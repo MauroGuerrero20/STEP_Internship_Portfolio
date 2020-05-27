@@ -1,46 +1,66 @@
-#content {
-    padding: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-#greeting-container {
-    margin-top: 20px;
-}
-
 div.navbar{
-    overflow: hidden;
-    margin-top: -8px;
-    margin-right: auto;
-    margin-left: auto;
-    background-color: lightcyan;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  margin-top: -8px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: lightcyan;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 div.navbar a{
-    text-decoration: none;
+  text-decoration: none;
 }
 
 div.navbar a i{
-    float: right;
-    padding: 20px;
-    font-size: 36px;
-    color: black;
+  float: right;
+  padding: 20px;
+  font-size: 36px;
+  color: black;
 }
 
 div.navbar h1{
-    float: left;
-    padding-left: 10%;
-    color: black;
+  float: left;
+  padding-left: 10%;
+  color: black;
 }
 
+#about_me {
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 
 img.profile_image{
-    width: 15%;
-    height: 15%;
-    float: right;
-    border: 2px solid black;
-    border-radius: 15%;
+  width: 15%;
+  height: 15%;
+  float: right;
+  border: 2px solid black;
+  border-radius: 15%;
 }
+
+#quote-container {
+  margin-top: 20px;
+}
+
+#work_exp {
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+img.google_logo{
+    float: left;
+    width: 30%;
+    height: 30%;
+}
+
+p.google_intro_text{
+    padding-left: 35%;
+    padding-top: 30px;
+    font-size: 24px;
+}
+
