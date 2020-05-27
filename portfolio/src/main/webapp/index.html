@@ -5,15 +5,22 @@
 	<meta charset="UTF-8">
 	<title>Mauro Guerrero's Portfolio</title>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="script.js"></script>
 </head>
 
 <body>
+	<!--Navbar-->
+	<div class="navbar">
+		<h1>Mauro Guerrero</h1>
+		<a href="https://www.linkedin.com/in/mauro-guerrero-286b69172"><i class="fa fa-linkedin-square"></i></a>
+		<a href="https://github.com/MauroGuerrero20"><i class="fa fa-github"></i></a>
+	</div>
+
 	<div id="content">
-		<h1>Mauro Guerrero's Portfolio<img class="profile_image" src="images/profile_pic.jpg" alt="Avatar"/>
-			</h1>
-			<p>Hi, I am a Texas A&ampM Engineering Student that is currently pursuing a B.A. in Computer
-				Engineering.</p>
+		<!--About me-->
+		<h2>About me:<img class="profile_image" src="images/profile_pic.jpg" alt="Avatar"/></h2>
+			<p>Hi, I am a Texas A&ampM Engineering Student that is currently pursuing a B.A. in Computer Engineering.</p>
 			<p>Click here to get a random message:</p>
 			<button onclick="addRandomQuote()">Hello</button>
 			<div id="quote-container"></div>
