@@ -65,3 +65,35 @@
   padding-top: 30px;
   font-size: 24px;
 }
+
+#edu{
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.tamu_logo{
+  width: 30%;
+  mix-blend-mode: multiply;
+  float: left;
+}
+
+.tamu_title{
+  float: left;
+  padding-right: 75px
+}
+
+.tamu_title_left h3{
+  font-size: 24px;
+}
+
+.trans_title h2{
+  font-size: 20px;
+  padding-top: 1.8%;
+}
+
+.trans_title i{
+  font-size: 60px;
+}
