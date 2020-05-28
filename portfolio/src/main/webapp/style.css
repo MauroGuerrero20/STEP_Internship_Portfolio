@@ -43,6 +43,10 @@
   margin-top: 20px;
 }
 
+.work_background{
+  background-color: aqua;
+}
+
 #work_exp {
   padding: 10px;
   margin-left: auto;
