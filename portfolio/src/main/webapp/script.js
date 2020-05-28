@@ -30,7 +30,7 @@ function addRandomQuote() {
 
 // Apply random quote onclick of button
 window.onload = function() {
-  var btn = document.getElementById("randBtn");
+  const btn = document.getElementById("randBtn");
   if (btn) {
     btn.addEventListener("click", addRandomQuote);
   }
