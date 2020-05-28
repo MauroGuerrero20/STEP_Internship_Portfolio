@@ -1,4 +1,4 @@
-div.navbar{
+.navbar{
   overflow: hidden;
   margin-top: -8px;
   margin-right: auto;
@@ -7,18 +7,18 @@ div.navbar{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-div.navbar a{
+.navbar a{
   text-decoration: none;
 }
 
-div.navbar a i{
+.navbar a i{
   float: right;
   padding: 20px;
   font-size: 36px;
   color: black;
 }
 
-div.navbar h1{
+.navbar h1{
   float: left;
   padding-left: 10%;
   color: black;
@@ -36,9 +36,8 @@ div.navbar h1{
   margin-top: 20px;
 }
 
-img.profile_image{
+.profile_image{
   width: 15%;
-  height: 15%;
   float: right;
   border: 2px solid black;
   border-radius: 15%;
