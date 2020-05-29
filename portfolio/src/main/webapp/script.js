@@ -20,7 +20,6 @@ function addRandomQuote() {
     ['Chaos is Ladder.', 'I am a native Spanish speaker.', 'I enjoy learning about history.',
       'I was born and raised in El Paso, Texas.', 'I like to play video games and enjoy all types of genres.'];
 
-
   // Pick a random quote.
   const quote = randomQuote[Math.floor(Math.random() * randomQuote.length)];
 
