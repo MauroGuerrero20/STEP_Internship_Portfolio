@@ -1,16 +1,43 @@
-#content {
-  margin-left: auto;
+.navbar{
+  overflow: hidden;
+  margin-top: -8px;
   margin-right: auto;
-  width: 650px;
+  margin-left: auto;
+  background-color: ghostwhite;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-#greeting-container {
+.navbar a{
+  text-decoration: none;
+}
+
+.navbar a i{
+  float: right;
+  padding: 20px;
+  font-size: 36px;
+  color: black;
+}
+
+.navbar h1{
+  float: left;
+  padding-left: 10%;
+  color: black;
+}
+
+#content {
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#quote-container{
   margin-top: 20px;
 }
 
-img.profile_image{
-  width: 25%;
-  height: 25%;
+.profile_image{
+  width: 15%;
   float: right;
   border: 2px solid black;
   border-radius: 15%;
