@@ -163,12 +163,23 @@
   text-align: center; 
 }
 
-/* #misc_links a{
-  color: white;
+.misc_links a{
   text-decoration: none;
-} */
+}
 
 .misc_links i{
   padding: 50px;
   font-size: 60px;
+}
+
+#github_misc{
+  color: black
+}
+
+#resume_misc{
+  color: cornflowerblue
+}
+
+#linkedin_misc{
+  color: #0e76a8;
 }
