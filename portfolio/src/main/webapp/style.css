@@ -3,7 +3,7 @@
   margin-top: -8px;
   margin-right: auto;
   margin-left: auto;
-  background-color: ghostwhite;
+  background-color: azure;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -24,7 +24,7 @@
   color: black;
 }
 
-#content {
+#about_me {
   padding: 10px;
   margin-left: auto;
   margin-right: auto;
@@ -32,13 +32,36 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-#quote-container{
-  margin-top: 20px;
-}
-
 .profile_image{
   width: 15%;
   float: right;
   border: 2px solid black;
   border-radius: 15%;
+}
+
+#quote-container {
+  margin-top: 20px;
+}
+
+.work_background{
+  background-color: whitesmoke;
+}
+
+#work_exp {
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.google_logo{
+  width: 30%;
+  mix-blend-mode: multiply;
+}
+
+.google_intro_text{
+  padding-left: 35%;
+  padding-top: 30px;
+  font-size: 24px;
 }
