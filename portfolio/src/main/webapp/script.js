@@ -13,17 +13,26 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Adds a random quote to the page.
  */
 function addRandomQuote() {
   const randomQuote =
     ['Chaos is Ladder.', 'I am a native Spanish speaker.', 'I enjoy learning about history.',
       'I was born and raised in El Paso, Texas.'];
 
-  // Pick a random greeting.
+
+  // Pick a random quote.
   const quote = randomQuote[Math.floor(Math.random() * randomQuote.length)];
 
   // Add it to the page.
   const quoteContainer = document.getElementById('quote-container');
   quoteContainer.innerText = quote;
+}
+
+// Apply random quote onclick of button
+window.onload = function() {
+  const btn = document.getElementById("randBtn");
+  if (btn) {
+    btn.addEventListener("click", addRandomQuote);
+  }
 }
