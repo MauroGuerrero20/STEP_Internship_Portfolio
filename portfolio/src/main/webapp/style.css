@@ -205,3 +205,15 @@
   width: 50%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+#comments_sec h2{
+  text-align: center;
+}
+
+#comments-output h2{
+  text-align: left;
+}
+
+#comments-output li{
+  font-size: 20px;
+}

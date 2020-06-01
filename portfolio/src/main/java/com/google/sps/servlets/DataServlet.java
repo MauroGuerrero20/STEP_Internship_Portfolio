@@ -28,18 +28,31 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
-  // Hard-coded comments
-  private final ArrayList<String> comments = new ArrayList<String>(
-    Arrays.asList(
-      "Change background color",
-      "Fix Grammar errors",
-      "Add more images"));
+  // Comments Container
+  private ArrayList<String> commentsContainer = new ArrayList<String>();
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
+
+    String comments_str = getParameter(request, "comments-input", "");
+    commentsContainer.add(comments_str);
+
+    response.sendRedirect("/index.html");
+  }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
     Gson gson = new Gson();
-    String json = gson.toJson(comments);
+    String json = gson.toJson(commentsContainer);
 
     response.setContentType("text/html;");
     response.getWriter().println(json);
