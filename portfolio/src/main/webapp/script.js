@@ -36,15 +36,29 @@ function randQuote() {
   }
 }
 
-// Get fetch 'Welcome' from DataServlet.java
-function getWelcome() {
-  fetch('/welcome').then(response => response.text()).then((welcome_str) => {
-    document.getElementById("fetch_welcome").innerHTML = welcome_str;
+// Fetch comments from DataServlet.java
+function getComments() {
+
+  const str_comments_intro = "<h2>Comments</h2><p>";
+
+  fetch('/comments').then(response => response.json()).then((comments) => {
+
+    const str_comments = str_comments_intro.concat(
+      comments[0],
+      "<br>",
+      comments[1],
+      "<br>",
+      comments[2], 
+      "</p>");
+
+      console.log(str_comments);
+
+    document.getElementById("comments_sec").innerHTML = str_comments;
   });
 }
 
 // Apply functions onload
 window.onload = function() {
   randQuote();
-  getWelcome();
+  getComments();
 }
