@@ -28,7 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
-  // Comments Container
   private ArrayList<String> commentsContainer = new ArrayList<String>();
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
