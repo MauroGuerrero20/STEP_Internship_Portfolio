@@ -29,9 +29,22 @@ function addRandomQuote() {
 }
 
 // Apply random quote onclick of button
-window.onload = function() {
+function randQuote() {
   const btn = document.getElementById("randBtn");
   if (btn) {
     btn.addEventListener("click", addRandomQuote);
   }
+}
+
+// Get fetch 'Welcome' from DataServlet.java
+function getWelcome() {
+  fetch('/welcome').then(response => response.text()).then((welcome_str) => {
+    document.getElementById("fetch_welcome").innerHTML = welcome_str;
+  });
+}
+
+// Apply functions onload
+window.onload = function() {
+  randQuote();
+  getWelcome();
 }
