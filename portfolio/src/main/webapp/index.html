@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <title>Mauro Guerrero's Portfolio</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
@@ -17,7 +18,8 @@
     </div>
     <!--Welcome!-->
     <div>
-      <div id="welcome_sec"><h1>Welcome!</h1>
+      <div id="welcome_sec">
+        <h1>Welcome!</h1>
       </div>
     </div>
     <!--About me-->
@@ -134,7 +136,16 @@
     </div>
     <!--Comments-->
     <div class="comment_background">
-      <div id="comments_sec"></div>
+      <div id="comments_sec">
+        <h2>Leave a Comment!</h2>
+        <form action="/comments" method="POST">
+          <textarea name="comments-input" class="form-control" rows="6"></textarea>
+          <input class="cmt_submit" type="submit">
+        </form>
+        <br>
+        <br>
+        <div id="comments-output"></div>
+      </div>
     </div>
   </body>
 </html>

@@ -39,21 +39,27 @@ function randQuote() {
 // Fetch comments from DataServlet.java
 function getComments() {
 
-  fetch('/comments').then(response => response.json()).then((comments) => {
+  fetch('/comments').then(response => response.json()).then((cmtContainer) => {
 
-    var str_comments = "<h2>Comments</h2><p>";
+    if (!cmtContainer) return;
 
-    for (var index in comments){
-      str_comments += comments[index] + "<br>";
-    }
-    
-    str_comments.concat("</p>");
+    const commentsOutput = document.getElementById("comments-output")
+      .appendChild(document.createElement("h2")
+        .appendChild(document.createTextNode("Comments")).parentElement);
 
-    document.getElementById("comments_sec").innerHTML = str_comments;
+    const cmtDOM = document.createElement("ul");
+
+    const commentsArray = Array.from(cmtContainer);
+
+    commentsArray.forEach(cmt => {
+      cmtDOM.appendChild(document.createElement("li").appendChild(
+        document.createTextNode(cmt)).parentElement);
+    });
+
+    commentsOutput.appendChild(cmtDOM);
   });
 }
 
-// Apply functions onload
 window.onload = function() {
   randQuote();
   getComments();

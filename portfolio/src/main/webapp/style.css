@@ -35,7 +35,7 @@
 }
 
 #welcome_sec h1{
-  padding-top: 8px;
+  padding-top: 15px;
 }
 
 #about_me {
@@ -204,4 +204,20 @@
   margin-right: auto;
   width: 50%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#comments_sec h2{
+  text-align: center;
+}
+
+.cmt_submit {
+  margin-top: 10px;
+}
+
+#comments-output h2{
+  text-align: left;
+}
+
+#comments-output li{
+  font-size: 20px;
 }
