@@ -43,22 +43,20 @@ function getComments() {
 
     if (!cmtContainer) return;
 
-    var commentsOutput = document.getElementById("comments-output");
+    const commentsOutput = document.getElementById("comments-output")
+      .appendChild(document.createElement("h2")
+        .appendChild(document.createTextNode("Comments")).parentElement);
 
-    var cmtIntroDOM = document.createElement("h2").appendChild(
-      document.createTextNode("Comments"));
+    const cmtDOM = document.createElement("ul");
 
-    commentsOutput.appendChild(cmtIntroDOM.parentElement);
+    const commentsArray = Array.from(cmtContainer);
 
-    var cmtDOM;
+    commentsArray.forEach(cmt => {
+      cmtDOM.appendChild(document.createElement("li").appendChild(
+        document.createTextNode(cmt)).parentElement);
+    });
 
-    for (var index in cmtContainer) {
-
-      cmtDOM = document.createElement("li").appendChild(
-        document.createTextNode(cmtContainer[index])
-      );
-      commentsOutput.appendChild(cmtDOM.parentElement);
-    }
+    commentsOutput.appendChild(cmtDOM);
   });
 }
 
