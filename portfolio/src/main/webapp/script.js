@@ -38,21 +38,21 @@ function randQuote() {
 
 function appendElement(currentElement, newElement) {
   var element = document.getElementById(currentElement);
-  var appElement = document.createElement(newElement);
+  var appendElement = document.createElement(newElement);
 
-  element.parentNode.insertBefore(appElement, element.nextSibling);
+  element.parentNode.insertBefore(appendElement, element.nextSibling);
 
-  return appElement;
+  return appendElement;
 }
 
 // Fetch comments from DataServlet.java
 function getComments() {
 
-  console.log("HE");
-
   fetch('/comments').then(response => response.json()).then((cmtContainer) => {
 
-    if (!cmtContainer) {
+    console.log(cmtContainer.length, typeof cmtContainer.length);
+
+    if (cmtContainer.length === 0) {
       return;
     }
     else {
@@ -85,7 +85,6 @@ function getComments() {
 window.onload = function() {
   randQuote();
   getComments();
-
 }
 
 // Listens for Comments section button

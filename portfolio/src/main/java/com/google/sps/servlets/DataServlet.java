@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
-  private ArrayList<String> commentsContainer = new ArrayList<String>();
+  private List<String> commentsContainer = new ArrayList<String>();
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
@@ -50,6 +50,8 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
+    commentsContainer.remove("");
+
     Gson gson = new Gson();
     String json = gson.toJson(commentsContainer);
 
