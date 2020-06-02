@@ -41,15 +41,24 @@ function getComments() {
 
   fetch('/comments').then(response => response.json()).then((cmtContainer) => {
 
-    if(!cmtContainer) return;
+    if (!cmtContainer) return;
 
-    var str_comments = "<h2>Comments</h2>";
+    var commentsOutput = document.getElementById("comments-output");
+
+    var cmtIntroDOM = document.createElement("h2").appendChild(
+      document.createTextNode("Comments"));
+
+    commentsOutput.appendChild(cmtIntroDOM.parentElement);
+
+    var cmtDOM;
 
     for (var index in cmtContainer) {
-      str_comments += ("<li>" + cmtContainer[index] + "</li>");
-    }
 
-    document.getElementById("comments-output").innerHTML = str_comments;
+      cmtDOM = document.createElement("li").appendChild(
+        document.createTextNode(cmtContainer[index])
+      );
+      commentsOutput.appendChild(cmtDOM.parentElement);
+    }
   });
 }
 
