@@ -36,12 +36,32 @@ function randQuote() {
   }
 }
 
+function appendElement(currentElement, newElement) {
+  var element = document.getElementById(currentElement);
+  var appElement = document.createElement(newElement);
+
+  element.parentNode.insertBefore(appElement, element.nextSibling);
+
+  return appElement;
+}
+
 // Fetch comments from DataServlet.java
 function getComments() {
 
+  console.log("HE");
+
   fetch('/comments').then(response => response.json()).then((cmtContainer) => {
 
-    if(!cmtContainer) return;
+    if (!cmtContainer) {
+      return;
+    }
+    else {
+      document.getElementById("about_me").classList.remove("col-12");
+      document.getElementById("about_me").classList.add("col-11");
+
+      var comment_div = appendElement("about_me", "div");
+      comment_div.classList.add("col-1");
+    }
 
     var str_comments = "<h2>Comments</h2>";
 
@@ -56,4 +76,16 @@ function getComments() {
 window.onload = function() {
   randQuote();
   getComments();
+
 }
+
+// Listens for Comments section button
+window.addEventListener("load", function() {
+  var cmt_form = document.getElementById("cmt_form");
+
+  document.getElementById("cmt_button").addEventListener("click", function() {
+    cmt_form.submit();
+  });
+
+  
+});
