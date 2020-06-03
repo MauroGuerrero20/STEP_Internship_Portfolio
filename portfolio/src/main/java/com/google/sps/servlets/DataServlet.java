@@ -70,7 +70,7 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(commentsQuery);
 
     for (Entity entity : results.asIterable()){
-      commentsList.add((String)entity.getProperty("comment"));
+      commentsList.add((String) entity.getProperty("comment"));
     }
 
     Gson gson = new Gson();
