@@ -61,22 +61,14 @@ public class DataServlet extends HttpServlet {
 
     String commentStr = getParameter(request, "comments-input", "");
     
-    if (commentStr.equals("")){
-      response.sendRedirect("/index.html");
-      return;
+    if (!commentStr.equals("")){
+      Entity commentEntity = new Entity("Comment");
+      commentEntity.setProperty("comment_msg", commentStr);
+
+      datastore.put(commentEntity);
     }
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> CmtInputDevelopment
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("comment_msg", commentStr);
-
-    datastore.put(commentEntity);
 
     response.sendRedirect("/index.html");
-
   }
 
   @Override

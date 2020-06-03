@@ -144,12 +144,12 @@
 					<textarea name="comments-input" class="form-control" rows="6"></textarea>
 					<h5 class="limit_cmt">Too many comments. Limit the amount of comments on the screen.</h5>
 					<input class="form-control" type="number" min="0" name="cmt-max-input">
-					<button id="cmt_button" class="btn btn-primary">Comment!</button>
+					<button id="cmt_button" type="button" class="btn btn-primary">Comment!</button>
         </form>
         <br>
-        <form action="/delete-cmt" method="POST">
+        <form id="cmt_del_form" action="/delete-cmt" method="POST">
           <h5>Delete Comments</h5>
-          <input class="cmt_delete_submit" type="submit" value="Delete">
+          <button id="cmt_del_button" type="button" class="btn btn-danger">Delete</button>
         </form>
 					<br>
 					<br>

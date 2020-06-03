@@ -41,6 +41,8 @@ function getComments() {
 
   fetch('/comments').then(response => response.json()).then((cmtContainer) => {
 
+    console.log(cmtContainer);
+
     if (!cmtContainer) return;
 
     const commentsOutput = document.getElementById("comments-output")
@@ -65,11 +67,16 @@ window.onload = function() {
   getComments();
 }
 
-// Listens for Comments section button
+// Listens for Comments section buttons
 window.addEventListener("load", function() {
   var cmt_form = document.getElementById("cmt_form");
+  // var cmt_del_form = document.getElementById("cmt_del_form")
 
   document.getElementById("cmt_button").addEventListener("click", function() {
     cmt_form.submit();
   });
+
+  // document.getElementById("cmt_del_button").addEventListener("click", function() {
+  //   cmt_del_form.submit();
+  // });
 });
