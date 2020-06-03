@@ -65,7 +65,11 @@ public class DataServlet extends HttpServlet {
       response.sendRedirect("/index.html");
       return;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> CmtInputDevelopment
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("comment_msg", commentStr);
 
