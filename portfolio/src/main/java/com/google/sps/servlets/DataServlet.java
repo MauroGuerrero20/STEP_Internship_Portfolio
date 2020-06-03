@@ -50,9 +50,10 @@ public class DataServlet extends HttpServlet {
 
     String commentStr = getParameter(request, "comments-input", "");
     
-    if (commentStr.equals(""))
+    if (commentStr.equals("")){
+      response.sendRedirect("/index.html");
       return;
-    
+    }
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("comment_msg", commentStr);
 
@@ -70,7 +71,7 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(commentsQuery);
 
     for (Entity entity : results.asIterable()){
-      commentsList.add((String) entity.getProperty("comment"));
+      commentsList.add((String) entity.getProperty("comment_msg"));
     }
 
     Gson gson = new Gson();

@@ -64,3 +64,12 @@ window.onload = function() {
   randQuote();
   getComments();
 }
+
+// Listens for Comments section button
+window.addEventListener("load", function() {
+  var cmt_form = document.getElementById("cmt_form");
+
+  document.getElementById("cmt_button").addEventListener("click", function() {
+    cmt_form.submit();
+  });
+});
