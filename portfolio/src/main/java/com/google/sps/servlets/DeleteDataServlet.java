@@ -32,76 +32,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** This Servlet handles and stores the comments provide on the main page */
-@WebServlet("/comments")
-public class DataServlet extends HttpServlet {
-
-  // Default 10
-  private int maxComments = 10;
+/** This Servlet deletes the stored the comments on the main page */
+@WebServlet("/delete-cmt")
+public class DeleteDataServlet extends HttpServlet {
 
   private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-    String value = request.getParameter(name);
-    if (value == null || value.equals("")) {
-      return defaultValue;
-    }
-    return value;
-  }
-
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
-
-    int prevMaxCmt = maxComments;
-    maxComments = Integer.parseInt(getParameter(request, "cmt-max-input", "-1"));
-
-    if (maxComments == -1){
-      maxComments = prevMaxCmt;
-    }
-
-    String commentStr = getParameter(request, "comments-input", "");
     
-    if (commentStr.equals("")){
-      response.sendRedirect("/index.html");
-      return;
-    }
-
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("comment_msg", commentStr);
-
-    datastore.put(commentEntity);
-
-    response.sendRedirect("/index.html");
-
-  }
-
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-    List<String> commentsList = new ArrayList();
-
     Query commentsQuery = new Query("Comment");
     PreparedQuery results = datastore.prepare(commentsQuery);
 
     for (Entity entity : results.asIterable()){
-      commentsList.add((String)entity.getProperty("comment_msg"));
+      datastore.delete(entity.getKey());
     }
 
-    // Shirk ArrayList based on max comments
-    if (maxComments >= 0 && maxComments < commentsList.size()){
-      if (maxComments == 0)
-        commentsList.clear();
-      else{
-        while(commentsList.size() != maxComments){
-          commentsList.remove(0);
-        }
-      }
-    }
+    response.sendRedirect("/index.html");
+  }
 
-    Gson gson = new Gson();
-    String json = gson.toJson(commentsList);
-
-    response.setContentType("text/html;");
-    response.getWriter().println(json);
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
   }
 }
