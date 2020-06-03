@@ -14,6 +14,13 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+// import com.google.sps.data.Comment;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +35,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
-  private ArrayList<String> commentsContainer = new ArrayList<String>();
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
@@ -41,17 +48,33 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
 
-    String comments_str = getParameter(request, "comments-input", "");
-    commentsContainer.add(comments_str);
+    String commentStr = getParameter(request, "comments-input", "");
+    
+    if (commentStr.equals(""))
+      return;
+    
+    Entity commentEntity = new Entity("Comment");
+    commentEntity.setProperty("comment_msg", commentStr);
+
+    datastore.put(commentEntity);
 
     response.sendRedirect("/index.html");
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
+
+    List<String> commentsList = new ArrayList();
+
+    Query commentsQuery = new Query("Comment");
+    PreparedQuery results = datastore.prepare(commentsQuery);
+
+    for (Entity entity : results.asIterable()){
+      commentsList.add((String) entity.getProperty("comment"));
+    }
+
     Gson gson = new Gson();
-    String json = gson.toJson(commentsContainer);
+    String json = gson.toJson(commentsList);
 
     response.setContentType("text/html;");
     response.getWriter().println(json);
