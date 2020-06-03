@@ -39,8 +39,6 @@ public class DataServlet extends HttpServlet {
   // Default 10
   private int maxComments = 10;
 
-  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     if (value == null || value.equals("")) {
@@ -52,6 +50,8 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
 
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    
     int prevMaxCmt = maxComments;
     maxComments = Integer.parseInt(getParameter(request, "cmt-max-input", "-1"));
 
@@ -68,12 +68,14 @@ public class DataServlet extends HttpServlet {
       datastore.put(commentEntity);
     }
 
-    response.sendRedirect("/index.html");
+    response.sendRedirect("/");
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    
     List<String> commentsList = new ArrayList();
 
     Query commentsQuery = new Query("Comment");
@@ -97,7 +99,7 @@ public class DataServlet extends HttpServlet {
     Gson gson = new Gson();
     String json = gson.toJson(commentsList);
 
-    response.setContentType("text/html;");
+    response.setContentType("application/json;");
     response.getWriter().println(json);
   }
 }
