@@ -87,10 +87,10 @@ public class DataServlet extends HttpServlet {
     }
 
     // Shirk ArrayList based on max comments
-    if (maxComments >= 0){
+    if (maxComments >= 0 && maxComments < commentsList.size()){
       if (maxComments == 0)
         commentsList.clear();
-      else if (maxComments < commentsList.size()){
+      else{
         while(commentsList.size() != maxComments){
           System.out.println(commentsList.size());
           commentsList.remove(0);
