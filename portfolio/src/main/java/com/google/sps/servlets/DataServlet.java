@@ -17,14 +17,15 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
-// import com.google.sps.data.Comment;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
+import java.lang.Math;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,11 +36,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
+  private int maxComments = -1;
+
   private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
-    if (value == null) {
+    if (value == null || value.equals("")) {
       return defaultValue;
     }
     return value;
@@ -48,11 +51,21 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
 
+    maxComments = Integer.parseInt(getParameter(request, "cmt-max-input", "-1"));
+
     String commentStr = getParameter(request, "comments-input", "");
     
-    if (commentStr.equals(""))
+    // Empty
+    if (commentStr.equals("") && maxComments < 0){
+      response.sendRedirect("/index.html");
       return;
-    
+    }
+    // Max comments change only
+    else if (commentStr.equals("") && maxComments >= 0){
+      response.sendRedirect("/index.html");
+      return;
+    }
+
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("comment_msg", commentStr);
 
@@ -70,7 +83,19 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(commentsQuery);
 
     for (Entity entity : results.asIterable()){
-      commentsList.add((String)entity.getProperty("comment"));
+      commentsList.add((String)entity.getProperty("comment_msg"));
+    }
+
+    // Shirk ArrayList based on max comments
+    if (maxComments >= 0){
+      if (maxComments == 0)
+        commentsList.clear();
+      else if (maxComments < commentsList.size()){
+        while(commentsList.size() != maxComments){
+          System.out.println(commentsList.size());
+          commentsList.remove(0);
+        }
+      }
     }
 
     Gson gson = new Gson();

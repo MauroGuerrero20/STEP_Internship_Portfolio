@@ -118,6 +118,7 @@
 .proj_background{
   background-color: whitesmoke;
   padding-top: 10px;
+  margin-top: 160px;
 }
 
 #proj {
@@ -210,6 +211,10 @@
   text-align: center;
 }
 
+.limit_cmt {
+  margin-top: 40px;
+}
+
 .cmt_submit {
   margin-top: 10px;
 }
@@ -221,3 +226,4 @@
 #comments-output li{
   font-size: 20px;
 }
+
