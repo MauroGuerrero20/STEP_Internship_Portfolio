@@ -258,7 +258,7 @@
 
 #comments_body blockquote{
   font-size: 20px;
-  text-align: center;
+  text-align: justify;
 }
 
 .blockquote p{
