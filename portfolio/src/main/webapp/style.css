@@ -118,6 +118,7 @@
 .proj_background{
   background-color: whitesmoke;
   padding-top: 10px;
+  margin-top: 160px;
 }
 
 #proj {
@@ -210,8 +211,21 @@
   text-align: center;
 }
 
+.cmt_msg_label{
+  margin-top: 15px;
+  margin-bottom: 0px;  
+}
+
+.limit_cmt {
+  margin-top: 40px;
+}
+
 #cmt_button {
   margin-top: 10px;
+}
+
+#cmt_del_button {
+  margin-top: -10px;
 }
 
 #comments-output h2{
@@ -221,3 +235,4 @@
 #comments-output li{
   font-size: 20px;
 }
+

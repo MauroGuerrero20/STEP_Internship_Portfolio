@@ -41,7 +41,11 @@ function getComments() {
 
   fetch('/comments').then(response => response.json()).then((cmtContainer) => {
 
-    if (!cmtContainer) return;
+    const commentsArray = Array.from(cmtContainer);
+
+    console.log(commentsArray);
+
+    if (!(commentsArray && commentsArray.length)) return;
 
     const commentsOutput = document.getElementById("comments-output")
       .appendChild(document.createElement("h2")
@@ -49,27 +53,29 @@ function getComments() {
 
     const cmtDOM = document.createElement("ul");
 
-    const commentsArray = Array.from(cmtContainer);
-
     commentsArray.forEach(cmt => {
       cmtDOM.appendChild(document.createElement("li").appendChild(
         document.createTextNode(cmt)).parentElement);
     });
 
     commentsOutput.appendChild(cmtDOM);
+    return false;
   });
 }
 
-window.onload = function() {
+window.addEventListener("DOMContentLoaded", function() {
+  
   randQuote();
   getComments();
-}
 
-// Listens for Comments section button
-window.addEventListener("load", function() {
-  var cmt_form = document.getElementById("cmt_form");
+  const cmt_form = document.getElementById("cmt_form");
+  const cmt_del_form = document.getElementById("cmt_del_form")
 
   document.getElementById("cmt_button").addEventListener("click", function() {
     cmt_form.submit();
+  });
+
+  document.getElementById("cmt_del_button").addEventListener("click", function() {
+    cmt_del_form.submit();
   });
 });

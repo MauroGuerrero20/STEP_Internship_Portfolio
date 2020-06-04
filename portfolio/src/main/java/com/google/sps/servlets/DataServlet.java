@@ -17,10 +17,8 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
-// import com.google.sps.data.Comment;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import java.util.Arrays;
 import java.util.List;
@@ -31,15 +29,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** This Servlet handles and stores the comments provide on the main page */
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
-  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  // Default 10
+  private int maxComments = 10;
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
-    if (value == null) {
+    if (value == null || value.equals("")) {
       return defaultValue;
     }
     return value;
@@ -48,37 +47,53 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
 
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    
+    int prevMaxCmt = maxComments;
+    maxComments = Integer.parseInt(getParameter(request, "cmt-max-input", "-1"));
+
+    if (maxComments == -1){
+      maxComments = prevMaxCmt;
+    }
+
     String commentStr = getParameter(request, "comments-input", "");
     
-    if (commentStr.equals("")){
-      response.sendRedirect("/index.html");
-      return;
+    if (!commentStr.equals("")){
+      Entity commentEntity = new Entity("Comment");
+      commentEntity.setProperty("comment_msg", commentStr);
+
+      datastore.put(commentEntity);
     }
-    
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("comment_msg", commentStr);
 
-    datastore.put(commentEntity);
-
-    response.sendRedirect("/index.html");
+    response.sendRedirect("/");
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    
     List<String> commentsList = new ArrayList();
 
     Query commentsQuery = new Query("Comment");
     PreparedQuery results = datastore.prepare(commentsQuery);
 
     for (Entity entity : results.asIterable()){
-      commentsList.add((String) entity.getProperty("comment_msg"));
+      commentsList.add((String)entity.getProperty("comment_msg"));
+    }
+
+    // Deletes Arraylist items based on max comments
+    if (maxComments == 0){
+        commentsList.clear();
+    }
+    else if (maxComments > 0 && maxComments < commentsList.size()){
+        commentsList.subList(0, commentsList.size() - maxComments).clear();
     }
 
     Gson gson = new Gson();
     String json = gson.toJson(commentsList);
 
-    response.setContentType("text/html;");
+    response.setContentType("application/json;");
     response.getWriter().println(json);
   }
 }
