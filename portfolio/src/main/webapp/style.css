@@ -211,6 +211,10 @@
   text-align: center;
 }
 
+#cmt_name {
+  height: 40px;
+}
+
 .limit_cmt {
   margin-top: 40px;
 }
@@ -223,7 +227,12 @@
   text-align: left;
 }
 
-#comments-output li{
+#comments-output blockquote{
   font-size: 20px;
+  text-align: center;
+}
+
+#comments-output div{
+  margin-top: 20px;
 }
 

@@ -19,6 +19,7 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.sps.containers.Comment;
 import com.google.gson.Gson;
 import java.util.Arrays;
 import java.util.List;
@@ -57,10 +58,13 @@ public class DataServlet extends HttpServlet {
     }
 
     String commentStr = getParameter(request, "comments-input", "");
+    String commentName = getParameter(request, "cmt-name-input", "Anonymous");
     
     if (!commentStr.equals("")){
       Entity commentEntity = new Entity("Comment");
+
       commentEntity.setProperty("comment_msg", commentStr);
+      commentEntity.setProperty("name", commentName);
 
       datastore.put(commentEntity);
     }
@@ -73,13 +77,19 @@ public class DataServlet extends HttpServlet {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     
-    List<String> commentsList = new ArrayList();
+    List<Comment> commentsList = new ArrayList();
 
     Query commentsQuery = new Query("Comment");
     PreparedQuery results = datastore.prepare(commentsQuery);
 
     for (Entity entity : results.asIterable()){
-      commentsList.add((String)entity.getProperty("comment_msg"));
+
+      Comment cmt = new Comment(
+        (String)entity.getProperty("name"),
+        (String)entity.getProperty("comment_msg"));
+
+
+      commentsList.add(cmt);
     }
 
     // Shirk ArrayList based on max comments

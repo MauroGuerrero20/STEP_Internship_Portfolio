@@ -51,14 +51,28 @@ function getComments() {
       .appendChild(document.createElement("h2")
         .appendChild(document.createTextNode("Comments")).parentElement);
 
-    const cmtDOM = document.createElement("ul");
+    const cmtDOM = document.createElement("div");
+    let quoteDOM;
+    let pDOM;
+    let footerDOM;
 
     commentsArray.forEach(cmt => {
-      cmtDOM.appendChild(document.createElement("li").appendChild(
-        document.createTextNode(cmt)).parentElement);
+
+      quoteDOM = document.createElement("blockquote");
+
+      pDOM = document.createElement("p").appendChild(document.createTextNode(cmt.cmtMsg));
+
+      footerDOM = document.createElement("footer").appendChild(document.createTextNode(cmt.name));
+      footerDOM.parentElement.classList.add("blockquote-footer");
+
+      quoteDOM.appendChild(pDOM.parentElement);
+      quoteDOM.appendChild(footerDOM.parentElement);
+      quoteDOM.classList.add("blockquote");
+
+      cmtDOM.appendChild(quoteDOM);
     });
 
-    commentsOutput.appendChild(cmtDOM);
+    commentsOutput.parentElement.appendChild(cmtDOM);
     return false;
   });
 }
