@@ -92,23 +92,21 @@
 }
 
 .tamu_logo{
-  width: 30%;
+  width: 100%;
   mix-blend-mode: multiply;
   float: left;
 }
 
 .tamu_title{
   float: left;
-  padding-right: 75px
 }
 
-.tamu_title_left h3{
-  font-size: 24px;
+.trans_title {
+  text-align: center;
 }
 
-.trans_title h2{
-  font-size: 20px;
-  padding-top: 1.8%;
+.trans_title h3{
+  padding-top: 5.3%;
 }
 
 .trans_title i{
@@ -118,7 +116,6 @@
 .proj_background{
   background-color: whitesmoke;
   padding-top: 10px;
-  margin-top: 160px;
 }
 
 #proj {
