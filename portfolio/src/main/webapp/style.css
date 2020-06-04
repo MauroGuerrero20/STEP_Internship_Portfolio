@@ -48,15 +48,21 @@
 
 .about_me_text{
   font-size: 16px;
-  padding-right: 23%;
+  text-align: justify;
+  margin-right: -55px;
 }
 
+<<<<<<< HEAD
 .col-12, .col-11{
   flex: none;
 }
 
 .profile_image{
   width: 15%;
+=======
+#profile_image{
+  max-width: 60%;
+>>>>>>> RefineComments
   float: right;
   border: 2px solid black;
   border-radius: 15%;
@@ -95,24 +101,22 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+#edu h2{
+  margin-bottom: -10px;
+}
+
 .tamu_logo{
-  width: 30%;
+  max-width: 100%;
   mix-blend-mode: multiply;
   float: left;
 }
 
 .tamu_title{
   float: left;
-  padding-right: 75px
 }
 
-.tamu_title_left h3{
-  font-size: 24px;
-}
-
-.trans_title h2{
-  font-size: 20px;
-  padding-top: 1.8%;
+.trans_title {
+  text-align: center;
 }
 
 .trans_title i{
@@ -214,14 +218,40 @@
   text-align: center;
 }
 
-.cmt_submit {
+#cmt_name {
+  height: 40px;
+}
+
+.cmt_msg_label{
+  margin-top: 15px;
+  margin-bottom: 0px;  
+}
+
+.limit_cmt {
+  margin-top: 40px;
+}
+
+#cmt_button {
   margin-top: 10px;
+}
+
+#cmt_del_button {
+  margin-top: -10px;
 }
 
 #comments-output h2{
   text-align: left;
 }
 
-#comments-output li{
+#comments-output div{
+  margin-top: 20px;
+}
+
+#comments-output blockquote{
   font-size: 20px;
+  text-align: center;
+}
+
+#comments-output footer{
+  text-align: right;
 }

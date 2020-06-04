@@ -50,50 +50,68 @@ function getComments() {
 
   fetch('/comments').then(response => response.json()).then((cmtContainer) => {
 
-    console.log(cmtContainer.length, typeof cmtContainer.length);
+    // console.log(cmtContainer.length, typeof cmtContainer.length);
 
-    if (cmtContainer.length === 0) {
-      return;
-    }
-    else {
-      document.getElementById("about_me").classList.remove("col-12");
-      document.getElementById("about_me").classList.add("col-11");
+    // if (cmtContainer.length === 0) {
+    //   return;
+    // }
+    // else {
+    //   document.getElementById("about_me").classList.remove("col-12");
+    //   document.getElementById("about_me").classList.add("col-11");
 
-      var comment_div = appendElement("about_me", "div");
-      comment_div.classList.add("col-1");
-    }
+    //   var comment_div = appendElement("about_me", "div");
+    //   comment_div.classList.add("col-1");
+    // }
 
-    var commentsOutput = document.getElementById("comments-output");
+    const commentsArray = Array.from(cmtContainer);
 
-    var cmtIntroDOM = document.createElement("h2").appendChild(
-      document.createTextNode("Comments"));
+    console.log(commentsArray);
 
-    commentsOutput.appendChild(cmtIntroDOM.parentElement);
+    if (!(commentsArray && commentsArray.length)) return;
 
-    var cmtDOM;
+    const commentsOutput = document.getElementById("comments-output")
+      .appendChild(document.createElement("h2")
+        .appendChild(document.createTextNode("Comments")).parentElement);
 
-    for (var index in cmtContainer) {
+    const cmtDOM = document.createElement("div");
+    let quoteDOM;
+    let pDOM;
+    let footerDOM;
 
-      cmtDOM = document.createElement("li").appendChild(
-        document.createTextNode(cmtContainer[index])
-      );
-      commentsOutput.appendChild(cmtDOM.parentElement);
-    }
+    commentsArray.forEach(cmt => {
+
+      quoteDOM = document.createElement("blockquote");
+
+      pDOM = document.createElement("p").appendChild(document.createTextNode(cmt.cmtMsg));
+
+      footerDOM = document.createElement("footer").appendChild(document.createTextNode(cmt.name));
+      footerDOM.parentElement.classList.add("blockquote-footer");
+
+      quoteDOM.appendChild(pDOM.parentElement);
+      quoteDOM.appendChild(footerDOM.parentElement);
+      quoteDOM.classList.add("blockquote");
+
+      cmtDOM.appendChild(quoteDOM);
+    });
+
+    commentsOutput.parentElement.appendChild(cmtDOM);
+    return false;
   });
 }
 
-window.onload = function() {
+window.addEventListener("DOMContentLoaded", function() {
+
   randQuote();
   getComments();
-}
 
-// Listens for Comments section button
-window.addEventListener("load", function() {
-  var cmt_form = document.getElementById("cmt_form");
+  const cmt_form = document.getElementById("cmt_form");
+  const cmt_del_form = document.getElementById("cmt_del_form")
 
   document.getElementById("cmt_button").addEventListener("click", function() {
     cmt_form.submit();
   });
 
-  
+  document.getElementById("cmt_del_button").addEventListener("click", function() {
+    cmt_del_form.submit();
+  });
 });
