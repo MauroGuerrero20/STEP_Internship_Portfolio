@@ -48,11 +48,12 @@
 
 .about_me_text{
   font-size: 16px;
-  padding-right: 23%;
+  text-align: justify;
+  margin-right: -55px;
 }
 
-.profile_image{
-  width: 15%;
+#profile_image{
+  max-width: 60%;
   float: right;
   border: 2px solid black;
   border-radius: 15%;
@@ -96,7 +97,7 @@
 }
 
 .tamu_logo{
-  width: 100%;
+  max-width: 100%;
   mix-blend-mode: multiply;
   float: left;
 }
@@ -107,10 +108,6 @@
 
 .trans_title {
   text-align: center;
-}
-
-.trans_title h3{
-  padding-top: 5.3%;
 }
 
 .trans_title i{
@@ -237,12 +234,15 @@
   text-align: left;
 }
 
+#comments-output div{
+  margin-top: 20px;
+}
+
 #comments-output blockquote{
   font-size: 20px;
   text-align: center;
 }
 
-#comments-output div{
-  margin-top: 20px;
+#comments-output footer{
+  text-align: right;
 }
-
