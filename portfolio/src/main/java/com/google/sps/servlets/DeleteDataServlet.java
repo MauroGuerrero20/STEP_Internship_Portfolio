@@ -20,9 +20,6 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.gson.Gson;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,6 +42,12 @@ public class DeleteDataServlet extends HttpServlet {
       datastore.delete(entity.getKey());
     }
 
-    response.sendRedirect("/");
+    Gson gson = new Gson();
+    String json = gson.toJson(true);
+
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
+
+    // response.sendRedirect("/");
   }
 }

@@ -73,7 +73,7 @@ public class DataServlet extends HttpServlet {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     
-    List<String> commentsList = new ArrayList();
+    ArrayList<String> commentsList = new ArrayList();
 
     Query commentsQuery = new Query("Comment");
     PreparedQuery results = datastore.prepare(commentsQuery);

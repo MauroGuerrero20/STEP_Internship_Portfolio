@@ -39,7 +39,7 @@ function randQuote() {
 // Fetch comments from DataServlet.java
 function getComments() {
 
-  fetch('/comments').then(response => response.json()).then((cmtContainer) => {
+  fetch('/comments', { method: 'GET' }).then(response => response.json()).then((cmtContainer) => {
 
     const commentsArray = Array.from(cmtContainer);
 
@@ -59,12 +59,11 @@ function getComments() {
     });
 
     commentsOutput.appendChild(cmtDOM);
-    return false;
   });
 }
 
 window.addEventListener("DOMContentLoaded", function() {
-  
+
   randQuote();
   getComments();
 
@@ -76,6 +75,24 @@ window.addEventListener("DOMContentLoaded", function() {
   });
 
   document.getElementById("cmt_del_button").addEventListener("click", function() {
-    cmt_del_form.submit();
+    // cmt_del_form.submit();
+
+    fetch('/delete-cmt', { method: 'POST' }).then(response => response.json()).then((del_bool) => {
+
+      console.log(del_bool);
+
+      if (del_bool) {
+
+        const commentsOutput = document.getElementById("comments-output");
+
+        // Delete comments using DOM API
+        commentsOutput.parentNode.removeChild(commentsOutput);
+
+      }
+    });
+
+
+
+
   });
 });
