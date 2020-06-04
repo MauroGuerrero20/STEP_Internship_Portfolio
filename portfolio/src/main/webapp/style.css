@@ -216,12 +216,21 @@
   height: 40px;
 }
 
+.cmt_msg_label{
+  margin-top: 15px;
+  margin-bottom: 0px;  
+}
+
 .limit_cmt {
   margin-top: 40px;
 }
 
 #cmt_button {
   margin-top: 10px;
+}
+
+#cmt_del_button {
+  margin-top: -10px;
 }
 
 #comments-output h2{
