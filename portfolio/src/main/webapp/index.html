@@ -136,19 +136,26 @@
       <div id="comments_sec">
         <h2>Leave a Comment!</h2>
         <form id="cmt_form" action="/comments" method="POST">
-          <h5>
-          Name:
-          <h5>
+          <label>
+            <h5>Name:</h5>
+          </label>
           <textarea name="cmt-name-input" class="form-control" row="1"></textarea>
-          <h5>Message:</h5>
+          <label class="cmt_msg_label">
+            <h5>Message:</h5>
+          </label>
           <textarea name="comments-input" class="form-control" rows="6"></textarea>
-          <h5 class="limit_cmt">Too many comments. Limit the amount of comments on the screen.</h5>
+          <label>
+            <h5 class="limit_cmt">Too many comments. Limit the amount of comments on the screen:</h5>
+          </label>
           <input class="form-control" type="number" min="0" name="cmt-max-input">
           <button id="cmt_button" type="button" class="btn btn-primary">Comment!</button>
         </form>
         <br>
         <form id="cmt_del_form" action="/delete-cmt" method="POST">
-          <h5>Delete Comments</h5>
+          <label>
+            <h5>Delete Comments: </h5>
+          </label>
+          <br>
           <button id="cmt_del_button" type="button" class="btn btn-danger">Delete</button>
         </form>
         <br>

@@ -82,15 +82,12 @@ public class DataServlet extends HttpServlet {
       commentsList.add((String)entity.getProperty("comment_msg"));
     }
 
-    // Shirk ArrayList based on max comments
-    if (maxComments >= 0 && maxComments < commentsList.size()){
-      if (maxComments == 0)
+    // Deletes Arraylist items based on max comments
+    if (maxComments == 0){
         commentsList.clear();
-      else{
-        while(commentsList.size() != maxComments){
-          commentsList.remove(0);
-        }
-      }
+    }
+    else if (maxComments > 0 && maxComments < commentsList.size()){
+        commentsList.subList(0, commentsList.size() - maxComments).clear();
     }
 
     Gson gson = new Gson();
