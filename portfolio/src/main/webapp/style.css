@@ -52,17 +52,12 @@
   margin-right: -55px;
 }
 
-<<<<<<< HEAD
-.col-12, .col-11{
+/* .col-12, .col-11{
   flex: none;
-}
+} */
 
-.profile_image{
-  width: 15%;
-=======
 #profile_image{
   max-width: 60%;
->>>>>>> RefineComments
   float: right;
   border: 2px solid black;
   border-radius: 15%;

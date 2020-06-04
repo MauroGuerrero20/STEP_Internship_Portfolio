@@ -45,31 +45,44 @@ function appendElement(currentElement, newElement) {
   return appendElement;
 }
 
+function addCommentsColumn(){
+
+  document.getElementById("main_body").classList.remove("col-12");
+  document.getElementById("main_body").classList.add("col-11");
+
+  document.getElementById("comments_body").classList.remove("col-0");
+  document.getElementById("comments_body").classList.add("col-1");
+
+  // var comments_div = appendElement("about_me", "div");
+  // comments_div.classList.add("col-1");
+
+}
+
+function removeCommentsColumn(){
+  document.getElementById("main_body").classList.remove("col-11");
+  document.getElementById("main_body").classList.add("col-12");
+
+  document.getElementById("comments_body").classList.remove("col-1");
+  document.getElementById("comments_body").classList.add("col-0");
+}
+
 // Fetch comments from DataServlet.java
 function getComments() {
 
   fetch('/comments').then(response => response.json()).then((cmtContainer) => {
 
-    // console.log(cmtContainer.length, typeof cmtContainer.length);
-
-    // if (cmtContainer.length === 0) {
-    //   return;
-    // }
-    // else {
-    //   document.getElementById("about_me").classList.remove("col-12");
-    //   document.getElementById("about_me").classList.add("col-11");
-
-    //   var comment_div = appendElement("about_me", "div");
-    //   comment_div.classList.add("col-1");
-    // }
-
     const commentsArray = Array.from(cmtContainer);
 
     console.log(commentsArray);
 
-    if (!(commentsArray && commentsArray.length)) return;
+    if (!(commentsArray && commentsArray.length)) {
+      removeCommentsColumn();
+      return;
+    }
 
-    const commentsOutput = document.getElementById("comments-output")
+    addCommentsColumn();
+
+    const commentsOutput = document.getElementById("comments_body")
       .appendChild(document.createElement("h2")
         .appendChild(document.createTextNode("Comments")).parentElement);
 
