@@ -34,8 +34,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
-  // Default 10
-  private int maxComments = 10;
+  // Default 20
+  private int maxComments = 20;
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);

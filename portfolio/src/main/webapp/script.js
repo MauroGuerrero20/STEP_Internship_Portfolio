@@ -48,10 +48,10 @@ function appendElement(currentElement, newElement) {
 function addCommentsColumn(){
 
   document.getElementById("main_body").classList.remove("col-12");
-  document.getElementById("main_body").classList.add("col-11");
+  document.getElementById("main_body").classList.add("col-10");
 
   document.getElementById("comments_body").classList.remove("col-0");
-  document.getElementById("comments_body").classList.add("col-1");
+  document.getElementById("comments_body").classList.add("col-2");
 
   // var comments_div = appendElement("about_me", "div");
   // comments_div.classList.add("col-1");
@@ -59,10 +59,10 @@ function addCommentsColumn(){
 }
 
 function removeCommentsColumn(){
-  document.getElementById("main_body").classList.remove("col-11");
+  document.getElementById("main_body").classList.remove("col-10");
   document.getElementById("main_body").classList.add("col-12");
 
-  document.getElementById("comments_body").classList.remove("col-1");
+  document.getElementById("comments_body").classList.remove("col-2");
   document.getElementById("comments_body").classList.add("col-0");
 }
 
