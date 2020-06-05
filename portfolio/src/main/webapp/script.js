@@ -36,34 +36,49 @@ function randQuote() {
   }
 }
 
-function appendElement(currentElement, newElement) {
-  var element = document.getElementById(currentElement);
-  var appendElement = document.createElement(newElement);
-
-  element.parentNode.insertBefore(appendElement, element.nextSibling);
-
-  return appendElement;
-}
-
-function addCommentsColumn(){
+function addCommentsColumn() {
 
   document.getElementById("main_body").classList.remove("col-12");
   document.getElementById("main_body").classList.add("col-10");
 
   document.getElementById("comments_body").classList.remove("col-0");
   document.getElementById("comments_body").classList.add("col-2");
-
-  // var comments_div = appendElement("about_me", "div");
-  // comments_div.classList.add("col-1");
-
 }
 
-function removeCommentsColumn(){
+function removeCommentsColumn() {
   document.getElementById("main_body").classList.remove("col-10");
   document.getElementById("main_body").classList.add("col-12");
 
   document.getElementById("comments_body").classList.remove("col-2");
   document.getElementById("comments_body").classList.add("col-0");
+}
+
+function createCommentsDOM() {
+
+  const commentsOutput = document.getElementById("comments_body")
+    .appendChild(document.createElement("h2")
+      .appendChild(document.createTextNode("Comments")).parentElement);
+
+  const cmtDOM = document.createElement("div");
+
+  commentsArray.forEach(cmt => {
+
+    const quoteDOM = document.createElement("blockquote");
+
+    const pDOM = document.createElement("p").appendChild(document.createTextNode(cmt.cmtMsg));
+
+    const footerDOM = document.createElement("footer").appendChild(document.createTextNode(cmt.name));
+    footerDOM.parentElement.classList.add("blockquote-footer");
+
+    quoteDOM.appendChild(pDOM.parentElement);
+    quoteDOM.appendChild(footerDOM.parentElement);
+    quoteDOM.classList.add("blockquote");
+
+    cmtDOM.appendChild(quoteDOM);
+  });
+
+  commentsOutput.parentElement.appendChild(cmtDOM);
+
 }
 
 // Fetch comments from DataServlet.java
@@ -73,8 +88,6 @@ function getComments() {
 
     const commentsArray = Array.from(cmtContainer);
 
-    console.log(commentsArray);
-
     if (!(commentsArray && commentsArray.length)) {
       removeCommentsColumn();
       return;
@@ -82,33 +95,7 @@ function getComments() {
 
     addCommentsColumn();
 
-    const commentsOutput = document.getElementById("comments_body")
-      .appendChild(document.createElement("h2")
-        .appendChild(document.createTextNode("Comments")).parentElement);
-
-    const cmtDOM = document.createElement("div");
-    let quoteDOM;
-    let pDOM;
-    let footerDOM;
-
-    commentsArray.forEach(cmt => {
-
-      quoteDOM = document.createElement("blockquote");
-
-      pDOM = document.createElement("p").appendChild(document.createTextNode(cmt.cmtMsg));
-
-      footerDOM = document.createElement("footer").appendChild(document.createTextNode(cmt.name));
-      footerDOM.parentElement.classList.add("blockquote-footer");
-
-      quoteDOM.appendChild(pDOM.parentElement);
-      quoteDOM.appendChild(footerDOM.parentElement);
-      quoteDOM.classList.add("blockquote");
-
-      cmtDOM.appendChild(quoteDOM);
-    });
-
-    commentsOutput.parentElement.appendChild(cmtDOM);
-    return false;
+    createCommentsDOM();
   });
 }
 
