@@ -258,11 +258,11 @@
 
 #comments_body blockquote{
   font-size: 20px;
-  text-align: justify;
+  text-align: left;
 }
 
 .blockquote p{
-  font-size: 18px;
+  font-size: 16px;
 }
 
 #comments_body footer{

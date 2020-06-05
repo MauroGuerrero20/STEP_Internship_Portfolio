@@ -67,7 +67,7 @@ function createCommentsDOM(commentsArray) {
 
     const pDOM = document.createElement("p").appendChild(document.createTextNode(cmt.cmtMsg));
 
-    const footerDOM = document.createElement("footer").appendChild(document.createTextNode(cmt.name));
+    const footerDOM = document.createElement("footer").appendChild(document.createTextNode(cmt.name + ', ' + cmt.date));
     footerDOM.parentElement.classList.add("blockquote-footer");
 
     quoteDOM.appendChild(pDOM.parentElement);
