@@ -33,6 +33,16 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/delete-cmt")
 public class DeleteDataServlet extends HttpServlet {
 
+  private void deleteDataStoreComments(PreparedQuery results, DatastoreService datastore){
+    
+    while(results.countEntities() != 0){
+      
+      for (Entity entity : results.asIterable()){
+        datastore.delete(entity.getKey());
+      }
+    }
+  }
+
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
     
@@ -41,9 +51,7 @@ public class DeleteDataServlet extends HttpServlet {
     Query commentsQuery = new Query("Comment");
     PreparedQuery results = datastore.prepare(commentsQuery);
 
-    for (Entity entity : results.asIterable()){
-      datastore.delete(entity.getKey());
-    }
+    deleteDataStoreComments(results, datastore);
 
     response.sendRedirect("/");
   }
