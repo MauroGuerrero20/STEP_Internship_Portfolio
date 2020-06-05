@@ -53,7 +53,7 @@ function removeCommentsColumn() {
   document.getElementById("comments_body").classList.add("col-0");
 }
 
-function createCommentsDOM() {
+function createCommentsDOM(commentsArray) {
 
   const commentsOutput = document.getElementById("comments_body")
     .appendChild(document.createElement("h2")
@@ -95,7 +95,7 @@ function getComments() {
 
     addCommentsColumn();
 
-    createCommentsDOM();
+    createCommentsDOM(commentsArray);
   });
 }
 
