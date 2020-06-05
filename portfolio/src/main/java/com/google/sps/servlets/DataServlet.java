@@ -22,7 +22,6 @@ import com.google.appengine.api.datastore.Query;
 import com.google.sps.containers.Comment;
 import com.google.gson.Gson;
 import java.util.Arrays;
-import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -34,8 +33,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
-  // Default 10
-  private int maxComments = 10;
+  // Default 20
+  private int maxComments = 20;
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
@@ -77,7 +76,7 @@ public class DataServlet extends HttpServlet {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     
-    List<Comment> commentsList = new ArrayList();
+    ArrayList<Comment> commentsList = new ArrayList();
 
     Query commentsQuery = new Query("Comment");
     PreparedQuery results = datastore.prepare(commentsQuery);
@@ -85,9 +84,8 @@ public class DataServlet extends HttpServlet {
     for (Entity entity : results.asIterable()){
 
       Comment cmt = new Comment(
-        (String)entity.getProperty("name"),
-        (String)entity.getProperty("comment_msg"));
-
+        (String) entity.getProperty("name"),
+        (String) entity.getProperty("comment_msg"));
 
       commentsList.add(cmt);
     }
