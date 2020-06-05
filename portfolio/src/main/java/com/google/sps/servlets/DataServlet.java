@@ -22,7 +22,6 @@ import com.google.appengine.api.datastore.Query;
 import com.google.sps.containers.Comment;
 import com.google.gson.Gson;
 import java.util.Arrays;
-import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -77,7 +76,7 @@ public class DataServlet extends HttpServlet {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     
-    List<Comment> commentsList = new ArrayList();
+    ArrayList<Comment> commentsList = new ArrayList();
 
     Query commentsQuery = new Query("Comment");
     PreparedQuery results = datastore.prepare(commentsQuery);
@@ -87,7 +86,6 @@ public class DataServlet extends HttpServlet {
       Comment cmt = new Comment(
         (String)entity.getProperty("name"),
         (String)entity.getProperty("comment_msg"));
-
 
       commentsList.add(cmt);
     }
