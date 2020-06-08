@@ -19,10 +19,13 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.containers.Comment;
 import com.google.gson.Gson;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +45,15 @@ public class DataServlet extends HttpServlet {
       return defaultValue;
     }
     return value;
+  }
+
+  private String timeMillisToDateStr(long timeMillis){
+
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("d MMM yyyy");
+    Date date = new Date(timeMillis);
+    String dateStr = dateFormatter.format(date);
+
+    return dateStr;
   }
 
   @Override
@@ -64,6 +76,7 @@ public class DataServlet extends HttpServlet {
 
       commentEntity.setProperty("comment_msg", commentStr);
       commentEntity.setProperty("name", commentName);
+      commentEntity.setProperty("time_at_POST", System.currentTimeMillis());
 
       datastore.put(commentEntity);
     }
@@ -78,24 +91,27 @@ public class DataServlet extends HttpServlet {
     
     ArrayList<Comment> commentsList = new ArrayList();
 
-    Query commentsQuery = new Query("Comment");
+    Query commentsQuery = new Query("Comment").addSort("time_at_POST", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(commentsQuery);
 
     for (Entity entity : results.asIterable()){
 
       Comment cmt = new Comment(
         (String) entity.getProperty("name"),
-        (String) entity.getProperty("comment_msg"));
+        (String) entity.getProperty("comment_msg"),
+        timeMillisToDateStr((long) entity.getProperty("time_at_POST")));
 
       commentsList.add(cmt);
     }
 
-    // Deletes Arraylist items based on max comments
+    // Deletes Arraylist items based on max comments.
     if (maxComments == 0){
         commentsList.clear();
     }
     else if (maxComments > 0 && maxComments < commentsList.size()){
-        commentsList.subList(0, commentsList.size() - maxComments).clear();
+      
+      // Only the newest comments will be display.
+      commentsList.subList(maxComments, commentsList.size()).clear();
     }
 
     Gson gson = new Gson();
