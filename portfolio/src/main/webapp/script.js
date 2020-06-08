@@ -100,12 +100,72 @@ function getComments() {
 }
 
 function initMap() {
+
   const map = new google.maps.Map(
-      document.getElementById('map'),
-      {center: {lat: 37.422, lng: -122.084}, zoom: 16});
+    document.getElementById('map'), {
+    center: { lat: 0, lng: 0 },
+    zoom: 4,
+    disableDefaultUI: true,
+    zoomControl: true,
+    mapTypeControl: false,
+    scaleControl: true,
+    streetViewControl: false,
+    rotateControl: true,
+    fullscreenControl: false
+  });
+
+  const NoLabelsStyle = [
+    {
+      featureType: "all",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    },
+    
+    {
+      featureType: "road",
+      stylers: [
+        { visibility: "off" }
+      ]
+    }
+  ]
+
+  map.set('styles', NoLabelsStyle);
+
+  map.addListener('click', function(mapMouseEvent) {
+    console.log(mapMouseEvent.latLng.toJSON());
+
+    const geocoder = new google.maps.Geocoder;
+
+    geocoder.geocode({'location': mapMouseEvent.latLng}, function(address, status){
+
+      const addressArray = Array.from(address);
+
+      if (status === "OK"){
+        console.log(addressArray[addressArray.length - 1].formatted_address);
+      }
+      else {
+        console.log("Geocoder fail due to ", status);
+      }
+
+
+
+    });
+
+
+
+
+
+  });
+
+
+
+
+
 }
 
-function renderPage(){
+function renderPage() {
   getComments();
   initMap();
 }
