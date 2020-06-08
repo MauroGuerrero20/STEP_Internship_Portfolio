@@ -7,6 +7,7 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIHCvJyyPWTcZrste8DREkiKusDJMfJ4Y&callback=initMap" type="text/javascript"></script>
     <script src="script.js"></script>
   </head>
   <body>
@@ -31,15 +32,10 @@
               <div class="col-8">
                 <h2>About me:</h2>
                 <p class="about_me_text">Hi, I am a Texas A&ampM Engineering Student that is currently pursuing
-                  a
-                  B.S.
-                  in Computer Engineering. As probably know by now, I am very passionate about programming and
+                  a B.S. in Computer Engineering. As probably know by now, I am very passionate about programming and
                   Computer Science, yet I also enjoy creating and desgining circuits. My current occupational
-                  goal
-                  is
-                  to purse a career that applies priciples of Computer Science and Electrical Engineering
-                  (e.g.
-                  Firmware Engineer, Computer Engineer, Software Engineer, etc).
+                  goal is to purse a career that applies priciples of Computer Science and Electrical Engineering
+                  (e.g. Firmware Engineer, Computer Engineer, Software Engineer, etc).
                 </p>
                 <p>Click here to get a random message:</p>
                 <button id="randBtn">Click me</button>
@@ -60,27 +56,20 @@
               <p>
               <h3>Engineering Practicum Intern, Sunnyvale, CA<br>Summer 2019</h3>
               <li>Security based internship, worked on developing the Test Identity Provider's (Idp)
-                metadata
-                using
-                the OpenSAML 2.0 library used for authenticating and authorizing data.
+                metadata using the OpenSAML 2.0 library used for authenticating and authorizing data.
               </li>
               <li>Also implemented the ability to update the Idp's crendentials, which allows admins
-                to
-                upload new
-                public and private keys. Developed using Google's framework and injector tools.
+                to upload new public and private keys. Developed using Google's framework and injector tools.
               </li>
               <li>Additionally, I worked on encrypting the SAML response of the Idp using the Service
-                Provider's
-                public key using OpenSAML encryption tools
+                Provider's public key using OpenSAML encryption tools
               </li>
               </p>
               <p>
               <h3>STEP Intern, Pittsburgh, PA (Remote)<br>Summer 2020</br></h3>
               <li>For the first few weeks, I created and desgin a Portfolio webpage that illustrates my
-                work
-                experience, education, projects, etc (This webpage). The web application is hosted using
-                Google's
-                App Engine and utilizes Maven to manage and build the project.
+                work experience, education, projects, etc (This webpage). The web application is hosted using
+                Google's App Engine and utilizes Maven to manage and build the project.
               </li>
               </p>
             </div>
@@ -159,6 +148,13 @@
               </a>
             </div>
             <!--TODO: Add 'Contact' portion-->
+          </div>
+        </div>
+        <!--Google Map Game-->
+        <div class="map_background">
+          <div id="map_game">
+            <h2>Test your Knowlege of Geography!</h2>
+            <div id="map"></div>
           </div>
         </div>
         <!--Comments-->
