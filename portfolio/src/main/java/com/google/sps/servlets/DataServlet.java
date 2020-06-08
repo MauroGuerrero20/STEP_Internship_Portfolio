@@ -76,7 +76,7 @@ public class DataServlet extends HttpServlet {
 
       commentEntity.setProperty("comment_msg", commentStr);
       commentEntity.setProperty("name", commentName);
-      commentEntity.setProperty("timeAtPOST", System.currentTimeMillis());
+      commentEntity.setProperty("time_at_POST", System.currentTimeMillis());
 
       datastore.put(commentEntity);
     }
@@ -91,7 +91,7 @@ public class DataServlet extends HttpServlet {
     
     ArrayList<Comment> commentsList = new ArrayList();
 
-    Query commentsQuery = new Query("Comment").addSort("timeAtPOST", SortDirection.DESCENDING);
+    Query commentsQuery = new Query("Comment").addSort("time_at_POST", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(commentsQuery);
 
     for (Entity entity : results.asIterable()){
@@ -99,17 +99,19 @@ public class DataServlet extends HttpServlet {
       Comment cmt = new Comment(
         (String) entity.getProperty("name"),
         (String) entity.getProperty("comment_msg"),
-        timeMillisToDateStr((long) entity.getProperty("timeAtPOST")));
+        timeMillisToDateStr((long) entity.getProperty("time_at_POST")));
 
       commentsList.add(cmt);
     }
 
-    // Deletes Arraylist items based on max comments
+    // Deletes Arraylist items based on max comments.
     if (maxComments == 0){
         commentsList.clear();
     }
     else if (maxComments > 0 && maxComments < commentsList.size()){
-        commentsList.subList(maxComments, commentsList.size()).clear();
+      
+      // Only the newest comments will be display.
+      commentsList.subList(maxComments, commentsList.size()).clear();
     }
 
     Gson gson = new Gson();
