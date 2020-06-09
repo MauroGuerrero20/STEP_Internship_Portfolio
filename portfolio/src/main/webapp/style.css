@@ -154,9 +154,13 @@
   width: 40%;
 }
 
+.effect_text{
+  margin-right: auto;
+}
+
 .map_background{
   padding-top: 10px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 }
 
 #map_game{
@@ -171,14 +175,28 @@
   text-align: center;
 }
 
+
+#map_output_answer {
+  text-align: right;
+}
+
+.map_correct {
+  color: #20CC82;
+}
+
+.map_incorrect {
+  color: red;
+}
+
 #map {
-  margin-top: 30px;
-  padding: 35%;
+  margin-top: 10px;
+  padding: 35%; /* 30% ??? */
   border-bottom: 1px solid #ccc;
 }
 
-.effect_text{
-  margin-right: auto;
+#selected_country {
+  margin-top: 20px;
+  text-align: center;
 }
 
 .misc_background{

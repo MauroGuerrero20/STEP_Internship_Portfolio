@@ -99,8 +99,8 @@ function getComments() {
   });
 }
 
-function getCountriesJSON() {
-  const countriesJSON = {
+class Countries {
+  keyedJSON = {
     "AD": {
       "country": "Andorra"
     },
@@ -837,12 +837,98 @@ function getCountriesJSON() {
       "country": "Zimbabwe"
     }
   };
-  return countriesJSON;
+
+  getRandCountryCode() {
+    const countryCodeArray = Object.keys(this.keyedJSON);
+    return countryCodeArray[Math.floor(Math.random() * countryCodeArray.length)];
+  }
+
+  removeCountry(countryCode) {
+    delete this.keyedJSON[countryCode];
+  }
+
 }
 
-function getRandCountryCode() {
-  countryCodeArray = Object.keys(getCountriesJSON());
-  return countryCodeArray[Math.floor(Math.random() * countryCodeArray.length)];
+function createRandCountryDOM(countriesObj) {
+
+  const randCountryCodeStr = countriesObj.getRandCountryCode();
+  const randCountry = countriesObj.keyedJSON[randCountryCodeStr].country;
+
+  const randCountryDOM = document.createElement("b")
+    .appendChild(document.createTextNode(randCountry));
+
+  const randCountryOutput = document.getElementById("rand_country")
+    .appendChild(document.createElement("h4")
+      .appendChild(document.createTextNode("Click where you think ")).parentElement
+      .appendChild(randCountryDOM.parentElement).parentElement
+      .appendChild(document.createTextNode(" is.")).parentElement);
+
+  return randCountryCodeStr;
+}
+
+function deleteRandCountryDOM() {
+
+  const randCountryDOM = document.getElementById("rand_country")
+
+  let child = randCountryDOM.lastElementChild;
+  while (child) {
+    randCountryDOM.removeChild(child);
+    child = randCountryDOM.lastElementChild;
+  }
+}
+
+function correctDOM() {
+
+  const correctOuputDOM = document.getElementById("map_output_answer")
+    .appendChild(document.createElement("h4")
+      .appendChild(document.createTextNode("Correct!")).parentElement);
+
+  correctOuputDOM.parentElement.classList.add("map_correct");
+}
+
+function incorrectDOM() {
+
+  const incorrectOuputDOM = document.getElementById("map_output_answer")
+    .appendChild(document.createElement("h4")
+      .appendChild(document.createTextNode("Incorrect")).parentElement);
+
+  incorrectOuputDOM.parentElement.classList.add("map_incorrect");
+}
+
+function deleteAnswerDOM() {
+
+  const outputDOM = document.getElementById("map_output_answer");
+
+  document.getElementById("map_output_answer").classList.remove("map_correct");
+  document.getElementById("map_output_answer").classList.remove("map_incorrect");
+
+  let child = outputDOM.lastElementChild;
+  while (child) {
+    outputDOM.removeChild(child);
+    child = outputDOM.lastElementChild;
+  }
+}
+
+function selectedCountryDOM(selectedCountry) {
+
+  const countryDOM = document.createElement("b")
+    .appendChild(document.createTextNode(selectedCountry));
+
+  document.getElementById("selected_country")
+    .appendChild(document.createElement("h3")
+      .appendChild(document.createTextNode("You clicked on ")).parentElement
+      .appendChild(countryDOM.parentElement).parentElement);
+}
+
+function deleteSelectedCountryDOM() {
+
+  const outputDOM = document.getElementById("selected_country");
+
+  let child = outputDOM.lastElementChild;
+  while (child) {
+    outputDOM.removeChild(child);
+    child = outputDOM.lastElementChild;
+  }
 }
 
 function initMap() {
@@ -876,31 +962,43 @@ function initMap() {
     ]
   });
 
-  const randCountryCodeStr = getRandCountryCode()
-  console.log(randCountryCodeStr, getCountriesJSON()[randCountryCodeStr].country);
+
+  let countries = new Countries();
+  let randCountryCodeStr = createRandCountryDOM(countries);
+
+  document.getElementById("skip_btn").addEventListener("click", function() {
+
+    deleteRandCountryDOM();
+    randCountryCodeStr = createRandCountryDOM(countries);
+  });
 
   map.addListener('click', function(mapMouseEvent) {
-    console.log(mapMouseEvent.latLng.toJSON());
 
     const geocoder = new google.maps.Geocoder;
 
     geocoder.geocode({ 'location': mapMouseEvent.latLng }, function(address, status) {
 
-      const addressArray = Array.from(address);
-
       if (status === "OK") {
 
+        deleteAnswerDOM();
+        deleteSelectedCountryDOM();
+
+        const addressArray = Array.from(address);
+
         const countryCodeStr = addressArray[addressArray.length - 1].address_components[0].short_name;
+        const countryNameStr = addressArray[addressArray.length - 1].address_components[0].long_name;
 
-        if(countryCodeStr === randCountryCodeStr){
-          console.log("Success");
-        }
-        else{
-          console.log("Incorrect");
-        }
+        selectedCountryDOM(countryNameStr);
 
-        console.log(countryCodeStr);
-        console.log(getCountriesJSON()[countryCodeStr].country);
+        if (countryCodeStr === randCountryCodeStr) {
+          correctDOM();
+          deleteRandCountryDOM();
+          countries.removeCountry(randCountryCodeStr);
+          randCountryCodeStr = createRandCountryDOM(countries);
+        }
+        else {
+          incorrectDOM();
+        }
 
         var marker = new google.maps.Marker({
           position: mapMouseEvent.latLng,
@@ -912,14 +1010,8 @@ function initMap() {
       else {
         console.log("Geocoder fail due to ", status);
       }
-
-
     });
-
-
   });
-
-
 }
 
 function renderPage() {
