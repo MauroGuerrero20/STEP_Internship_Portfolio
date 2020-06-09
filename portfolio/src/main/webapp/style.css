@@ -57,15 +57,14 @@
 
 .about_me_text {
   font-size: 16px;
-  margin-right: -55px;
-  text-align: justify;
+  text-align: left;
 }
 
-#profile_image {
+#profile_image{
+  max-height: 70%;
+  position: absolute;
   border: 2px solid black;
   border-radius: 15%;
-  float: right;
-  max-width: 60%;
 }
 
 #quote-container {
@@ -138,8 +137,12 @@
 
 #proj i {
   color: rebeccapurple;
+<<<<<<< HEAD
+  margin-left: 25px
+=======
   font-size: 50px;
 padding-left: 25px
+>>>>>>> master
 }
 
 #proj h3 {
