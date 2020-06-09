@@ -840,6 +840,11 @@ function getCountriesJSON() {
   return countriesJSON;
 }
 
+function getRandCountryCode() {
+  countryCodeArray = Object.keys(getCountriesJSON());
+  return countryCodeArray[Math.floor(Math.random() * countryCodeArray.length)];
+}
+
 function initMap() {
 
   const map = new google.maps.Map(
@@ -852,31 +857,27 @@ function initMap() {
     scaleControl: true,
     streetViewControl: false,
     rotateControl: true,
-    fullscreenControl: false
+    fullscreenControl: false,
+    styles: [
+      {
+        featureType: "all",
+        elementType: "labels",
+        stylers: [
+          { visibility: "off" }
+        ]
+      },
+
+      {
+        featureType: "road",
+        stylers: [
+          { visibility: "off" }
+        ]
+      }
+    ]
   });
 
-  const NoLabelsStyle = [
-    {
-      featureType: "all",
-      elementType: "labels",
-      stylers: [
-        { visibility: "off" }
-      ]
-    },
-
-    {
-      featureType: "road",
-      stylers: [
-        { visibility: "off" }
-      ]
-    }
-  ]
-
-  map.set('styles', NoLabelsStyle);
-
-  console.log(getCountriesJSON());
-  console.log(getCountriesJSON().AD);
-
+  const randCountryCodeStr = getRandCountryCode()
+  console.log(randCountryCodeStr, getCountriesJSON()[randCountryCodeStr].country);
 
   map.addListener('click', function(mapMouseEvent) {
     console.log(mapMouseEvent.latLng.toJSON());
@@ -891,12 +892,15 @@ function initMap() {
 
         const countryCodeStr = addressArray[addressArray.length - 1].address_components[0].short_name;
 
-        console.log(addressArray[addressArray.length - 1].address_components[0].short_name);
-        console.log(addressArray[addressArray.length - 1].formatted_address);
+        if(countryCodeStr === randCountryCodeStr){
+          console.log("Success");
+        }
+        else{
+          console.log("Incorrect");
+        }
 
-        // console.log(getCountriesCodesArray().indexOf(countryCodeStr));
-        // const codeIndex = getCountriesCodesArray().indexOf(countryCodeStr);
-        console.log(getCountriesJSON()[countryCodeStr]);
+        console.log(countryCodeStr);
+        console.log(getCountriesJSON()[countryCodeStr].country);
 
         var marker = new google.maps.Marker({
           position: mapMouseEvent.latLng,
@@ -914,9 +918,6 @@ function initMap() {
 
 
   });
-
-
-
 
 
 }
