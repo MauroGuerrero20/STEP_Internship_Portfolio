@@ -1,28 +1,28 @@
-#navbar{
-  overflow: hidden;
+#navbar {
+  background-color: lightskyblue;
   display: block;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   margin-right: auto;
   margin-left: auto;
-  background-color: lightskyblue;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  overflow: hidden;
 }
 
-#navbar a{
+#navbar a {
   text-decoration: none;
 }
 
-#navbar a i{
-  float: right;
-  padding: 20px;
-  font-size: 36px;
+#navbar a i {
   color: black;
+  float: right;
+  font-size: 36px;
+  padding: 20px;
 }
 
-#navbar h1{
+#navbar h1 {
+  color: black;
   float: left;
   padding-left: 10%;
   padding-top: 8px;
-  color: black;
 }
 
 #main_body.col-10 {
@@ -35,27 +35,27 @@
 }
 
 #welcome_sec {
-  padding: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding: 10px;
   text-align: center;
+  width: 50%;
 }
 
-#welcome_sec h1{
+#welcome_sec h1 {
   padding-top: 15px;
 }
 
 #about_me {
-  padding: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-left: auto;
   margin-right: auto;
+  padding: 10px;
   width: 50%;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.about_me_text{
+.about_me_text {
   font-size: 16px;
   text-align: left;
 }
@@ -65,52 +65,54 @@
   position: absolute;
   border: 2px solid black;
   border-radius: 15%;
+  float: right;
+  max-width: 60%;
 }
 
 #quote-container {
   margin-top: 20px;
 }
 
-.work_background{
+.work_background {
   background-color: whitesmoke;
 }
 
 #work_exp {
-  padding: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-left: auto;
   margin-right: auto;
+  padding: 10px;
   width: 50%;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.google_logo{
-  width: 30%;
+.google_logo {
   mix-blend-mode: multiply;
+  width: 30%;
 }
 
-#work_exp h3{
+#work_exp h3 {
   font-size: 24px;
 }
 
-#edu{
-  padding: 10px;
+#edu {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-left: auto;
   margin-right: auto;
+  padding: 10px;
   width: 50%;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-#edu h2{
+#edu h2 {
   margin-bottom: -10px;
 }
 
-.tamu_logo{
+.tamu_logo {
+  float: left;
   max-width: 100%;
   mix-blend-mode: multiply;
-  float: left;
 }
 
-.tamu_title{
+.tamu_title {
   float: left;
 }
 
@@ -118,102 +120,129 @@
   text-align: center;
 }
 
-.trans_title i{
+.trans_title i {
   font-size: 60px;
 }
 
-.proj_background{
+.proj_background {
   background-color: whitesmoke;
   padding-top: 10px;
 }
 
 #proj {
-  padding: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-left: auto;
   margin-right: auto;
+  padding: 10px;
   width: 50%;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-#proj i{
-  font-size: 50px;
+#proj i {
   color: rebeccapurple;
+<<<<<<< HEAD
   margin-left: 25px
+=======
+  font-size: 50px;
+padding-left: 25px
+>>>>>>> master
 }
 
-#proj h3{
+#proj h3 {
   font-size: 24px;
 }
 
-.effect_img{
-  width: 40%;
-  mix-blend-mode: multiply;
+.effect_img {
+  border-radius: 5%;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 5%;
+  mix-blend-mode: multiply;
+  width: 40%;
 }
 
-.effect_text{
+.effect_text {
   margin-right: auto;
 }
 
-.mics_background{
+.mics_background {
   padding-top: 10px;
 }
 
 #misc {
-  padding: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-left: auto;
   margin-right: auto;
+  padding: 10px;
   width: 50%;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-#misc p{
+#misc p {
   font-size: 16px;
   text-align: center;
 }
 
-.misc_links{
+.misc_links {
   text-align: center; 
 }
 
-.misc_links a{
+.misc_links a {
   text-decoration: none;
 }
 
-.misc_links i{
-  padding: 50px;
+.misc_links i {
   font-size: 60px;
+  padding: 50px;
 }
 
-#github_misc{
+#github_misc {
   color: black
 }
 
-#resume_misc{
+#resume_misc {
   color: cornflowerblue
 }
 
-#linkedin_misc{
+#linkedin_misc {
   color: #0e76a8;
 }
 
-.comment_background{
-  padding-top: 10px;
+.map_background {
   background-color: whitesmoke;
+  padding-bottom: 50px;
+  padding-top: 10px;
 }
 
-#comments_sec{
-  padding: 10px;
+#map_game {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-left: auto;
   margin-right: auto;
+  padding: 10px;
   width: 50%;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-#comments_sec h2{
+#map_game h2 {
+  text-align: center;
+}
+
+#map {
+  border-bottom: 1px solid #ccc;
+  margin-top: 30px;
+  padding: 35%;
+}
+
+.comment_background {
+  padding-top: 10px;
+}
+
+#comments_sec {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  width: 50%;
+}
+
+#comments_sec h2 {
   text-align: center;
 }
 
@@ -221,9 +250,9 @@
   height: 40px;
 }
 
-.cmt_msg_label{
-  margin-top: 15px;
+.cmt_msg_label {
   margin-bottom: 0px;  
+  margin-top: 15px;
 }
 
 .limit_cmt {
@@ -240,30 +269,30 @@
 
 #comments_body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  padding-top: 10px;
-  border-style: solid;
+  background-color: #eee;  
   border-color: #ccc;
-  border-width: 1px;
-  background-color: #eee;
+  border-style: solid;  
+border-width: 1px;
+padding-top: 10px;
 }
 
-#comments_body h2{
+#comments_body h2 {
   text-align: left;
 }
 
-#comments_body div{
+#comments_body div {
   padding-top: 15px;
 }
 
-#comments_body blockquote{
+#comments_body blockquote {
   font-size: 20px;
   text-align: left;
 }
 
-.blockquote p{
+.blockquote p {
   font-size: 16px;
 }
 
-#comments_body footer{
+#comments_body footer {
   text-align: right;
 }

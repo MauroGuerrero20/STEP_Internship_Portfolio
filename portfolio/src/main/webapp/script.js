@@ -99,10 +99,22 @@ function getComments() {
   });
 }
 
+function initMap() {
+  const map = new google.maps.Map(
+      document.getElementById('map'),
+      {center: {lat: 37.422, lng: -122.084}, zoom: 16});
+}
+
+function renderPage(){
+  getComments();
+  initMap();
+}
+
+
 window.addEventListener("DOMContentLoaded", function() {
 
   randQuote();
-  getComments();
+  renderPage();
 
   const cmt_form = document.getElementById("cmt_form");
   const cmt_del_form = document.getElementById("cmt_del_form")
