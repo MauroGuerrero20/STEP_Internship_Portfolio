@@ -357,10 +357,6 @@ class Countries {
       "country": "Eritrea",
       "continent": "AF"
     },
-    "EH": {
-      "country": "Western Sahara",
-      "continent": "AF"
-    },
     "ES": {
       "country": "Spain",
       "continent": "EU"
@@ -632,10 +628,6 @@ class Countries {
     "MG": {
       "country": "Madagascar",
       "continent": "AF"
-    },
-    "MV": {
-      "country": "Maldives",
-      "continent": "AS"
     },
     "MX": {
       "country": "Mexico",
@@ -1053,14 +1045,14 @@ function createRandCountryDOM(countriesObj) {
   return randCountryCodeStr;
 }
 
-function deleteRandCountryDOM() {
+function deleteElementContentsById(elementId){
 
-  const randCountryDOM = document.getElementById("rand_country")
+  const elementDOM = document.getElementById(elementId);
 
-  let child = randCountryDOM.lastElementChild;
+  let child = elementDOM.lastElementChild;
   while (child) {
-    randCountryDOM.removeChild(child);
-    child = randCountryDOM.lastElementChild;
+    elementDOM.removeChild(child);
+    child = elementDOM.lastElementChild;
   }
 }
 
@@ -1083,17 +1075,10 @@ function incorrectDOM() {
 }
 
 function deleteAnswerDOM() {
-
-  const outputDOM = document.getElementById("map_output_answer");
-
   document.getElementById("map_output_answer").classList.remove("map_correct");
   document.getElementById("map_output_answer").classList.remove("map_incorrect");
 
-  let child = outputDOM.lastElementChild;
-  while (child) {
-    outputDOM.removeChild(child);
-    child = outputDOM.lastElementChild;
-  }
+  deleteElementContentsById("map_output_answer");
 }
 
 function selectedCountryDOM(selectedCountry) {
@@ -1105,17 +1090,6 @@ function selectedCountryDOM(selectedCountry) {
     .appendChild(document.createElement("h3")
       .appendChild(document.createTextNode("You clicked on ")).parentElement
       .appendChild(countryDOM.parentElement).parentElement);
-}
-
-function deleteSelectedCountryDOM() {
-
-  const outputDOM = document.getElementById("selected_country");
-
-  let child = outputDOM.lastElementChild;
-  while (child) {
-    outputDOM.removeChild(child);
-    child = outputDOM.lastElementChild;
-  }
 }
 
 function noCountriesLeftDOM() {
@@ -1170,24 +1144,24 @@ function initMap() {
   document.getElementById("skip_btn").addEventListener("click", function() {
 
     if (countries.empty()) {
-      deleteRandCountryDOM();
+      deleteElementContentsById("rand_country");
       deleteAnswerDOM();
-      deleteSelectedCountryDOM();
+      deleteElementContentsById("selected_country");
       noCountriesLeftDOM();
 
       return;
     }
 
-    deleteRandCountryDOM();
+    deleteElementContentsById("rand_country");
     randCountryCodeStr = createRandCountryDOM(countries);
   });
 
   map.addListener('click', function(mapMouseEvent) {
 
     if (countries.empty()) {
-      deleteRandCountryDOM();
+      deleteElementContentsById("rand_country");
       deleteAnswerDOM();
-      deleteSelectedCountryDOM();
+      deleteElementContentsById("selected_country");
       noCountriesLeftDOM();
 
       return;
@@ -1200,7 +1174,7 @@ function initMap() {
       if (status === "OK") {
 
         deleteAnswerDOM();
-        deleteSelectedCountryDOM();
+        deleteElementContentsById("selected_country");
 
         const addressArray = Array.from(address);
         const addressComps = addressArray[addressArray.length - 1].address_components
@@ -1215,13 +1189,17 @@ function initMap() {
             countryNameStr = comp.long_name;
             break;
           }
+          if (comp.short_name.includes("Ocean") || comp.long_name.includes("Ocean")){
+            countryCodeStr = comp.short_name;
+            countryNameStr = comp.long_name;
+          }
         }       
 
         selectedCountryDOM(countryNameStr);
 
         if (countryCodeStr === randCountryCodeStr) {
           correctDOM();
-          deleteRandCountryDOM();
+          deleteElementContentsById("rand_country");
           countries.removeCountry(randCountryCodeStr);
           randCountryCodeStr = createRandCountryDOM(countries);
 
@@ -1234,7 +1212,6 @@ function initMap() {
 
           // Remove Incorrect Markers
           incorrectMarkersArray.forEach(mrk => {
-            console.log(mrk);
             mrk.setMap(null);
           });
         }
