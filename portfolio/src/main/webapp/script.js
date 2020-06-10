@@ -1213,6 +1213,7 @@ function initMap() {
           if (comp.short_name.length === 2){
             countryCodeStr = comp.short_name;
             countryNameStr = comp.long_name;
+            break;
           }
         }       
 
