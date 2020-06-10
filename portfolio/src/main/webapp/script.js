@@ -924,8 +924,6 @@ function selectedCountryDOM(selectedCountry) {
   const countryDOM = document.createElement("b")
     .appendChild(document.createTextNode(selectedCountry));
 
-  document.getElementById("skip_btn").remove();
-
   document.getElementById("selected_country")
     .appendChild(document.createElement("h3")
       .appendChild(document.createTextNode("You clicked on ")).parentElement
