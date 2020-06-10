@@ -1008,8 +1008,7 @@ class Countries {
   };
 
   getRandCountryCode() {
-    const countryCodeArray = Object.keys(this.keyedJSON);
-    return countryCodeArray[Math.floor(Math.random() * countryCodeArray.length)];
+    return Object.keys(this.keyedJSON)[Math.floor(Math.random() * Object.keys(this.keyedJSON).length)];
   }
 
   removeCountry(countryCode) {
@@ -1017,12 +1016,7 @@ class Countries {
   }
 
   empty() {
-    if (Object.keys(this.keyedJSON).length === 0) {
-      return true;
-    }
-    else {
-      return false;
-    }
+    return Object.keys(this.keyedJSON).length === 0;
   }
 }
 
