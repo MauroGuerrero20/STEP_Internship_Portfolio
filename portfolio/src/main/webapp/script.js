@@ -847,9 +847,19 @@ class Countries {
     delete this.keyedJSON[countryCode];
   }
 
+  empty() {
+    if (Object.keys(this.keyedJSON).length === 0) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }
 
 function createRandCountryDOM(countriesObj) {
+
+  if (countriesObj.empty()) return;
 
   const randCountryCodeStr = countriesObj.getRandCountryCode();
   const randCountry = countriesObj.keyedJSON[randCountryCodeStr].country;
@@ -914,6 +924,8 @@ function selectedCountryDOM(selectedCountry) {
   const countryDOM = document.createElement("b")
     .appendChild(document.createTextNode(selectedCountry));
 
+  document.getElementById("skip_btn").remove();
+
   document.getElementById("selected_country")
     .appendChild(document.createElement("h3")
       .appendChild(document.createTextNode("You clicked on ")).parentElement
@@ -929,6 +941,19 @@ function deleteSelectedCountryDOM() {
     outputDOM.removeChild(child);
     child = outputDOM.lastElementChild;
   }
+}
+
+function noCountriesLeftDOM() {
+
+  document.getElementById("rand_country")
+    .appendChild(document.createElement("h4")
+      .appendChild(document.createTextNode("There are no more contries left!")).parentElement);
+
+  document.getElementById("selected_country")
+    .appendChild(document.createElement("h3")
+      .appendChild(document.createTextNode("Congratulations. You Win!!!")).parentElement);
+
+  document.getElementById("skip_btn").remove();
 }
 
 function initMap() {
@@ -965,14 +990,38 @@ function initMap() {
 
   let countries = new Countries();
   let randCountryCodeStr = createRandCountryDOM(countries);
+  let incorrectMarkersArray = [];
+
+  console.log(Object.keys(countries.keyedJSON).length);
 
   document.getElementById("skip_btn").addEventListener("click", function() {
 
+    if (countries.empty()) {
+      deleteRandCountryDOM();
+      deleteAnswerDOM();
+      deleteSelectedCountryDOM();
+      noCountriesLeftDOM();
+
+      return;
+    }
+
     deleteRandCountryDOM();
+    // countries.removeCountry(randCountryCodeStr);
     randCountryCodeStr = createRandCountryDOM(countries);
   });
 
   map.addListener('click', function(mapMouseEvent) {
+
+    console.log(Object.keys(countries.keyedJSON).length);
+
+    if (countries.empty()) {
+      deleteRandCountryDOM();
+      deleteAnswerDOM();
+      deleteSelectedCountryDOM();
+      noCountriesLeftDOM();
+
+      return;
+    }
 
     const geocoder = new google.maps.Geocoder;
 
@@ -985,6 +1034,8 @@ function initMap() {
 
         const addressArray = Array.from(address);
 
+        console.log(addressArray);
+
         const countryCodeStr = addressArray[addressArray.length - 1].address_components[0].short_name;
         const countryNameStr = addressArray[addressArray.length - 1].address_components[0].long_name;
 
@@ -995,17 +1046,32 @@ function initMap() {
           deleteRandCountryDOM();
           countries.removeCountry(randCountryCodeStr);
           randCountryCodeStr = createRandCountryDOM(countries);
+
+          var checkmark_marker = new google.maps.Marker({
+            position: mapMouseEvent.latLng,
+            map: map,
+            icon: "images/checkmark_icon.png",
+            animation: google.maps.Animation.DROP,
+          });
+
+          // Remove Incorrect Markers
+          incorrectMarkersArray.forEach(mrk => {
+            console.log(mrk);
+            mrk.setMap(null);
+          });
         }
         else {
           incorrectDOM();
+
+          var cross_mark_marker = new google.maps.Marker({
+            position: mapMouseEvent.latLng,
+            map: map,
+            icon: "images/cross_mark_icon.png",
+            animation: google.maps.Animation.DROP,
+          });
+
+          incorrectMarkersArray.push(cross_mark_marker);
         }
-
-        var marker = new google.maps.Marker({
-          position: mapMouseEvent.latLng,
-          map: map,
-          animation: google.maps.Animation.DROP,
-        });
-
       }
       else {
         console.log("Geocoder fail due to ", status);
