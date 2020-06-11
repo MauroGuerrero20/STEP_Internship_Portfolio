@@ -234,7 +234,6 @@ function initMap() {
   fetch("/documents/countries.json").then(resp => resp.json()).then(countriesJsonFile => {
 
     let countries = new Countries(countriesJsonFile);
-    console.log(countries.keyedJSON);
     let randCountryCodeStr = createRandCountryDOM(countries);
     let incorrectMarkersArray = [];
 
@@ -272,8 +271,6 @@ function initMap() {
 
           deleteAnswerDOM();
           deleteElementContentsById("selected_country");
-
-          console.log(address);
 
           const addressArray = Array.from(address);
           const addressComps = addressArray[addressArray.length - 1].address_components
