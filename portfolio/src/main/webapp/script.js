@@ -102,7 +102,14 @@ function getComments() {
 class Countries {
 
   constructor(jsonObj) {
-    this.keyedJSON = jsonObj;
+    this.keyedJSON = JSON.parse(JSON.stringify(jsonObj));
+    this.keyedJSONBackup = JSON.parse(JSON.stringify(jsonObj));
+    this.naBool = true;
+    this.saBool = true;
+    this.euBool = true;
+    this.afBool = true;
+    this.asBool = true;
+    this.ocBool = true;
   }
 
   getRandCountryCode() {
@@ -111,10 +118,66 @@ class Countries {
 
   removeCountry(countryCode) {
     delete this.keyedJSON[countryCode];
+    delete this.keyedJSONBackup[countryCode];
   }
 
   empty() {
     return Object.keys(this.keyedJSON).length === 0;
+  }
+
+  remakeJsonByContinent(nanaBool = this.naBool, saBool = this.saBool, euBool = this.euBool, afBool = this.afBool, asBool = this.asBool, ocBool = this.ocBool) {
+    this.naBool = nanaBool;
+    this.saBool = saBool;
+    this.euBool = euBool;
+    this.afBool = afBool;
+    this.asBool = asBool;
+    this.ocBool = ocBool;
+
+    this.keyedJSON = JSON.parse(JSON.stringify(this.keyedJSONBackup));
+
+    for (let countryCode of Object.keys(this.keyedJSON)) {
+
+      if ((!this.naBool) && this.keyedJSON[countryCode].continent === "NA") {
+        delete this.keyedJSON[countryCode];
+        continue;
+      }
+
+      if ((!this.saBool) && this.keyedJSON[countryCode].continent === "SA") {
+        delete this.keyedJSON[countryCode];
+        continue;
+      }
+
+      if ((!this.euBool) && this.keyedJSON[countryCode].continent === "EU") {
+        delete this.keyedJSON[countryCode];
+        continue;
+      }
+
+      if ((!this.afBool) && this.keyedJSON[countryCode].continent === "AF") {
+        delete this.keyedJSON[countryCode];
+        continue;
+      }
+
+      if ((!this.asBool) && this.keyedJSON[countryCode].continent === "AS") {
+        delete this.keyedJSON[countryCode];
+        continue;
+      }
+
+      if ((!this.ocBool) && this.keyedJSON[countryCode].continent === "OC") {
+        delete this.keyedJSON[countryCode];
+        continue;
+      }
+
+      // Delete AN countries if at least one Continent restriction is set
+      if (!(this.naBool && this.saBool && this.euBool && this.afBool && this.asBool && this.ocBool) && this.keyedJSON[countryCode].continent === "AN") {
+        delete this.keyedJSON[countryCode];
+        continue;
+      }
+    }
+
+    if (!(!this.naBool && !this.saBool && !this.euBool && !this.afBool && !this.asBool && !this.ocBool) && Object.keys(this.keyedJSON).length > 0) {
+      document.getElementById("skip_btn").classList.remove("skip_btn_none");
+      document.getElementById("skip_btn").classList.add("skip_btn_display");
+    }
   }
 }
 
@@ -153,7 +216,7 @@ function correctAnswerDOM(answerBool) {
   let outputStr;
   let outputClassStr;
 
-  if (answerBool){
+  if (answerBool) {
     outputStr = "Correct!";
     outputClassStr = "map_correct";
   }
@@ -197,7 +260,43 @@ function noCountriesLeftDOM() {
     .appendChild(document.createElement("h3")
       .appendChild(document.createTextNode("Congratulations. You Win!!!")).parentElement);
 
-  document.getElementById("skip_btn").remove();
+  document.getElementById("skip_btn").classList.remove("skip_btn_display");
+  document.getElementById("skip_btn").classList.add("skip_btn_none");
+
+}
+
+function continentsCheckBoxListener(countriesObj) {
+
+  document.getElementById("na_checkbox").addEventListener("change", function() {
+    countriesObj.remakeJsonByContinent(this.checked);
+    document.getElementById("skip_btn").click();
+  });
+
+  document.getElementById("sa_checkbox").addEventListener("change", function() {
+    countriesObj.remakeJsonByContinent(undefined, this.checked);
+    document.getElementById("skip_btn").click();
+  });
+
+  document.getElementById("eu_checkbox").addEventListener("change", function() {
+    countriesObj.remakeJsonByContinent(undefined, undefined, this.checked);
+    document.getElementById("skip_btn").click();
+  });
+
+  document.getElementById("af_checkbox").addEventListener("change", function() {
+    countriesObj.remakeJsonByContinent(undefined, undefined, undefined, this.checked);
+    document.getElementById("skip_btn").click();
+  });
+
+  document.getElementById("as_checkbox").addEventListener("change", function() {
+    countriesObj.remakeJsonByContinent(undefined, undefined, undefined, undefined, this.checked);
+    document.getElementById("skip_btn").click();
+  });
+
+  document.getElementById("oc_checkbox").addEventListener("change", function() {
+    countriesObj.remakeJsonByContinent(undefined, undefined, undefined, undefined, undefined, this.checked);
+    document.getElementById("skip_btn").click();
+  });
+
 }
 
 function initMap() {
@@ -237,6 +336,8 @@ function initMap() {
     let randCountryCodeStr = createRandCountryDOM(countries);
     let incorrectMarkersArray = [];
 
+    continentsCheckBoxListener(countries);
+
     document.getElementById("skip_btn").addEventListener("click", function() {
 
       if (countries.empty()) {
@@ -253,6 +354,10 @@ function initMap() {
     });
 
     map.addListener('click', function(mapMouseEvent) {
+
+      console.log(Object.keys(countries.keyedJSON).length);
+      console.log(countries.keyedJSON);
+      console.log(Object.keys(countries.keyedJSONBackup).length);
 
       if (countries.empty()) {
         deleteElementContentsById("rand_country");
@@ -272,6 +377,8 @@ function initMap() {
           deleteAnswerDOM();
           deleteElementContentsById("selected_country");
 
+          console.log(address);
+
           const addressArray = Array.from(address);
           const addressComps = addressArray[addressArray.length - 1].address_components
 
@@ -283,9 +390,8 @@ function initMap() {
             if (comp.short_name.length === 2) {
               countryCodeStr = comp.short_name;
               countryNameStr = comp.long_name;
-              break;
             }
-            if (comp.short_name.includes("Ocean") || comp.long_name.includes("Ocean")) {
+            else if (comp.short_name.includes("Ocean") || comp.long_name.includes("Ocean")) {
               countryCodeStr = comp.short_name;
               countryNameStr = comp.long_name;
             }
@@ -299,7 +405,16 @@ function initMap() {
             countries.removeCountry(randCountryCodeStr);
             randCountryCodeStr = createRandCountryDOM(countries);
 
-            var checkmark_marker = new google.maps.Marker({
+            if (Object.keys(countries.keyedJSON).length === 1) {
+              document.getElementById("skip_btn").classList.remove("skip_btn_display");
+              document.getElementById("skip_btn").classList.add("skip_btn_none");
+            }
+
+            if (Object.keys(countries.keyedJSON).length === 0) {
+              noCountriesLeftDOM();
+            }
+
+            const checkmark_marker = new google.maps.Marker({
               position: mapMouseEvent.latLng,
               map: map,
               icon: "images/checkmark_icon.png",
@@ -314,7 +429,7 @@ function initMap() {
           else {
             correctAnswerDOM(false);
 
-            var cross_mark_marker = new google.maps.Marker({
+            const cross_mark_marker = new google.maps.Marker({
               position: mapMouseEvent.latLng,
               map: map,
               icon: "images/cross_mark_icon.png",
