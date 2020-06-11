@@ -421,6 +421,14 @@ function initMap() {
               animation: google.maps.Animation.DROP,
             });
 
+            const infowindow = new google.maps.InfoWindow({
+              content: "<h5>" + countryNameStr + "</h5>"
+            });
+
+            checkmark_marker.addListener('click', function() {
+              infowindow.open(map, checkmark_marker);
+            });
+
             // Remove Incorrect Markers
             incorrectMarkersArray.forEach(mrk => {
               mrk.setMap(null);
@@ -436,11 +444,16 @@ function initMap() {
               animation: google.maps.Animation.DROP,
             });
 
+            const infowindow = new google.maps.InfoWindow({
+              content: "<h5>" + countryNameStr + "</h5>"
+            });
+
+            cross_mark_marker.addListener('click', function() {
+              infowindow.open(map, cross_mark_marker);
+            });
+
             incorrectMarkersArray.push(cross_mark_marker);
           }
-        }
-        else {
-          console.log("Geocoder fail due to ", status);
         }
       });
     });
