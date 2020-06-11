@@ -1039,7 +1039,7 @@ function createRandCountryDOM(countriesObj) {
   return randCountryCodeStr;
 }
 
-function deleteElementContentsById(elementId){
+function deleteElementContentsById(elementId) {
 
   const elementDOM = document.getElementById(elementId);
 
@@ -1176,18 +1176,18 @@ function initMap() {
         let countryCodeStr;
         let countryNameStr;
 
-        for (let comp of addressComps){
+        for (let comp of addressComps) {
 
-          if (comp.short_name.length === 2){
+          if (comp.short_name.length === 2) {
             countryCodeStr = comp.short_name;
             countryNameStr = comp.long_name;
             break;
           }
-          if (comp.short_name.includes("Ocean") || comp.long_name.includes("Ocean")){
+          if (comp.short_name.includes("Ocean") || comp.long_name.includes("Ocean")) {
             countryCodeStr = comp.short_name;
             countryNameStr = comp.long_name;
           }
-        }       
+        }
 
         selectedCountryDOM(countryNameStr);
 
@@ -1197,11 +1197,19 @@ function initMap() {
           countries.removeCountry(randCountryCodeStr);
           randCountryCodeStr = createRandCountryDOM(countries);
 
-          var checkmark_marker = new google.maps.Marker({
+          let checkmark_marker = new google.maps.Marker({
             position: mapMouseEvent.latLng,
             map: map,
             icon: "images/checkmark_icon.png",
             animation: google.maps.Animation.DROP,
+          });
+
+          let infowindow = new google.maps.InfoWindow({
+            content: "<h5>" + countryNameStr + "</h5>"
+          });
+
+          checkmark_marker.addListener('click', function() {
+            infowindow.open(map, checkmark_marker);
           });
 
           // Remove Incorrect Markers
@@ -1212,11 +1220,19 @@ function initMap() {
         else {
           incorrectDOM();
 
-          var cross_mark_marker = new google.maps.Marker({
+          let cross_mark_marker = new google.maps.Marker({
             position: mapMouseEvent.latLng,
             map: map,
             icon: "images/cross_mark_icon.png",
             animation: google.maps.Animation.DROP,
+          });
+
+          let infowindow = new google.maps.InfoWindow({
+            content: "<h5>" + countryNameStr + "</h5>"
+          });
+
+          cross_mark_marker.addListener('click', function() {
+            infowindow.open(map, cross_mark_marker);
           });
 
           incorrectMarkersArray.push(cross_mark_marker);
