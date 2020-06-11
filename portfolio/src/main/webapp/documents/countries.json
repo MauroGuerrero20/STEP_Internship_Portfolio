@@ -320,7 +320,7 @@
     "continent": "NA"
   },
   "GM": {
-    "country": "Gambia",
+    "country": "The Gambia",
     "continent": "AF"
   },
   "GW": {
@@ -691,10 +691,6 @@
     "country": "Saudi Arabia",
     "continent": "AS"
   },
-  "CS": {
-    "country": "Serbia and Montenegro",
-    "continent": "EU"
-  },
   "SD": {
     "country": "Sudan",
     "continent": "AF"
@@ -882,10 +878,6 @@
   "WS": {
     "country": "Samoa",
     "continent": "OC"
-  },
-  "XK": {
-    "country": "Kosovo",
-    "continent": "EU"
   },
   "YE": {
     "country": "Yemen",

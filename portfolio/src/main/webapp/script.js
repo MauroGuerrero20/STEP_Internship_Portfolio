@@ -100,912 +100,10 @@ function getComments() {
 }
 
 class Countries {
-  keyedJSON = {
-    "AW": {
-      "country": "Aruba",
-      "continent": "NA"
-    },
-    "AF": {
-      "country": "Afghanistan",
-      "continent": "AS"
-    },
-    "AO": {
-      "country": "Angola",
-      "continent": "AF"
-    },
-    "AI": {
-      "country": "Anguilla",
-      "continent": "NA"
-    },
-    "AX": {
-      "country": "Åland",
-      "continent": "EU"
-    },
-    "AL": {
-      "country": "Albania",
-      "continent": "EU"
-    },
-    "AD": {
-      "country": "Andorra",
-      "continent": "EU"
-    },
-    "AE": {
-      "country": "United Arab Emirates",
-      "continent": "AS"
-    },
-    "AR": {
-      "country": "Argentina",
-      "continent": "SA"
-    },
-    "AM": {
-      "country": "Armenia",
-      "continent": "AS"
-    },
-    "AS": {
-      "country": "American Samoa",
-      "continent": "OC"
-    },
-    "AQ": {
-      "country": "Antarctica",
-      "continent": "AN"
-    },
-    "TF": {
-      "country": "French Southern Territories",
-      "continent": "AN"
-    },
-    "AG": {
-      "country": "Antigua and Barbuda",
-      "continent": "NA"
-    },
-    "AU": {
-      "country": "Australia",
-      "continent": "OC"
-    },
-    "AT": {
-      "country": "Austria",
-      "continent": "EU"
-    },
-    "AZ": {
-      "country": "Azerbaijan",
-      "continent": "AS"
-    },
-    "BI": {
-      "country": "Burundi",
-      "continent": "AF"
-    },
-    "BE": {
-      "country": "Belgium",
-      "continent": "EU"
-    },
-    "BJ": {
-      "country": "Benin",
-      "continent": "AF"
-    },
-    "BQ": {
-      "country": "Caribbean Netherlands",
-      "continent": "NA"
-    },
-    "BF": {
-      "country": "Burkina Faso",
-      "continent": "AF"
-    },
-    "BD": {
-      "country": "Bangladesh",
-      "continent": "AS"
-    },
-    "BG": {
-      "country": "Bulgaria",
-      "continent": "EU"
-    },
-    "BH": {
-      "country": "Bahrain",
-      "continent": "AS"
-    },
-    "BS": {
-      "country": "Bahamas",
-      "continent": "NA"
-    },
-    "BA": {
-      "country": "Bosnia and Herzegovina",
-      "continent": "EU"
-    },
-    "BY": {
-      "country": "Belarus",
-      "continent": "EU"
-    },
-    "BZ": {
-      "country": "Belize",
-      "continent": "NA"
-    },
-    "BM": {
-      "country": "Bermuda",
-      "continent": "NA"
-    },
-    "BO": {
-      "country": "Bolivia",
-      "continent": "SA"
-    },
-    "BR": {
-      "country": "Brazil",
-      "continent": "SA"
-    },
-    "BB": {
-      "country": "Barbados",
-      "continent": "NA"
-    },
-    "BN": {
-      "country": "Brunei",
-      "continent": "AS"
-    },
-    "BT": {
-      "country": "Bhutan",
-      "continent": "AS"
-    },
-    "BW": {
-      "country": "Botswana",
-      "continent": "AF"
-    },
-    "CF": {
-      "country": "Central African Republic",
-      "continent": "AF"
-    },
-    "CA": {
-      "country": "Canada",
-      "continent": "NA"
-    },
-    "CH": {
-      "country": "Switzerland",
-      "continent": "EU"
-    },
-    "CL": {
-      "country": "Chile",
-      "continent": "SA"
-    },
-    "CN": {
-      "country": "China",
-      "continent": "AS"
-    },
-    "CI": {
-      "country": "Ivory Coast",
-      "continent": "AF"
-    },
-    "CM": {
-      "country": "Cameroon",
-      "continent": "AF"
-    },
-    "CD": {
-      "country": "DR Congo",
-      "continent": "AF"
-    },
-    "CG": {
-      "country": "Congo Republic",
-      "continent": "AF"
-    },
-    "CO": {
-      "country": "Colombia",
-      "continent": "SA"
-    },
-    "KM": {
-      "country": "Comoros",
-      "continent": "AF"
-    },
-    "CV": {
-      "country": "Cabo Verde",
-      "continent": "AF"
-    },
-    "CR": {
-      "country": "Costa Rica",
-      "continent": "NA"
-    },
-    "CU": {
-      "country": "Cuba",
-      "continent": "NA"
-    },
-    "CW": {
-      "country": "Curaçao",
-      "continent": "NA"
-    },
-    "CX": {
-      "country": "Christmas Island",
-      "continent": "OC"
-    },
-    "KY": {
-      "country": "Cayman Islands",
-      "continent": "NA"
-    },
-    "CY": {
-      "country": "Cyprus",
-      "continent": "EU"
-    },
-    "CZ": {
-      "country": "Czechia",
-      "continent": "EU"
-    },
-    "DE": {
-      "country": "Germany",
-      "continent": "EU"
-    },
-    "DJ": {
-      "country": "Djibouti",
-      "continent": "AF"
-    },
-    "DM": {
-      "country": "Dominica",
-      "continent": "NA"
-    },
-    "DK": {
-      "country": "Denmark",
-      "continent": "EU"
-    },
-    "DO": {
-      "country": "Dominican Republic",
-      "continent": "NA"
-    },
-    "DZ": {
-      "country": "Algeria",
-      "continent": "AF"
-    },
-    "EC": {
-      "country": "Ecuador",
-      "continent": "SA"
-    },
-    "EG": {
-      "country": "Egypt",
-      "continent": "AF"
-    },
-    "ER": {
-      "country": "Eritrea",
-      "continent": "AF"
-    },
-    "ES": {
-      "country": "Spain",
-      "continent": "EU"
-    },
-    "EE": {
-      "country": "Estonia",
-      "continent": "EU"
-    },
-    "ET": {
-      "country": "Ethiopia",
-      "continent": "AF"
-    },
-    "FI": {
-      "country": "Finland",
-      "continent": "EU"
-    },
-    "FJ": {
-      "country": "Fiji",
-      "continent": "OC"
-    },
-    "FK": {
-      "country": "Falkland Islands",
-      "continent": "SA"
-    },
-    "FR": {
-      "country": "France",
-      "continent": "EU"
-    },
-    "FO": {
-      "country": "Faroe Islands",
-      "continent": "EU"
-    },
-    "GA": {
-      "country": "Gabon",
-      "continent": "AF"
-    },
-    "GB": {
-      "country": "United Kingdom",
-      "continent": "EU"
-    },
-    "GE": {
-      "country": "Georgia",
-      "continent": "AS"
-    },
-    "GG": {
-      "country": "Guernsey",
-      "continent": "EU"
-    },
-    "GH": {
-      "country": "Ghana",
-      "continent": "AF"
-    },
-    "GI": {
-      "country": "Gibraltar",
-      "continent": "EU"
-    },
-    "GN": {
-      "country": "Guinea",
-      "continent": "AF"
-    },
-    "GP": {
-      "country": "Guadeloupe",
-      "continent": "NA"
-    },
-    "GM": {
-      "country": "Gambia",
-      "continent": "AF"
-    },
-    "GW": {
-      "country": "Guinea-Bissau",
-      "continent": "AF"
-    },
-    "GQ": {
-      "country": "Equatorial Guinea",
-      "continent": "AF"
-    },
-    "GR": {
-      "country": "Greece",
-      "continent": "EU"
-    },
-    "GD": {
-      "country": "Grenada",
-      "continent": "NA"
-    },
-    "GL": {
-      "country": "Greenland",
-      "continent": "NA"
-    },
-    "GT": {
-      "country": "Guatemala",
-      "continent": "NA"
-    },
-    "GF": {
-      "country": "French Guiana",
-      "continent": "SA"
-    },
-    "GU": {
-      "country": "Guam",
-      "continent": "OC"
-    },
-    "GY": {
-      "country": "Guyana",
-      "continent": "SA"
-    },
-    "HK": {
-      "country": "Hong Kong",
-      "continent": "AS"
-    },
-    "HM": {
-      "country": "Heard Island and McDonald Islands",
-      "continent": "AN"
-    },
-    "HN": {
-      "country": "Honduras",
-      "continent": "NA"
-    },
-    "HR": {
-      "country": "Croatia",
-      "continent": "EU"
-    },
-    "HT": {
-      "country": "Haiti",
-      "continent": "NA"
-    },
-    "HU": {
-      "country": "Hungary",
-      "continent": "EU"
-    },
-    "ID": {
-      "country": "Indonesia",
-      "continent": "AS"
-    },
-    "IM": {
-      "country": "Isle of Man",
-      "continent": "EU"
-    },
-    "IN": {
-      "country": "India",
-      "continent": "AS"
-    },
-    "IE": {
-      "country": "Ireland",
-      "continent": "EU"
-    },
-    "IR": {
-      "country": "Iran",
-      "continent": "AS"
-    },
-    "IQ": {
-      "country": "Iraq",
-      "continent": "AS"
-    },
-    "IS": {
-      "country": "Iceland",
-      "continent": "EU"
-    },
-    "IL": {
-      "country": "Israel",
-      "continent": "AS"
-    },
-    "IT": {
-      "country": "Italy",
-      "continent": "EU"
-    },
-    "JM": {
-      "country": "Jamaica",
-      "continent": "NA"
-    },
-    "JE": {
-      "country": "Jersey",
-      "continent": "EU"
-    },
-    "JO": {
-      "country": "Jordan",
-      "continent": "AS"
-    },
-    "JP": {
-      "country": "Japan",
-      "continent": "AS"
-    },
-    "KZ": {
-      "country": "Kazakhstan",
-      "continent": "AS"
-    },
-    "KE": {
-      "country": "Kenya",
-      "continent": "AF"
-    },
-    "KG": {
-      "country": "Kyrgyzstan",
-      "continent": "AS"
-    },
-    "KH": {
-      "country": "Cambodia",
-      "continent": "AS"
-    },
-    "KN": {
-      "country": "St Kitts and Nevis",
-      "continent": "NA"
-    },
-    "KR": {
-      "country": "South Korea",
-      "continent": "AS"
-    },
-    "KW": {
-      "country": "Kuwait",
-      "continent": "AS"
-    },
-    "LA": {
-      "country": "Laos",
-      "continent": "AS"
-    },
-    "LB": {
-      "country": "Lebanon",
-      "continent": "AS"
-    },
-    "LR": {
-      "country": "Liberia",
-      "continent": "AF"
-    },
-    "LY": {
-      "country": "Libya",
-      "continent": "AF"
-    },
-    "LC": {
-      "country": "Saint Lucia",
-      "continent": "NA"
-    },
-    "LI": {
-      "country": "Liechtenstein",
-      "continent": "EU"
-    },
-    "LK": {
-      "country": "Sri Lanka",
-      "continent": "AS"
-    },
-    "LS": {
-      "country": "Lesotho",
-      "continent": "AF"
-    },
-    "LT": {
-      "country": "Lithuania",
-      "continent": "EU"
-    },
-    "LU": {
-      "country": "Luxembourg",
-      "continent": "EU"
-    },
-    "LV": {
-      "country": "Latvia",
-      "continent": "EU"
-    },
-    "MO": {
-      "country": "Macao",
-      "continent": "AS"
-    },
-    "MA": {
-      "country": "Morocco",
-      "continent": "AF"
-    },
-    "MC": {
-      "country": "Monaco",
-      "continent": "EU"
-    },
-    "MD": {
-      "country": "Moldova",
-      "continent": "EU"
-    },
-    "MG": {
-      "country": "Madagascar",
-      "continent": "AF"
-    },
-    "MX": {
-      "country": "Mexico",
-      "continent": "NA"
-    },
-    "MK": {
-      "country": "North Macedonia",
-      "continent": "EU"
-    },
-    "ML": {
-      "country": "Mali",
-      "continent": "AF"
-    },
-    "MT": {
-      "country": "Malta",
-      "continent": "EU"
-    },
-    "MM": {
-      "country": "Myanmar",
-      "continent": "AS"
-    },
-    "ME": {
-      "country": "Montenegro",
-      "continent": "EU"
-    },
-    "MN": {
-      "country": "Mongolia",
-      "continent": "AS"
-    },
-    "MZ": {
-      "country": "Mozambique",
-      "continent": "AF"
-    },
-    "MR": {
-      "country": "Mauritania",
-      "continent": "AF"
-    },
-    "MS": {
-      "country": "Montserrat",
-      "continent": "NA"
-    },
-    "MQ": {
-      "country": "Martinique",
-      "continent": "NA"
-    },
-    "MU": {
-      "country": "Mauritius",
-      "continent": "AF"
-    },
-    "MW": {
-      "country": "Malawi",
-      "continent": "AF"
-    },
-    "MY": {
-      "country": "Malaysia",
-      "continent": "AS"
-    },
-    "YT": {
-      "country": "Mayotte",
-      "continent": "AF"
-    },
-    "NA": {
-      "country": "Namibia",
-      "continent": "AF"
-    },
-    "NC": {
-      "country": "New Caledonia",
-      "continent": "OC"
-    },
-    "NE": {
-      "country": "Niger",
-      "continent": "AF"
-    },
-    "NG": {
-      "country": "Nigeria",
-      "continent": "AF"
-    },
-    "NI": {
-      "country": "Nicaragua",
-      "continent": "NA"
-    },
-    "NL": {
-      "country": "Netherlands",
-      "continent": "EU"
-    },
-    "NO": {
-      "country": "Norway",
-      "continent": "EU"
-    },
-    "NP": {
-      "country": "Nepal",
-      "continent": "AS"
-    },
-    "NZ": {
-      "country": "New Zealand",
-      "continent": "OC"
-    },
-    "OM": {
-      "country": "Oman",
-      "continent": "AS"
-    },
-    "PK": {
-      "country": "Pakistan",
-      "continent": "AS"
-    },
-    "PA": {
-      "country": "Panama",
-      "continent": "NA"
-    },
-    "PE": {
-      "country": "Peru",
-      "continent": "SA"
-    },
-    "PH": {
-      "country": "Philippines",
-      "continent": "AS"
-    },
-    "PG": {
-      "country": "Papua New Guinea",
-      "continent": "OC"
-    },
-    "PL": {
-      "country": "Poland",
-      "continent": "EU"
-    },
-    "PR": {
-      "country": "Puerto Rico",
-      "continent": "NA"
-    },
-    "KP": {
-      "country": "North Korea",
-      "continent": "AS"
-    },
-    "PT": {
-      "country": "Portugal",
-      "continent": "EU"
-    },
-    "PY": {
-      "country": "Paraguay",
-      "continent": "SA"
-    },
-    "QA": {
-      "country": "Qatar",
-      "continent": "AS"
-    },
-    "RE": {
-      "country": "Réunion",
-      "continent": "AF"
-    },
-    "RO": {
-      "country": "Romania",
-      "continent": "EU"
-    },
-    "RU": {
-      "country": "Russia",
-      "continent": "EU"
-    },
-    "RW": {
-      "country": "Rwanda",
-      "continent": "AF"
-    },
-    "SA": {
-      "country": "Saudi Arabia",
-      "continent": "AS"
-    },
-    "CS": {
-      "country": "Serbia and Montenegro",
-      "continent": "EU"
-    },
-    "SD": {
-      "country": "Sudan",
-      "continent": "AF"
-    },
-    "SN": {
-      "country": "Senegal",
-      "continent": "AF"
-    },
-    "SG": {
-      "country": "Singapore",
-      "continent": "AS"
-    },
-    "GS": {
-      "country": "South Georgia and South Sandwich Islands",
-      "continent": "AN"
-    },
-    "SH": {
-      "country": "Saint Helena",
-      "continent": "AF"
-    },
-    "SJ": {
-      "country": "Svalbard and Jan Mayen",
-      "continent": "EU"
-    },
-    "SB": {
-      "country": "Solomon Islands",
-      "continent": "OC"
-    },
-    "SL": {
-      "country": "Sierra Leone",
-      "continent": "AF"
-    },
-    "SV": {
-      "country": "El Salvador",
-      "continent": "NA"
-    },
-    "SM": {
-      "country": "San Marino",
-      "continent": "EU"
-    },
-    "SO": {
-      "country": "Somalia",
-      "continent": "AF"
-    },
-    "PM": {
-      "country": "Saint Pierre and Miquelon",
-      "continent": "NA"
-    },
-    "RS": {
-      "country": "Serbia",
-      "continent": "EU"
-    },
-    "SS": {
-      "country": "South Sudan",
-      "continent": "AF"
-    },
-    "ST": {
-      "country": "São Tomé and Príncipe",
-      "continent": "AF"
-    },
-    "SR": {
-      "country": "Suriname",
-      "continent": "SA"
-    },
-    "SK": {
-      "country": "Slovakia",
-      "continent": "EU"
-    },
-    "SI": {
-      "country": "Slovenia",
-      "continent": "EU"
-    },
-    "SE": {
-      "country": "Sweden",
-      "continent": "EU"
-    },
-    "SZ": {
-      "country": "Eswatini",
-      "continent": "AF"
-    },
-    "SC": {
-      "country": "Seychelles",
-      "continent": "AF"
-    },
-    "SY": {
-      "country": "Syria",
-      "continent": "AS"
-    },
-    "TC": {
-      "country": "Turks and Caicos Islands",
-      "continent": "NA"
-    },
-    "TD": {
-      "country": "Chad",
-      "continent": "AF"
-    },
-    "TG": {
-      "country": "Togo",
-      "continent": "AF"
-    },
-    "TH": {
-      "country": "Thailand",
-      "continent": "AS"
-    },
-    "TJ": {
-      "country": "Tajikistan",
-      "continent": "AS"
-    },
-    "TM": {
-      "country": "Turkmenistan",
-      "continent": "AS"
-    },
-    "TL": {
-      "country": "Timor-Leste",
-      "continent": "OC"
-    },
-    "TT": {
-      "country": "Trinidad and Tobago",
-      "continent": "NA"
-    },
-    "TN": {
-      "country": "Tunisia",
-      "continent": "AF"
-    },
-    "TR": {
-      "country": "Turkey",
-      "continent": "AS"
-    },
-    "TW": {
-      "country": "Taiwan",
-      "continent": "AS"
-    },
-    "TZ": {
-      "country": "Tanzania",
-      "continent": "AF"
-    },
-    "UG": {
-      "country": "Uganda",
-      "continent": "AF"
-    },
-    "UA": {
-      "country": "Ukraine",
-      "continent": "EU"
-    },
-    "UY": {
-      "country": "Uruguay",
-      "continent": "SA"
-    },
-    "US": {
-      "country": "United States",
-      "continent": "NA"
-    },
-    "UZ": {
-      "country": "Uzbekistan",
-      "continent": "AS"
-    },
-    "VA": {
-      "country": "Vatican City",
-      "continent": "EU"
-    },
-    "VC": {
-      "country": "St Vincent and Grenadines",
-      "continent": "NA"
-    },
-    "VE": {
-      "country": "Venezuela",
-      "continent": "SA"
-    },
-    "VG": {
-      "country": "British Virgin Islands",
-      "continent": "NA"
-    },
-    "VI": {
-      "country": "U.S. Virgin Islands",
-      "continent": "NA"
-    },
-    "VN": {
-      "country": "Vietnam",
-      "continent": "AS"
-    },
-    "VU": {
-      "country": "Vanuatu",
-      "continent": "OC"
-    },
-    "WS": {
-      "country": "Samoa",
-      "continent": "OC"
-    },
-    "XK": {
-      "country": "Kosovo",
-      "continent": "EU"
-    },
-    "YE": {
-      "country": "Yemen",
-      "continent": "AS"
-    },
-    "ZA": {
-      "country": "South Africa",
-      "continent": "AF"
-    },
-    "ZM": {
-      "country": "Zambia",
-      "continent": "AF"
-    },
-    "ZW": {
-      "country": "Zimbabwe",
-      "continent": "AF"
-    }
-  };
+
+  constructor(jsonObj) {
+    this.keyedJSON = jsonObj;
+  }
 
   getRandCountryCode() {
     return Object.keys(this.keyedJSON)[Math.floor(Math.random() * Object.keys(this.keyedJSON).length)];
@@ -1039,7 +137,7 @@ function createRandCountryDOM(countriesObj) {
   return randCountryCodeStr;
 }
 
-function deleteElementContentsById(elementId){
+function deleteElementContentsById(elementId) {
 
   const elementDOM = document.getElementById(elementId);
 
@@ -1050,22 +148,25 @@ function deleteElementContentsById(elementId){
   }
 }
 
-function correctDOM() {
+function correctAnswerDOM(answerBool) {
+
+  let outputStr;
+  let outputClassStr;
+
+  if (answerBool){
+    outputStr = "Correct!";
+    outputClassStr = "map_correct";
+  }
+  else {
+    outputStr = "Incorrect";
+    outputClassStr = "map_incorrect";
+  }
 
   const correctOuputDOM = document.getElementById("map_output_answer")
     .appendChild(document.createElement("h4")
-      .appendChild(document.createTextNode("Correct!")).parentElement);
+      .appendChild(document.createTextNode(outputStr)).parentElement);
 
-  correctOuputDOM.parentElement.classList.add("map_correct");
-}
-
-function incorrectDOM() {
-
-  const incorrectOuputDOM = document.getElementById("map_output_answer")
-    .appendChild(document.createElement("h4")
-      .appendChild(document.createTextNode("Incorrect")).parentElement);
-
-  incorrectOuputDOM.parentElement.classList.add("map_incorrect");
+  correctOuputDOM.parentElement.classList.add(outputClassStr);
 }
 
 function deleteAnswerDOM() {
@@ -1130,101 +231,106 @@ function initMap() {
     ]
   });
 
+  fetch("/documents/countries.json").then(resp => resp.json()).then(countriesJsonFile => {
 
-  let countries = new Countries();
-  let randCountryCodeStr = createRandCountryDOM(countries);
-  let incorrectMarkersArray = [];
+    let countries = new Countries(countriesJsonFile);
+    console.log(countries.keyedJSON);
+    let randCountryCodeStr = createRandCountryDOM(countries);
+    let incorrectMarkersArray = [];
 
-  document.getElementById("skip_btn").addEventListener("click", function() {
+    document.getElementById("skip_btn").addEventListener("click", function() {
 
-    if (countries.empty()) {
-      deleteElementContentsById("rand_country");
-      deleteAnswerDOM();
-      deleteElementContentsById("selected_country");
-      noCountriesLeftDOM();
-
-      return;
-    }
-
-    deleteElementContentsById("rand_country");
-    randCountryCodeStr = createRandCountryDOM(countries);
-  });
-
-  map.addListener('click', function(mapMouseEvent) {
-
-    if (countries.empty()) {
-      deleteElementContentsById("rand_country");
-      deleteAnswerDOM();
-      deleteElementContentsById("selected_country");
-      noCountriesLeftDOM();
-
-      return;
-    }
-
-    const geocoder = new google.maps.Geocoder;
-
-    geocoder.geocode({ 'location': mapMouseEvent.latLng }, function(address, status) {
-
-      if (status === "OK") {
-
+      if (countries.empty()) {
+        deleteElementContentsById("rand_country");
         deleteAnswerDOM();
         deleteElementContentsById("selected_country");
+        noCountriesLeftDOM();
 
-        const addressArray = Array.from(address);
-        const addressComps = addressArray[addressArray.length - 1].address_components
+        return;
+      }
 
-        let countryCodeStr;
-        let countryNameStr;
+      deleteElementContentsById("rand_country");
+      randCountryCodeStr = createRandCountryDOM(countries);
+    });
 
-        for (let comp of addressComps){
+    map.addListener('click', function(mapMouseEvent) {
 
-          if (comp.short_name.length === 2){
-            countryCodeStr = comp.short_name;
-            countryNameStr = comp.long_name;
-            break;
+      if (countries.empty()) {
+        deleteElementContentsById("rand_country");
+        deleteAnswerDOM();
+        deleteElementContentsById("selected_country");
+        noCountriesLeftDOM();
+
+        return;
+      }
+
+      const geocoder = new google.maps.Geocoder;
+
+      geocoder.geocode({ 'location': mapMouseEvent.latLng }, function(address, status) {
+
+        if (status === "OK") {
+
+          deleteAnswerDOM();
+          deleteElementContentsById("selected_country");
+
+          console.log(address);
+
+          const addressArray = Array.from(address);
+          const addressComps = addressArray[addressArray.length - 1].address_components
+
+          let countryCodeStr;
+          let countryNameStr;
+
+          for (let comp of addressComps) {
+
+            if (comp.short_name.length === 2) {
+              countryCodeStr = comp.short_name;
+              countryNameStr = comp.long_name;
+              break;
+            }
+            if (comp.short_name.includes("Ocean") || comp.long_name.includes("Ocean")) {
+              countryCodeStr = comp.short_name;
+              countryNameStr = comp.long_name;
+            }
           }
-          if (comp.short_name.includes("Ocean") || comp.long_name.includes("Ocean")){
-            countryCodeStr = comp.short_name;
-            countryNameStr = comp.long_name;
+
+          selectedCountryDOM(countryNameStr);
+
+          if (countryCodeStr === randCountryCodeStr) {
+            correctAnswerDOM(true);
+            deleteElementContentsById("rand_country");
+            countries.removeCountry(randCountryCodeStr);
+            randCountryCodeStr = createRandCountryDOM(countries);
+
+            var checkmark_marker = new google.maps.Marker({
+              position: mapMouseEvent.latLng,
+              map: map,
+              icon: "images/checkmark_icon.png",
+              animation: google.maps.Animation.DROP,
+            });
+
+            // Remove Incorrect Markers
+            incorrectMarkersArray.forEach(mrk => {
+              mrk.setMap(null);
+            });
           }
-        }       
+          else {
+            correctAnswerDOM(false);
 
-        selectedCountryDOM(countryNameStr);
+            var cross_mark_marker = new google.maps.Marker({
+              position: mapMouseEvent.latLng,
+              map: map,
+              icon: "images/cross_mark_icon.png",
+              animation: google.maps.Animation.DROP,
+            });
 
-        if (countryCodeStr === randCountryCodeStr) {
-          correctDOM();
-          deleteElementContentsById("rand_country");
-          countries.removeCountry(randCountryCodeStr);
-          randCountryCodeStr = createRandCountryDOM(countries);
-
-          var checkmark_marker = new google.maps.Marker({
-            position: mapMouseEvent.latLng,
-            map: map,
-            icon: "images/checkmark_icon.png",
-            animation: google.maps.Animation.DROP,
-          });
-
-          // Remove Incorrect Markers
-          incorrectMarkersArray.forEach(mrk => {
-            mrk.setMap(null);
-          });
+            incorrectMarkersArray.push(cross_mark_marker);
+          }
         }
         else {
-          incorrectDOM();
-
-          var cross_mark_marker = new google.maps.Marker({
-            position: mapMouseEvent.latLng,
-            map: map,
-            icon: "images/cross_mark_icon.png",
-            animation: google.maps.Animation.DROP,
-          });
-
-          incorrectMarkersArray.push(cross_mark_marker);
+          console.log("Geocoder fail due to ", status);
         }
-      }
-      else {
-        console.log("Geocoder fail due to ", status);
-      }
+      });
     });
   });
 }
