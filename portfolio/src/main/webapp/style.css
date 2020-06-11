@@ -137,12 +137,8 @@
 
 #proj i {
   color: rebeccapurple;
-<<<<<<< HEAD
-  margin-left: 25px
-=======
   font-size: 50px;
-padding-left: 25px
->>>>>>> master
+  margin-left: 25px;
 }
 
 #proj h3 {
@@ -158,12 +154,54 @@ padding-left: 25px
   width: 40%;
 }
 
-.effect_text {
+.effect_text{
   margin-right: auto;
 }
 
-.mics_background {
+.map_background{
   padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+#map_game{
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#map_game h2{
+  text-align: center;
+}
+
+
+#map_output_answer {
+  text-align: right;
+}
+
+.map_correct {
+  color: #20CC82;
+}
+
+.map_incorrect {
+  color: red;
+}
+
+#map {
+  margin-top: 10px;
+  padding: 35%; /* 30% ??? */
+  border-bottom: 1px solid #ccc;
+}
+
+#selected_country {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.misc_background{
+  padding-top: 10px;
+  background-color: whitesmoke;
 }
 
 #misc {
@@ -202,30 +240,6 @@ padding-left: 25px
 
 #linkedin_misc {
   color: #0e76a8;
-}
-
-.map_background {
-  background-color: whitesmoke;
-  padding-bottom: 50px;
-  padding-top: 10px;
-}
-
-#map_game {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
-  width: 50%;
-}
-
-#map_game h2 {
-  text-align: center;
-}
-
-#map {
-  border-bottom: 1px solid #ccc;
-  margin-top: 30px;
-  padding: 35%;
 }
 
 .comment_background {

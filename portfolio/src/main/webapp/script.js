@@ -99,13 +99,240 @@ function getComments() {
   });
 }
 
-function initMap() {
-  const map = new google.maps.Map(
-      document.getElementById('map'),
-      {center: {lat: 37.422, lng: -122.084}, zoom: 16});
+class Countries {
+
+  constructor(jsonObj) {
+    this.keyedJSON = jsonObj;
+  }
+
+  getRandCountryCode() {
+    return Object.keys(this.keyedJSON)[Math.floor(Math.random() * Object.keys(this.keyedJSON).length)];
+  }
+
+  removeCountry(countryCode) {
+    delete this.keyedJSON[countryCode];
+  }
+
+  empty() {
+    return Object.keys(this.keyedJSON).length === 0;
+  }
 }
 
-function renderPage(){
+function createRandCountryDOM(countriesObj) {
+
+  if (countriesObj.empty()) return;
+
+  const randCountryCodeStr = countriesObj.getRandCountryCode();
+  const randCountry = countriesObj.keyedJSON[randCountryCodeStr].country;
+
+  const randCountryDOM = document.createElement("b")
+    .appendChild(document.createTextNode(randCountry));
+
+  const randCountryOutput = document.getElementById("rand_country")
+    .appendChild(document.createElement("h4")
+      .appendChild(document.createTextNode("Click where you think ")).parentElement
+      .appendChild(randCountryDOM.parentElement).parentElement
+      .appendChild(document.createTextNode(" is.")).parentElement);
+
+  return randCountryCodeStr;
+}
+
+function deleteElementContentsById(elementId) {
+
+  const elementDOM = document.getElementById(elementId);
+
+  let child = elementDOM.lastElementChild;
+  while (child) {
+    elementDOM.removeChild(child);
+    child = elementDOM.lastElementChild;
+  }
+}
+
+function correctAnswerDOM(answerBool) {
+
+  let outputStr;
+  let outputClassStr;
+
+  if (answerBool){
+    outputStr = "Correct!";
+    outputClassStr = "map_correct";
+  }
+  else {
+    outputStr = "Incorrect";
+    outputClassStr = "map_incorrect";
+  }
+
+  const correctOuputDOM = document.getElementById("map_output_answer")
+    .appendChild(document.createElement("h4")
+      .appendChild(document.createTextNode(outputStr)).parentElement);
+
+  correctOuputDOM.parentElement.classList.add(outputClassStr);
+}
+
+function deleteAnswerDOM() {
+  document.getElementById("map_output_answer").classList.remove("map_correct");
+  document.getElementById("map_output_answer").classList.remove("map_incorrect");
+
+  deleteElementContentsById("map_output_answer");
+}
+
+function selectedCountryDOM(selectedCountry) {
+
+  const countryDOM = document.createElement("b")
+    .appendChild(document.createTextNode(selectedCountry));
+
+  document.getElementById("selected_country")
+    .appendChild(document.createElement("h3")
+      .appendChild(document.createTextNode("You clicked on ")).parentElement
+      .appendChild(countryDOM.parentElement).parentElement);
+}
+
+function noCountriesLeftDOM() {
+
+  document.getElementById("rand_country")
+    .appendChild(document.createElement("h4")
+      .appendChild(document.createTextNode("There are no more contries left!")).parentElement);
+
+  document.getElementById("selected_country")
+    .appendChild(document.createElement("h3")
+      .appendChild(document.createTextNode("Congratulations. You Win!!!")).parentElement);
+
+  document.getElementById("skip_btn").remove();
+}
+
+function initMap() {
+
+  const map = new google.maps.Map(
+    document.getElementById('map'), {
+    center: { lat: 0, lng: 0 },
+    zoom: 4,
+    disableDefaultUI: true,
+    zoomControl: true,
+    mapTypeControl: false,
+    scaleControl: true,
+    streetViewControl: false,
+    rotateControl: true,
+    fullscreenControl: false,
+    styles: [
+      {
+        featureType: "all",
+        elementType: "labels",
+        stylers: [
+          { visibility: "off" }
+        ]
+      },
+
+      {
+        featureType: "road",
+        stylers: [
+          { visibility: "off" }
+        ]
+      }
+    ]
+  });
+
+  fetch("/documents/countries.json").then(resp => resp.json()).then(countriesJsonFile => {
+
+    let countries = new Countries(countriesJsonFile);
+    let randCountryCodeStr = createRandCountryDOM(countries);
+    let incorrectMarkersArray = [];
+
+    document.getElementById("skip_btn").addEventListener("click", function() {
+
+      if (countries.empty()) {
+        deleteElementContentsById("rand_country");
+        deleteAnswerDOM();
+        deleteElementContentsById("selected_country");
+        noCountriesLeftDOM();
+
+        return;
+      }
+
+      deleteElementContentsById("rand_country");
+      randCountryCodeStr = createRandCountryDOM(countries);
+    });
+
+    map.addListener('click', function(mapMouseEvent) {
+
+      if (countries.empty()) {
+        deleteElementContentsById("rand_country");
+        deleteAnswerDOM();
+        deleteElementContentsById("selected_country");
+        noCountriesLeftDOM();
+
+        return;
+      }
+
+      const geocoder = new google.maps.Geocoder;
+
+      geocoder.geocode({ 'location': mapMouseEvent.latLng }, function(address, status) {
+
+        if (status === "OK") {
+
+          deleteAnswerDOM();
+          deleteElementContentsById("selected_country");
+
+          const addressArray = Array.from(address);
+          const addressComps = addressArray[addressArray.length - 1].address_components
+
+          let countryCodeStr;
+          let countryNameStr;
+
+          for (let comp of addressComps) {
+
+            if (comp.short_name.length === 2) {
+              countryCodeStr = comp.short_name;
+              countryNameStr = comp.long_name;
+              break;
+            }
+            if (comp.short_name.includes("Ocean") || comp.long_name.includes("Ocean")) {
+              countryCodeStr = comp.short_name;
+              countryNameStr = comp.long_name;
+            }
+          }
+
+          selectedCountryDOM(countryNameStr);
+
+          if (countryCodeStr === randCountryCodeStr) {
+            correctAnswerDOM(true);
+            deleteElementContentsById("rand_country");
+            countries.removeCountry(randCountryCodeStr);
+            randCountryCodeStr = createRandCountryDOM(countries);
+
+            var checkmark_marker = new google.maps.Marker({
+              position: mapMouseEvent.latLng,
+              map: map,
+              icon: "images/checkmark_icon.png",
+              animation: google.maps.Animation.DROP,
+            });
+
+            // Remove Incorrect Markers
+            incorrectMarkersArray.forEach(mrk => {
+              mrk.setMap(null);
+            });
+          }
+          else {
+            correctAnswerDOM(false);
+
+            var cross_mark_marker = new google.maps.Marker({
+              position: mapMouseEvent.latLng,
+              map: map,
+              icon: "images/cross_mark_icon.png",
+              animation: google.maps.Animation.DROP,
+            });
+
+            incorrectMarkersArray.push(cross_mark_marker);
+          }
+        }
+        else {
+          console.log("Geocoder fail due to ", status);
+        }
+      });
+    });
+  });
+}
+
+function renderPage() {
   getComments();
   initMap();
 }
