@@ -153,7 +153,7 @@ function correctAnswerDOM(answerBool) {
   let outputStr;
   let outputClassStr;
 
-  if (answerBool){
+  if (answerBool) {
     outputStr = "Correct!";
     outputClassStr = "map_correct";
   }
@@ -299,11 +299,19 @@ function initMap() {
             countries.removeCountry(randCountryCodeStr);
             randCountryCodeStr = createRandCountryDOM(countries);
 
-            var checkmark_marker = new google.maps.Marker({
+            let checkmark_marker = new google.maps.Marker({
               position: mapMouseEvent.latLng,
               map: map,
               icon: "images/checkmark_icon.png",
               animation: google.maps.Animation.DROP,
+            });
+
+            let infowindow = new google.maps.InfoWindow({
+              content: "<h5>" + countryNameStr + "</h5>"
+            });
+
+            checkmark_marker.addListener('click', function() {
+              infowindow.open(map, checkmark_marker);
             });
 
             // Remove Incorrect Markers
@@ -314,18 +322,23 @@ function initMap() {
           else {
             correctAnswerDOM(false);
 
-            var cross_mark_marker = new google.maps.Marker({
+            let cross_mark_marker = new google.maps.Marker({
               position: mapMouseEvent.latLng,
               map: map,
               icon: "images/cross_mark_icon.png",
               animation: google.maps.Animation.DROP,
             });
 
+            let infowindow = new google.maps.InfoWindow({
+              content: "<h5>" + countryNameStr + "</h5>"
+            });
+
+            cross_mark_marker.addListener('click', function() {
+              infowindow.open(map, cross_mark_marker);
+            });
+
             incorrectMarkersArray.push(cross_mark_marker);
           }
-        }
-        else {
-          console.log("Geocoder fail due to ", status);
         }
       });
     });
