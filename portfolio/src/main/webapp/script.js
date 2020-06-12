@@ -272,7 +272,7 @@ class Countries {
       }
     }
 
-    if (!(!this.naBool && !this.saBool && !this.euBool && !this.afBool && !this.asBool && !this.ocBool) && Object.keys(this.keyedJSON).length > 0) {
+    if ((this.naBool || this.saBool || this.euBool || this.afBool || this.asBool || this.ocBool) && Object.keys(this.keyedJSON).length > 0) {
       document.getElementById("skip_btn").classList.remove("skip_btn_none");
       document.getElementById("skip_btn").classList.add("skip_btn_display");
     }
