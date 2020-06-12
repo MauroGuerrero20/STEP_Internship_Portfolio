@@ -101,6 +101,8 @@ function getComments() {
 
 class Countries {
 
+  statsType = Object.freeze({ "correct": 0, "incorrect": 1, "skip": 2 });
+
   constructor(jsonObj) {
 
     this.keyedJSON = JSON.parse(JSON.stringify(jsonObj));
@@ -113,9 +115,66 @@ class Countries {
     this.asBool = true;
     this.ocBool = true;
 
-    this.totalCorrect = 0;
-    this.totalIncorrect = 0;
-    this.totalSkip = 0;
+    this.checkBoxSkipToggle = false;
+
+    this.statsJsonArray = [
+      {
+        "title": "World Statistics",
+        "id": "world_map_chart",
+        "correctStats": 0,
+        "incorrectStats": 0,
+        "skipStats": 0
+      },
+
+      {
+        "title": "North America",
+        "id": "na_map_chart",
+        "correctStats": 0,
+        "incorrectStats": 0,
+        "skipStats": 0,
+
+      },
+
+      {
+        "title": "South America",
+        "id": "sa_map_chart",
+        "correctStats": 0,
+        "incorrectStats": 0,
+        "skipStats": 0,
+      },
+
+      {
+        "title": "Europe",
+        "id": "eu_map_chart",
+        "correctStats": 0,
+        "incorrectStats": 0,
+        "skipStats": 0,
+      },
+
+      {
+        "title": "Africa",
+        "id": "af_map_chart",
+        "correctStats": 0,
+        "incorrectStats": 0,
+        "skipStats": 0,
+      },
+
+      {
+        "title": "Asia",
+        "id": "as_map_chart",
+        "correctStats": 0,
+        "incorrectStats": 0,
+        "skipStats": 0,
+      },
+
+      {
+        "title": "Oceania",
+        "id": "oc_map_chart",
+        "correctStats": 0,
+        "incorrectStats": 0,
+        "skipStats": 0,
+      }
+    ]
   }
 
   getRandCountryCode() {
@@ -184,6 +243,42 @@ class Countries {
       document.getElementById("skip_btn").classList.remove("skip_btn_none");
       document.getElementById("skip_btn").classList.add("skip_btn_display");
     }
+  }
+
+  countStats(randCountryCodeStr, statsType) {
+
+    if (this.checkBoxSkipToggle) {
+      this.checkBoxSkipToggle = !this.checkBoxSkipToggle;
+      return;
+    }
+
+    const statsContinent = Object.freeze({ "world": 0, "NA": 1, "SA": 2, "EU": 3, "AF": 4, "AS": 5, "OC": 6 });
+    let statsTypeStr;
+
+    switch (statsType) {
+
+      case this.statsType.correct:
+        statsTypeStr = "correctStats";
+        break;
+      case this.statsType.incorrect:
+        statsTypeStr = "incorrectStats";
+        break;
+      case this.statsType.skip:
+        statsTypeStr = "skipStats";
+        break;
+    }
+
+    const continent = this.keyedJSON[randCountryCodeStr].continent;
+
+    // World Stats
+    this.statsJsonArray[statsContinent.world][statsTypeStr]++;
+
+    // Skip if Antartica
+    if (continent === "AN") return;
+
+    // Continent
+    this.statsJsonArray[statsContinent[continent]][statsTypeStr]++;
+
   }
 }
 
@@ -275,31 +370,37 @@ function continentsCheckBoxListener(countriesObj) {
 
   document.getElementById("na_checkbox").addEventListener("change", function() {
     countriesObj.remakeJsonByContinent(this.checked);
+    countriesObj.checkBoxSkipToggle = true;
     document.getElementById("skip_btn").click();
   });
 
   document.getElementById("sa_checkbox").addEventListener("change", function() {
     countriesObj.remakeJsonByContinent(undefined, this.checked);
+    countriesObj.checkBoxSkipToggle = true;
     document.getElementById("skip_btn").click();
   });
 
   document.getElementById("eu_checkbox").addEventListener("change", function() {
     countriesObj.remakeJsonByContinent(undefined, undefined, this.checked);
+    countriesObj.checkBoxSkipToggle = true;
     document.getElementById("skip_btn").click();
   });
 
   document.getElementById("af_checkbox").addEventListener("change", function() {
     countriesObj.remakeJsonByContinent(undefined, undefined, undefined, this.checked);
+    countriesObj.checkBoxSkipToggle = true;
     document.getElementById("skip_btn").click();
   });
 
   document.getElementById("as_checkbox").addEventListener("change", function() {
     countriesObj.remakeJsonByContinent(undefined, undefined, undefined, undefined, this.checked);
+    countriesObj.checkBoxSkipToggle = true;
     document.getElementById("skip_btn").click();
   });
 
   document.getElementById("oc_checkbox").addEventListener("change", function() {
     countriesObj.remakeJsonByContinent(undefined, undefined, undefined, undefined, undefined, this.checked);
+    countriesObj.checkBoxSkipToggle = true;
     document.getElementById("skip_btn").click();
   });
 
@@ -355,7 +456,7 @@ function initMap() {
         return;
       }
 
-      countries.totalSkip++;
+      countries.countStats(randCountryCodeStr, countries.statsType.skip);
       createPieCharts(countries);
 
       deleteElementContentsById("rand_country");
@@ -404,7 +505,7 @@ function initMap() {
 
           if (countryCodeStr === randCountryCodeStr) {
 
-            countries.totalCorrect++;
+            countries.countStats(randCountryCodeStr, countries.statsType.correct);
             createPieCharts(countries);
 
             correctAnswerDOM(true);
@@ -443,7 +544,7 @@ function initMap() {
           }
           else {
 
-            countries.totalIncorrect++;
+            countries.countStats(randCountryCodeStr, countries.statsType.incorrect);
             createPieCharts(countries);
 
             correctAnswerDOM(false);
@@ -473,33 +574,47 @@ function initMap() {
 
 function initGoogleCharts() {
   google.charts.load('current', { 'packages': ['corechart'] });
-  // google.charts.setOnLoadCallback(createPieCharts);
 }
 
 function createPieCharts(countriesObj) {
 
-  // if (countriesObj.totalCorrect === 0 && countriesObj.totalIncorrect === 0 && countriesObj.totalSkip === 0){
-  //   return;
-  // }
+  for (const continentJson of countriesObj.statsJsonArray) {
 
-  var worldData = google.visualization.arrayToDataTable([
-    ['Answer Type', 'Count'],
-    ['Correct', countriesObj.totalCorrect],
-    ['Incorrect', countriesObj.totalIncorrect],
-    ['Skip', countriesObj.totalSkip]
-  ]);
+    if (continentJson.correctStats === 0 && continentJson.incorrectStats === 0 && continentJson.skipStats === 0) {
+      continue;
+    }
 
-  var worldOptions = {
-    title: 'World Statistics',
-    is3D: true,
-    colors: ['green', 'red', 'gray']
-  };
+    const data = google.visualization.arrayToDataTable([
+      ['Answer Type', 'Count'],
+      ['Correct', continentJson.correctStats],
+      ['Incorrect', continentJson.incorrectStats],
+      ['Skip', continentJson.skipStats]
+    ]);
 
-  var worldChart = new google.visualization.PieChart(document.getElementById('world_map_chart'));
+    const worldBool = (continentJson.id === "world_map_chart") ? true : false;
 
-  worldChart.draw(worldData, worldOptions);
+    const options = {
+      title: continentJson.title,
+      colors: ['green', 'red', 'gray'],
 
+      legend: (worldBool) ? ({
+        alignment: "center",
+        position: "bottom"
+      }) : ("none"),
 
+      titleTextStyle: (worldBool) ? ({
+        fontSize: 20,
+      }) : ({
+        fontSize: 14,
+      }),
+
+      is3D: (worldBool) ? (true) : (false)
+    };
+
+    const chart = new google.visualization.PieChart(document.getElementById(continentJson.id));
+
+    chart.draw(data, options);
+  }
 }
 
 function renderPage() {
