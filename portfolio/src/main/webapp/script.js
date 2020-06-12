@@ -638,7 +638,7 @@ function createPieCharts(countriesObj) {
       titleTextStyle: (worldBool) ? ({
         fontSize: 20,
       }) : ({
-        fontSize: 14,
+        fontSize: 16,
       }),
 
       is3D: (worldBool) ? (true) : (false)
@@ -655,7 +655,6 @@ function renderPage() {
   randQuote();
   getComments();
   initMap();
-  // createPieCharts();
 }
 
 
