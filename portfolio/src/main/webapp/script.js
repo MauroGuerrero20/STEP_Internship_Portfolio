@@ -157,7 +157,6 @@ class Countries {
     return Object.keys(this.keyedJSON).length === 0;
   }
 
-  // How to make function private
   filterJsonByContinent(continentStr) {
 
     const continentJson = JSON.parse(JSON.stringify(this.keyedJSONBackup));
