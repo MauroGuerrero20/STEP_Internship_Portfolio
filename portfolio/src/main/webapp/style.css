@@ -216,6 +216,10 @@
   text-align: center;
 }
 
+/* #world_map_chart {
+  height: 800px;
+} */
+
 .misc_background{
   padding-top: 10px;
   background-color: whitesmoke;

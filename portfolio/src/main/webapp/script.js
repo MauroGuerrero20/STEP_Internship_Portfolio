@@ -102,14 +102,20 @@ function getComments() {
 class Countries {
 
   constructor(jsonObj) {
+
     this.keyedJSON = JSON.parse(JSON.stringify(jsonObj));
     this.keyedJSONBackup = JSON.parse(JSON.stringify(jsonObj));
+
     this.naBool = true;
     this.saBool = true;
     this.euBool = true;
     this.afBool = true;
     this.asBool = true;
     this.ocBool = true;
+
+    this.totalCorrect = 0;
+    this.totalIncorrect = 0;
+    this.totalSkip = 0;
   }
 
   getRandCountryCode() {
@@ -349,15 +355,14 @@ function initMap() {
         return;
       }
 
+      countries.totalSkip++;
+      createPieCharts(countries);
+
       deleteElementContentsById("rand_country");
       randCountryCodeStr = createRandCountryDOM(countries);
     });
 
     map.addListener('click', function(mapMouseEvent) {
-
-      console.log(Object.keys(countries.keyedJSON).length);
-      console.log(countries.keyedJSON);
-      console.log(Object.keys(countries.keyedJSONBackup).length);
 
       if (countries.empty()) {
         deleteElementContentsById("rand_country");
@@ -376,8 +381,6 @@ function initMap() {
 
           deleteAnswerDOM();
           deleteElementContentsById("selected_country");
-
-          console.log(address);
 
           const addressArray = Array.from(address);
           const addressComps = addressArray[addressArray.length - 1].address_components
@@ -400,6 +403,10 @@ function initMap() {
           selectedCountryDOM(countryNameStr);
 
           if (countryCodeStr === randCountryCodeStr) {
+
+            countries.totalCorrect++;
+            createPieCharts(countries);
+
             correctAnswerDOM(true);
             deleteElementContentsById("rand_country");
             countries.removeCountry(randCountryCodeStr);
@@ -435,6 +442,10 @@ function initMap() {
             });
           }
           else {
+
+            countries.totalIncorrect++;
+            createPieCharts(countries);
+
             correctAnswerDOM(false);
 
             const cross_mark_marker = new google.maps.Marker({
@@ -460,15 +471,48 @@ function initMap() {
   });
 }
 
+function initGoogleCharts() {
+  google.charts.load('current', { 'packages': ['corechart'] });
+  // google.charts.setOnLoadCallback(createPieCharts);
+}
+
+function createPieCharts(countriesObj) {
+
+  // if (countriesObj.totalCorrect === 0 && countriesObj.totalIncorrect === 0 && countriesObj.totalSkip === 0){
+  //   return;
+  // }
+
+  var worldData = google.visualization.arrayToDataTable([
+    ['Answer Type', 'Count'],
+    ['Correct', countriesObj.totalCorrect],
+    ['Incorrect', countriesObj.totalIncorrect],
+    ['Skip', countriesObj.totalSkip]
+  ]);
+
+  var worldOptions = {
+    title: 'World Statistics',
+    is3D: true,
+    colors: ['green', 'red', 'gray']
+  };
+
+  var worldChart = new google.visualization.PieChart(document.getElementById('world_map_chart'));
+
+  worldChart.draw(worldData, worldOptions);
+
+
+}
+
 function renderPage() {
+  initGoogleCharts();
+  randQuote();
   getComments();
   initMap();
+  // createPieCharts();
 }
 
 
 window.addEventListener("DOMContentLoaded", function() {
 
-  randQuote();
   renderPage();
 
   const cmt_form = document.getElementById("cmt_form");
