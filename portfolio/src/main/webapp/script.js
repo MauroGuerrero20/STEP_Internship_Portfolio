@@ -102,8 +102,18 @@ function getComments() {
 class Countries {
 
   constructor(jsonObj) {
-    this.keyedJSON = JSON.parse(JSON.stringify(jsonObj));
+
+    //  = JSON.parse(JSON.stringify(jsonObj));
     this.keyedJSONBackup = JSON.parse(JSON.stringify(jsonObj));
+    this.keyedJSON = this.keyedJSONBackup;
+
+    this.naJSON = this.filterJsonByContinent("NA");
+    this.saJSON = this.filterJsonByContinent("SA");
+    this.euJSON = this.filterJsonByContinent("EU");
+    this.afJSON = this.filterJsonByContinent("AF");
+    this.asJSON = this.filterJsonByContinent("AS");
+    this.ocJSON = this.filterJsonByContinent("OC");
+
     this.naBool = true;
     this.saBool = true;
     this.euBool = true;
@@ -117,12 +127,48 @@ class Countries {
   }
 
   removeCountry(countryCode) {
+
+    const continentStr = this.keyedJSON[countryCode].continent;
+
     delete this.keyedJSON[countryCode];
     delete this.keyedJSONBackup[countryCode];
+
+    if (continentStr === "NA") {
+      delete this.naJSON[countryCode];
+    }
+    else if (continentStr === "SA") {
+      delete this.saJSON[countryCode];
+    }
+    else if (continentStr === "EU") {
+      delete this.euJSON[countryCode];
+    }
+    else if (continentStr === "AF") {
+      delete this.afJSON[countryCode];
+    }
+    else if (continentStr === "AS") {
+      delete this.asJSON[countryCode];
+    }
+    else {
+      delete this.ocJSON[countryCode];
+    }
   }
 
   empty() {
     return Object.keys(this.keyedJSON).length === 0;
+  }
+
+  // How to make function private
+  filterJsonByContinent(continentStr) {
+
+    const continentJson = JSON.parse(JSON.stringify(this.keyedJSONBackup));
+
+    Object.keys(continentJson).forEach(countryCode => {
+
+      if (!(continentJson[countryCode].continent == continentStr)) {
+        delete continentJson[countryCode];
+      }
+    });
+    return continentJson;
   }
 
   remakeJsonByContinent(nanaBool = this.naBool, saBool = this.saBool, euBool = this.euBool, afBool = this.afBool, asBool = this.asBool, ocBool = this.ocBool) {
@@ -133,44 +179,35 @@ class Countries {
     this.asBool = asBool;
     this.ocBool = ocBool;
 
-    this.keyedJSON = JSON.parse(JSON.stringify(this.keyedJSONBackup));
+    this.keyedJSON = {};
 
-    for (let countryCode of Object.keys(this.keyedJSON)) {
+    if (this.naBool && this.saBool && this.euBool && this.afBool && this.asBool && this.ocBool) {
+      this.keyedJSON = this.keyedJSONBackup;
+    }
+    else {
 
-      if ((!this.naBool) && this.keyedJSON[countryCode].continent === "NA") {
-        delete this.keyedJSON[countryCode];
-        continue;
+      if (this.naBool) {
+        Object.assign(this.keyedJSON, this.naJSON);
       }
 
-      if ((!this.saBool) && this.keyedJSON[countryCode].continent === "SA") {
-        delete this.keyedJSON[countryCode];
-        continue;
+      if (this.saBool) {
+        Object.assign(this.keyedJSON, this.saJSON);
       }
 
-      if ((!this.euBool) && this.keyedJSON[countryCode].continent === "EU") {
-        delete this.keyedJSON[countryCode];
-        continue;
+      if (this.euBool) {
+        Object.assign(this.keyedJSON, this.euJSON);
       }
 
-      if ((!this.afBool) && this.keyedJSON[countryCode].continent === "AF") {
-        delete this.keyedJSON[countryCode];
-        continue;
+      if (this.afBool) {
+        Object.assign(this.keyedJSON, this.afJSON);
       }
 
-      if ((!this.asBool) && this.keyedJSON[countryCode].continent === "AS") {
-        delete this.keyedJSON[countryCode];
-        continue;
+      if (this.asBool) {
+        Object.assign(this.keyedJSON, this.asJSON);
       }
 
-      if ((!this.ocBool) && this.keyedJSON[countryCode].continent === "OC") {
-        delete this.keyedJSON[countryCode];
-        continue;
-      }
-
-      // Delete AN countries if at least one Continent restriction is set
-      if (!(this.naBool && this.saBool && this.euBool && this.afBool && this.asBool && this.ocBool) && this.keyedJSON[countryCode].continent === "AN") {
-        delete this.keyedJSON[countryCode];
-        continue;
+      if (this.ocBool) {
+        Object.assign(this.keyedJSON, this.ocJSON);
       }
     }
 
@@ -355,10 +392,6 @@ function initMap() {
 
     map.addListener('click', function(mapMouseEvent) {
 
-      console.log(Object.keys(countries.keyedJSON).length);
-      console.log(countries.keyedJSON);
-      console.log(Object.keys(countries.keyedJSONBackup).length);
-
       if (countries.empty()) {
         deleteElementContentsById("rand_country");
         deleteAnswerDOM();
@@ -376,8 +409,6 @@ function initMap() {
 
           deleteAnswerDOM();
           deleteElementContentsById("selected_country");
-
-          console.log(address);
 
           const addressArray = Array.from(address);
           const addressComps = addressArray[addressArray.length - 1].address_components
