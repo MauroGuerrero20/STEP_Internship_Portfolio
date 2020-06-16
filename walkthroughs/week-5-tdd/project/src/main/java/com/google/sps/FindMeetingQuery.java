@@ -93,6 +93,45 @@ public final class FindMeetingQuery {
     return false;
   }
 
+    // 
+
+  /**
+   * This method removes optional Events from iterator, timeRanges, if it contains mandatory attendees
+   * @param timeRanges iterator, contains all events 
+   * @param timeRangeEventMap HashMap object, utilize to find Event object based on given TimeRange
+   * @param optionalEvents Empty ArrayList, will contain all optional Events
+   * @param removeOpRanges Empty ArrayList, will contain all optional TimeRange objects
+   * @param request MeetingRequest object, utilized to check if Event is optional
+   * @param onlyOptionalEvents boolean, set to 'true' if timeRanges only contains optional events
+   * @return onlyOptionalEvents
+   */
+  private boolean processOptionalEvents(ArrayList<TimeRange> timeRanges,
+                                    HashMap<TimeRange, Event> timeRangeEventMap,
+                                    ArrayList<Event> optionalEvents,
+                                    ArrayList<TimeRange> removeOpRanges,
+                                    MeetingRequest request,
+                                    boolean onlyOptionalEvents){
+
+    for(TimeRange timeRange : timeRanges){
+
+      Event currentEvent = timeRangeEventMap.get(timeRange);
+
+      if (hasOnlyOptionalAttendees(request, currentEvent)){
+        optionalEvents.add(currentEvent);
+        removeOpRanges.add(timeRange);
+      }
+    }
+
+    for (TimeRange opTimeRange : removeOpRanges){
+      timeRanges.remove(opTimeRange);
+    }
+
+
+    if (timeRanges.isEmpty()){
+      return true;
+    }
+    return false;
+  }
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
@@ -116,29 +155,15 @@ public final class FindMeetingQuery {
     }
     timeRanges.sort(TimeRange.ORDER_BY_START);
 
-    boolean onlyOptionalEvents = false;
 
-    // Remove Optional Events from iterator (timeRanges)
+    boolean onlyOptionalEvents = false;
     ArrayList<Event> optionalEvents = new ArrayList<Event>();
     ArrayList<TimeRange> removeOpRanges = new ArrayList<TimeRange>();
 
-    for(TimeRange timeRange : timeRanges){
+    onlyOptionalEvents = processOptionalEvents(timeRanges, timeRangeEventMap, optionalEvents, 
+                                  removeOpRanges, request, onlyOptionalEvents);
 
-      Event currentEvent = timeRangeEventMap.get(timeRange);
-
-      if (hasOnlyOptionalAttendees(request, currentEvent)){
-        optionalEvents.add(currentEvent);
-        removeOpRanges.add(timeRange);
-      }
-    }
-
-    for (TimeRange opTimeRange : removeOpRanges){
-      timeRanges.remove(opTimeRange);
-    }
-
-
-    if (timeRanges.isEmpty()){
-      onlyOptionalEvents = true;
+    if (onlyOptionalEvents){
       timeRanges = removeOpRanges;
     }
 

@@ -371,7 +371,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void noMandatoryAnttendeesGaps() {
+  public void noMandatoryAntendeesGaps() {
 
     // Events  :       |--A--|     |--B--|
     // Day     : |-----------------------------|
