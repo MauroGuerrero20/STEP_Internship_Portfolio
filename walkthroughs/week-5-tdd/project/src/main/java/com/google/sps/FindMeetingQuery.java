@@ -26,7 +26,7 @@ public final class FindMeetingQuery {
    * @param event The Event object's attendees are compare with the request object
    * @return boolean if the provide event object contains no mandatory attendees
    */
-  private boolean eventNoMandatoryAttendees(MeetingRequest request, Event event){
+  private boolean hasNoMandatoryAttendees(MeetingRequest request, Event event){
     for (String attendee : event.getAttendees()){
       if (request.getAttendees().contains(attendee)){
         return false;
@@ -59,7 +59,9 @@ public final class FindMeetingQuery {
    * @param timeRanges A list of available TimeRanges without taken into account optional events 
    * @return A list of TimeRanges depending on the optionalEvents list and final size of timeRanges
    */
-  private Collection<TimeRange> resolveOptionalEventConflicts(ArrayList<Event> optionalEvents, Collection<TimeRange> timeRanges){
+  private Collection<TimeRange> resolveOptionalEventConflicts(ArrayList<Event> optionalEvents, 
+        Collection<TimeRange> timeRanges){
+
     Collection<TimeRange> backUpTimeRanges = new ArrayList<TimeRange>(timeRanges);
     ArrayList<TimeRange> removedTimeRanges = new ArrayList<TimeRange>();
 
@@ -88,7 +90,7 @@ public final class FindMeetingQuery {
    * @return true if the TimeRange objects meet the criteria of nested events
    */
   private boolean nestedEventsCheck(TimeRange prevTimeRange, TimeRange currTimeRange){
-    if(prevTimeRange.start() < currTimeRange.start() && currTimeRange.end() < prevTimeRange.end()){
+    if (prevTimeRange.start() < currTimeRange.start() && currTimeRange.end() < prevTimeRange.end()){
       return true;
     }
     return false;
@@ -143,37 +145,37 @@ public final class FindMeetingQuery {
     }
 
 
-    int avaliableStart = TimeRange.START_OF_DAY;
-    int avaliableEnd;
+    int availableStart = TimeRange.START_OF_DAY;
+    int availableEnd;
 
     for (int index = 0; index < timeRanges.size(); index++){
 
       Event currentEvent = timeRangeEventMap.get(timeRanges.get(index));
 
-      if (eventNoMandatoryAttendees(request, currentEvent)){
+      if (hasNoMandatoryAttendees(request, currentEvent)){
         if (timeRanges.size() == 1){
-          avaliableEnd = TimeRange.END_OF_DAY;
-          availableTimeRanges.add(TimeRange.fromStartEnd(avaliableStart, avaliableEnd, true));
+          availableEnd = TimeRange.END_OF_DAY;
+          availableTimeRanges.add(TimeRange.fromStartEnd(availableStart, availableEnd, true));
         }
         if (!onlyOptionalEvents){
           continue;
         }
       }
 
-      avaliableEnd = timeRanges.get(index).start();
+      availableEnd = timeRanges.get(index).start();
       
       // [##, ##)
-      TimeRange avaliableTimeExclusive = TimeRange.fromStartEnd(avaliableStart, avaliableEnd, false);
+      TimeRange availableTimeExclusive = TimeRange.fromStartEnd(availableStart, availableEnd, false);
       // [##, ## + 1)
-      TimeRange avaliableTimeInclusive = TimeRange.fromStartEnd(avaliableStart, avaliableEnd, true);
+      TimeRange availableTimeInclusive = TimeRange.fromStartEnd(availableStart, availableEnd, true);
 
       // Valid TimeRanges Check
-      if (!(avaliableTimeExclusive.overlaps(timeRanges.get(index)) || avaliableTimeExclusive.duration() < request.getDuration())){
-        availableTimeRanges.add(avaliableTimeExclusive);
+      if (!(availableTimeExclusive.overlaps(timeRanges.get(index)) || availableTimeExclusive.duration() < request.getDuration())){
+        availableTimeRanges.add(availableTimeExclusive);
       }
 
-      if(!(avaliableTimeInclusive.overlaps(timeRanges.get(index)) || avaliableTimeInclusive.duration() < request.getDuration())){
-        availableTimeRanges.add(avaliableTimeInclusive);
+      if(!(availableTimeInclusive.overlaps(timeRanges.get(index)) || availableTimeInclusive.duration() < request.getDuration())){
+        availableTimeRanges.add(availableTimeInclusive);
       }
 
       // Nested Events Check
@@ -182,12 +184,12 @@ public final class FindMeetingQuery {
         if (nestedEventsCheck(timeRanges.get(index - 1), timeRanges.get(index))){
 
           if (index == timeRanges.size() - 1){
-            avaliableEnd = TimeRange.END_OF_DAY;
-            availableTimeRanges.add(TimeRange.fromStartEnd(avaliableStart, avaliableEnd, true));
+            availableEnd = TimeRange.END_OF_DAY;
+            availableTimeRanges.add(TimeRange.fromStartEnd(availableStart, availableEnd, true));
           }
           else {
-            avaliableEnd = timeRanges.get(index + 1).start();
-            availableTimeRanges.add(TimeRange.fromStartEnd(avaliableStart, avaliableEnd, false));
+            availableEnd = timeRanges.get(index + 1).start();
+            availableTimeRanges.add(TimeRange.fromStartEnd(availableStart, availableEnd, false));
           }
         continue;
         }
@@ -196,17 +198,17 @@ public final class FindMeetingQuery {
       // Last Event on list
       if (index == timeRanges.size() - 1){
         
-        avaliableStart = timeRanges.get(index).end();
-        avaliableEnd = TimeRange.END_OF_DAY;
+        availableStart = timeRanges.get(index).end();
+        availableEnd = TimeRange.END_OF_DAY;
 
-        TimeRange lastTimeRange = TimeRange.fromStartEnd(avaliableStart, avaliableEnd, true);
+        TimeRange lastTimeRange = TimeRange.fromStartEnd(availableStart, availableEnd, true);
 
         if (!(lastTimeRange.duration() < request.getDuration())){        
           availableTimeRanges.add(lastTimeRange);
         }
       }
 
-      avaliableStart = timeRanges.get(index).end();
+      availableStart = timeRanges.get(index).end();
     }
 
     availableTimeRanges = resolveOptionalEventConflicts(optionalEvents, availableTimeRanges);
