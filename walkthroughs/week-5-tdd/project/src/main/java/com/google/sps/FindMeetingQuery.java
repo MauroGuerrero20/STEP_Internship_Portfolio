@@ -20,6 +20,12 @@ import java.util.HashMap;
 
 public final class FindMeetingQuery {
 
+  /**
+   * This method checks if an event contains no mandatory attendees using a MeetingRequest
+   * @param request MeetingRequest object which contains list of attendees
+   * @param event The Event object's attendees are compare with the request object
+   * @return boolean if the provide event object contains no mandatory attendees
+   */
   private boolean eventNoMandatoryAttendees(MeetingRequest request, Event event){
     for (String attendee : event.getAttendees()){
       if (request.getAttendees().contains(attendee)){
@@ -29,6 +35,58 @@ public final class FindMeetingQuery {
     return true;
   }
 
+  /**
+   * This method checks if an event contains only optional Attendees using a MeetingRequest
+   * @param request MeetingRequest object which contains list of optional attendees
+   * @param event The Event object's attendees are compare with the request object
+   * @return boolean if the provide event object contains only optional attendees
+   */
+  private boolean optionalAttendeesEvent(MeetingRequest request, Event event){
+    for (String attendee : event.getAttendees()){
+      if (request.getAttendees().contains(attendee)){
+        return false;
+      }
+      if (!(request.getOptionalAttendees().contains(attendee))){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * This method returns the correct time ranges if optional attendees are taken into account
+   * @param optionalEvents List of events with only optional attendees
+   * @param timeRanges A list of available TimeRanges without taken into account optional events 
+   * @return A list of TimeRanges depending on the optionalEvents list and final size of timeRanges
+   */
+  private Collection<TimeRange> resolveOptionalEventConflicts(ArrayList<Event> optionalEvents, Collection<TimeRange> timeRanges){
+    Collection<TimeRange> backUpTimeRanges = new ArrayList<TimeRange>(timeRanges);
+    ArrayList<TimeRange> removedTimeRanges = new ArrayList<TimeRange>();
+
+    for (Event opEvent : optionalEvents){
+      for (TimeRange timeRange : timeRanges){
+        if (opEvent.getWhen().overlaps(timeRange)){
+          removedTimeRanges.add(timeRange);
+        }
+      }
+    }
+
+    for (TimeRange removedTimeRange : removedTimeRanges){
+      timeRanges.remove(removedTimeRange);
+    }
+
+    if (timeRanges.isEmpty()){
+      return backUpTimeRanges;
+    }
+    return timeRanges;
+  }
+
+  /**
+   * This method checks if the previous and current time ranges are nested events
+   * @param prevTimeRange Previous TimeRange object
+   * @param currTimeRange Current TimeRange object
+   * @return true if the TimeRange objects meet the criteria of nested events
+   */
   private boolean nestedEventsCheck(TimeRange prevTimeRange, TimeRange currTimeRange){
     if(prevTimeRange.start() < currTimeRange.start() && currTimeRange.end() < prevTimeRange.end()){
       return true;
@@ -58,6 +116,32 @@ public final class FindMeetingQuery {
     }
     timeRanges.sort(TimeRange.ORDER_BY_START);
 
+    boolean onlyOptionalEvents = false;
+
+    // Remove Optional Events from iterator (timeRanges)
+    ArrayList<Event> optionalEvents = new ArrayList<Event>();
+    ArrayList<TimeRange> removeOpRanges = new ArrayList<TimeRange>();
+
+    for(TimeRange timeRange : timeRanges){
+
+      Event currentEvent = timeRangeEventMap.get(timeRange);
+
+      if (optionalAttendeesEvent(request, currentEvent)){
+        optionalEvents.add(currentEvent);
+        removeOpRanges.add(timeRange);
+      }
+    }
+
+    for (TimeRange opTimeRange : removeOpRanges){
+      timeRanges.remove(opTimeRange);
+    }
+
+
+    if (timeRanges.isEmpty()){
+      onlyOptionalEvents = true;
+      timeRanges = removeOpRanges;
+    }
+
 
     int avaliableStart = TimeRange.START_OF_DAY;
     int avaliableEnd;
@@ -67,9 +151,13 @@ public final class FindMeetingQuery {
       Event currentEvent = timeRangeEventMap.get(timeRanges.get(index));
 
       if (eventNoMandatoryAttendees(request, currentEvent)){
-        avaliableEnd = TimeRange.END_OF_DAY;
-        availableTimeRanges.add(TimeRange.fromStartEnd(avaliableStart, avaliableEnd, true));
-        continue;
+        if (timeRanges.size() == 1){
+          avaliableEnd = TimeRange.END_OF_DAY;
+          availableTimeRanges.add(TimeRange.fromStartEnd(avaliableStart, avaliableEnd, true));
+        }
+        if (!onlyOptionalEvents){
+          continue;
+        }
       }
 
       avaliableEnd = timeRanges.get(index).start();
@@ -120,6 +208,8 @@ public final class FindMeetingQuery {
 
       avaliableStart = timeRanges.get(index).end();
     }
+
+    availableTimeRanges = resolveOptionalEventConflicts(optionalEvents, availableTimeRanges);
 
     return availableTimeRanges;
   }
