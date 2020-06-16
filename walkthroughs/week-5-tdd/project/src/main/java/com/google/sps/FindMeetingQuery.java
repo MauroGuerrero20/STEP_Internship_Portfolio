@@ -93,6 +93,7 @@ public final class FindMeetingQuery {
     return false;
   }
 
+
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
     Collection<TimeRange> availableTimeRanges = new ArrayList<TimeRange>();
@@ -186,6 +187,12 @@ public final class FindMeetingQuery {
           }
           else {
             availableEnd = timeRanges.get(index + 1).start();
+
+            // Extra Check for additional Nested Events
+            if (availableStart > availableEnd){
+              continue;
+            }
+
             availableTimeRanges.add(TimeRange.fromStartEnd(availableStart, availableEnd, false));
           }
         continue;
