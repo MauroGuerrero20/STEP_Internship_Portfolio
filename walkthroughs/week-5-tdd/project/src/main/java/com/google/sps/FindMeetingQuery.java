@@ -15,6 +15,7 @@
 package com.google.sps;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,12 +28,7 @@ public final class FindMeetingQuery {
    * @return boolean if the provide event object contains no mandatory attendees
    */
   private boolean hasNoMandatoryAttendees(MeetingRequest request, Event event){
-    for (String attendee : event.getAttendees()){
-      if (request.getAttendees().contains(attendee)){
-        return false;
-      }
-    }
-    return true;
+    return Collections.disjoint(event.getAttendees(), request.getAttendees());
   }
 
   /**
@@ -41,7 +37,8 @@ public final class FindMeetingQuery {
    * @param event The Event object's attendees are compare with the request object
    * @return boolean if the provide event object contains only optional attendees
    */
-  private boolean optionalAttendeesEvent(MeetingRequest request, Event event){
+  private boolean hasOnlyOptionalAttendees(MeetingRequest request, Event event){
+
     for (String attendee : event.getAttendees()){
       if (request.getAttendees().contains(attendee)){
         return false;
@@ -128,7 +125,7 @@ public final class FindMeetingQuery {
 
       Event currentEvent = timeRangeEventMap.get(timeRange);
 
-      if (optionalAttendeesEvent(request, currentEvent)){
+      if (hasOnlyOptionalAttendees(request, currentEvent)){
         optionalEvents.add(currentEvent);
         removeOpRanges.add(timeRange);
       }
