@@ -93,8 +93,6 @@ public final class FindMeetingQuery {
     return false;
   }
 
-    // 
-
   /**
    * This method removes optional Events from iterator, timeRanges, if it contains mandatory attendees
    * @param timeRanges iterator, contains all events 
