@@ -59,7 +59,6 @@ public final class FindMeetingQuery {
   private Collection<TimeRange> resolveOptionalEventConflicts(ArrayList<Event> optionalEvents, 
         Collection<TimeRange> timeRanges) {
 
-    Collection<TimeRange> backUpTimeRanges = new ArrayList<TimeRange>(timeRanges);
     ArrayList<TimeRange> removedTimeRanges = new ArrayList<TimeRange>();
 
     for (Event opEvent : optionalEvents){
@@ -75,7 +74,7 @@ public final class FindMeetingQuery {
     }
 
     if (timeRanges.isEmpty()){
-      return backUpTimeRanges;
+      return removedTimeRanges;
     }
     return timeRanges;
   }
@@ -154,7 +153,7 @@ public final class FindMeetingQuery {
     ArrayList<TimeRange> removeOpRanges = new ArrayList<TimeRange>();
 
     onlyOptionalEvents = processOptionalEvents(timeRanges, timeRangeEventMap, optionalEvents, 
-                                  removeOpRanges, request, onlyOptionalEvents);
+                                  removeOpRanges, request);
 
     if (onlyOptionalEvents){
       timeRanges = removeOpRanges;
