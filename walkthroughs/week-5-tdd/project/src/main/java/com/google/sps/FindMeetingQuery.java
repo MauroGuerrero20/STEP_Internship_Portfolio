@@ -27,7 +27,7 @@ public final class FindMeetingQuery {
    * @param event The Event object's attendees are compare with the request object
    * @return boolean if the provide event object contains no mandatory attendees
    */
-  private boolean hasNoMandatoryAttendees(MeetingRequest request, Event event){
+  private boolean hasNoMandatoryAttendees(MeetingRequest request, Event event) {
     return Collections.disjoint(event.getAttendees(), request.getAttendees());
   }
 
@@ -37,7 +37,7 @@ public final class FindMeetingQuery {
    * @param event The Event object's attendees are compare with the request object
    * @return boolean if the provide event object contains only optional attendees
    */
-  private boolean hasOnlyOptionalAttendees(MeetingRequest request, Event event){
+  private boolean hasOnlyOptionalAttendees(MeetingRequest request, Event event) {
 
     for (String attendee : event.getAttendees()){
       if (request.getAttendees().contains(attendee)){
@@ -57,7 +57,7 @@ public final class FindMeetingQuery {
    * @return A list of TimeRanges depending on the optionalEvents list and final size of timeRanges
    */
   private Collection<TimeRange> resolveOptionalEventConflicts(ArrayList<Event> optionalEvents, 
-        Collection<TimeRange> timeRanges){
+        Collection<TimeRange> timeRanges) {
 
     Collection<TimeRange> backUpTimeRanges = new ArrayList<TimeRange>(timeRanges);
     ArrayList<TimeRange> removedTimeRanges = new ArrayList<TimeRange>();
@@ -86,7 +86,7 @@ public final class FindMeetingQuery {
    * @param currTimeRange Current TimeRange object
    * @return true if the TimeRange objects meet the criteria of nested events
    */
-  private boolean nestedEventsCheck(TimeRange prevTimeRange, TimeRange currTimeRange){
+  private boolean nestedEventsCheck(TimeRange prevTimeRange, TimeRange currTimeRange) {
     if (prevTimeRange.start() < currTimeRange.start() && currTimeRange.end() < prevTimeRange.end()){
       return true;
     }
@@ -107,8 +107,7 @@ public final class FindMeetingQuery {
                                     HashMap<TimeRange, Event> timeRangeEventMap,
                                     ArrayList<Event> optionalEvents,
                                     ArrayList<TimeRange> removeOpRanges,
-                                    MeetingRequest request,
-                                    boolean onlyOptionalEvents){
+                                    MeetingRequest request) {
 
     for(TimeRange timeRange : timeRanges){
 
@@ -124,11 +123,7 @@ public final class FindMeetingQuery {
       timeRanges.remove(opTimeRange);
     }
 
-
-    if (timeRanges.isEmpty()){
-      return true;
-    }
-    return false;
+    return timeRanges.isEmpty();
   }
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
