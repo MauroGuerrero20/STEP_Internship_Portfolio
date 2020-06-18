@@ -57,27 +57,28 @@ public final class FindMeetingQuery {
    * @return A list of TimeRanges depending on the optionalEvents list and final size of timeRanges
    */
   private Collection<TimeRange> resolveOptionalEventConflicts(ArrayList<Event> optionalEvents, 
-        Collection<TimeRange> timeRanges) {
+        Collection<TimeRange> availableTimeRanges) {
 
-    ArrayList<TimeRange> removedTimeRanges = new ArrayList<TimeRange>();
+    ArrayList<TimeRange> removeTimeRanges = new ArrayList<TimeRange>();
 
     for (Event opEvent : optionalEvents){
-      for (TimeRange timeRange : timeRanges){
+      for (TimeRange timeRange : availableTimeRanges){
         if (opEvent.getWhen().overlaps(timeRange)){
-          removedTimeRanges.add(timeRange);
+          
+          // Will only remove overlaping events if they are equal 
+          if (opEvent.getWhen().equals(timeRange)){
+            removeTimeRanges.add(timeRange);
+          }
+
         }
       }
     }
-
-    if (timeRanges.size() == removedTimeRanges.size()){
-      return removedTimeRanges;
-    }
-
-    for (TimeRange removedTimeRange : removedTimeRanges){
-      timeRanges.remove(removedTimeRange);
+    
+    for (TimeRange removeRangeObj : removeTimeRanges){
+      availableTimeRanges.remove(removeRangeObj);
     }
     
-    return timeRanges;
+    return availableTimeRanges;
   }
 
   /**
@@ -147,7 +148,7 @@ public final class FindMeetingQuery {
       timeRanges.add(event.getWhen());
     }
     timeRanges.sort(TimeRange.ORDER_BY_START);
-
+    
 
     boolean onlyOptionalEvents = false;
     ArrayList<Event> optionalEvents = new ArrayList<Event>();
