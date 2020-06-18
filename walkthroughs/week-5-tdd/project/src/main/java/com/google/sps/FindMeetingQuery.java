@@ -69,13 +69,14 @@ public final class FindMeetingQuery {
       }
     }
 
+    if (timeRanges.size() == removedTimeRanges.size()){
+      return removedTimeRanges;
+    }
+
     for (TimeRange removedTimeRange : removedTimeRanges){
       timeRanges.remove(removedTimeRange);
     }
-
-    if (timeRanges.isEmpty()){
-      return removedTimeRanges;
-    }
+    
     return timeRanges;
   }
 
