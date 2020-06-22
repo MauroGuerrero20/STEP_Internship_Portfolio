@@ -12,30 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random quote to the page.
- */
-function addRandomQuote() {
-  const randomQuote =
-    ['Chaos is Ladder.', 'I am a native Spanish speaker.', 'I enjoy learning about history.',
-      'I was born and raised in El Paso, Texas.', 'I like to play video games and enjoy all types of genres.'];
-
-  // Pick a random quote.
-  const quote = randomQuote[Math.floor(Math.random() * randomQuote.length)];
-
-  // Add it to the page.
-  const quoteContainer = document.getElementById('quote-container');
-  quoteContainer.innerText = quote;
-}
-
-// Apply random quote onclick of button
-function randQuote() {
-  const btn = document.getElementById("randBtn");
-  if (btn) {
-    btn.addEventListener("click", addRandomQuote);
-  }
-}
-
 function addCommentsColumn() {
 
   document.getElementById("main_body").classList.remove("col-12");
