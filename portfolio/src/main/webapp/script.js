@@ -628,7 +628,6 @@ function createPieCharts(countriesObj) {
 
 function renderPage() {
   initGoogleCharts();
-  randQuote();
   getComments();
   initMap();
 }
