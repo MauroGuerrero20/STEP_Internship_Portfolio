@@ -635,16 +635,27 @@ function renderPage() {
 
 window.addEventListener("DOMContentLoaded", function() {
 
+  let submitCmtOnce = false;
+  let submitDeleteOnce = false;
+
   renderPage();
 
   const cmt_form = document.getElementById("cmt_form");
   const cmt_del_form = document.getElementById("cmt_del_form")
 
   document.getElementById("cmt_button").addEventListener("click", function() {
-    cmt_form.submit();
+
+    if (!submitCmtOnce) {
+      cmt_form.submit();
+      submitCmtOnce = true;
+    }
   });
 
   document.getElementById("cmt_del_button").addEventListener("click", function() {
-    cmt_del_form.submit();
+
+    if (!submitDeleteOnce) {
+      cmt_del_form.submit();
+      submitDeleteOnce = true;
+    }
   });
 });
