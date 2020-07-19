@@ -57,7 +57,7 @@
 }
 
 .about_me_text {
-  font-size: 16px;
+  font-size: 18px;
   text-align: left;
 }
 
@@ -84,13 +84,13 @@
   width: 50%;
 }
 
+.list-font-size {
+  font-size: 18px;
+}
+
 .google_logo {
   mix-blend-mode: multiply;
   width: 30%;
-}
-
-#work_exp h3 {
-  font-size: 24px;
 }
 
 #edu {
@@ -142,10 +142,6 @@
   margin-left: 25px;
 }
 
-#proj h3 {
-  font-size: 24px;
-}
-
 .effect_img {
   border-radius: 5%;
   display: block;
@@ -156,7 +152,7 @@
 }
 
 .effect_text {
-  margin-right: auto;
+  font-size: 20px;
 }
 
 .map_background {
