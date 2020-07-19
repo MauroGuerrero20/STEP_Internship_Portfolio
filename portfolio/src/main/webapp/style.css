@@ -142,6 +142,20 @@
   margin-left: 25px;
 }
 
+.proj_text {
+  font-size: 20px;
+}
+
+.face_detection_img {
+  border-radius: 5%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  mix-blend-mode: multiply;
+  width: 25%;
+  border: 1px solid black;
+}
+
 .effect_img {
   border-radius: 5%;
   display: block;
@@ -149,10 +163,6 @@
   margin-right: auto;
   mix-blend-mode: multiply;
   width: 40%;
-}
-
-.effect_text {
-  font-size: 20px;
 }
 
 .map_background {
