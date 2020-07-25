@@ -1,33 +1,32 @@
-#navbar {
-  background-color: lightskyblue;
-  display: block;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  margin-right: auto;
-  margin-left: auto;
-  overflow: hidden;
+.navbar-home-text {
+  font-size: 2rem;
 }
 
-#navbar a {
-  text-decoration: none;
+.navbar-sections-text {
+  font-size: 1.15rem;
+  margin-top: 4px;
 }
 
-#navbar a i {
-  color: black;
-  float: right;
-  font-size: 36px;
-  padding: 20px;
-}
-
-#navbar h1 {
-  color: black;
-  float: left;
-  padding-left: 10%;
-  padding-top: 8px;
+.navbar-icon {
+  color: white;
+  font-size: 45px;
 }
 
 #main_body.col-10 {
   padding-left: 0px;
   padding-right: 0px;
+}
+
+@media screen and (max-width: 1374px) {
+  .section-width {
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 1375px) {
+  .section-width {
+    width: 50%;
+  }
 }
 
 .welcome_background {
@@ -40,7 +39,6 @@
   margin-right: auto;
   padding: 10px;
   text-align: center;
-  width: 50%;
 }
 
 #welcome_sec h1 {
@@ -53,7 +51,6 @@
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
-  width: 50%;
 }
 
 .about_me_text {
@@ -81,7 +78,6 @@
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
-  width: 50%;
 }
 
 .list-font-size {
@@ -98,7 +94,6 @@
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
-  width: 50%;
 }
 
 #edu h2 {
@@ -133,7 +128,6 @@
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
-  width: 50%;
 }
 
 #proj i {
@@ -174,7 +168,6 @@
   padding: 10px;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -233,7 +226,6 @@
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
-  width: 50%;
 }
 
 #misc p {
@@ -275,7 +267,6 @@
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
-  width: 50%;
 }
 
 #comments_sec h2 {

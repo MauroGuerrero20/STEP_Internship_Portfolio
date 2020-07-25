@@ -18,22 +18,49 @@
   </head>
   <body>
     <!--Navbar-->
-    <div id="navbar" class="navbar navbar-expand-lg">
-      <h1>Mauro Guerrero</h1>
-      <a href="https://www.linkedin.com/in/mauro-guerrero-286b69172"><i class="fa fa-linkedin-square"></i></a>
-      <a href="https://github.com/MauroGuerrero20"><i class="fa fa-github"></i></a>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand navbar-home-text" href="#welcome_sec">Mauro Guerrero</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto pl-1">
+          <li class="nav-item active px-2">
+            <a class="nav-link navbar-sections-text" href="#welcome_sec">About</a>
+          </li>
+          <li class="nav-item active px-2">
+            <a class="nav-link navbar-sections-text" href="#work_exp">Work</a>
+          </li>
+          <li class="nav-item active px-2">
+            <a class="nav-link navbar-sections-text" href="#edu">Education</a>
+          </li>
+          <li class="nav-item active px-2">
+            <a class="nav-link navbar-sections-text" href="#proj">Projects</a>
+          </li>
+          <li class="nav-item active px-2">
+            <a class="nav-link navbar-sections-text" href="#map_game">Map Game</a>
+          </li>
+          <li class="nav-item active px-2">
+            <a class="nav-link navbar-sections-text" href="#misc">Misc</a>
+          </li>
+          <li class="nav-item active px-2">
+            <a class="nav-link navbar-sections-text" href="#comments_sec">Comment</a>
+          </li>
+        </ul>
+      </div>
+      <div class="display-inline my-2 my-lg-0">
+        <a class="px-3" href="https://www.linkedin.com/in/mauro-guerrero-286b69172"><i class="fa fa-linkedin-square navbar-icon"></i></a>
+        <a class="px-3" href="https://github.com/MauroGuerrero20"><i class="fa fa-github navbar-icon"></i></a>
+      </div>
+    </nav>
     <div class="row">
       <div id="main_body" class="col-12">
         <!--Welcome!-->
-        <div class="welcome_background">
-          <div id="welcome_sec">
+        <div class="welcome_background" >
+          <div id="welcome_sec" class="section-width">
             <h1>Welcome!</h1>
           </div>
         </div>
         <!--About me-->
-        <div class="about_me_background">
-          <div id="about_me">
+        <div>
+          <div id="about_me" class="section-width">
             <div class="row">
               <div class="col-8">
                 <h2>About me:</h2>
@@ -53,7 +80,7 @@
         </div>
         <!--Work Exp-->
         <div class="work_background">
-          <div id="work_exp">
+          <div id="work_exp" class="section-width">
             <h2>Work Experience</h2>
             <img class="google_logo" src="images/google_logo.jpg">
             <div>
@@ -138,7 +165,7 @@
         </div>
         <!--Edu-->
         <div class="background_edu">
-          <div id="edu">
+          <div id="edu" class="section-width">
             <h2>Education</h2>
             <br>
             <div>
@@ -174,7 +201,7 @@
         </div>
         <!--Projects-->
         <div class="proj_background">
-          <div id="proj">
+          <div id="proj" class="section-width">
             <h2>Projects</h2>
             <h3>Face Detection, Summer 2020
               <a href="https://github.com/MauroGuerrero20/Face-Detection"><i class="fa fa-github"></i></a>
@@ -205,7 +232,7 @@
         </div>
         <!--Google Map Game-->
         <div class="map_background">
-          <div id="map_game">
+          <div id="map_game" class="section-width">
             <h2>Test your Knowlege of Geography!</h2>
             <br>
             <div>
@@ -265,7 +292,7 @@
         </div>
         <!--Misc-->
         <div class="misc_background">
-          <div id="misc">
+          <div id="misc" class="section-width">
             <h2>Misc</h2>
             <p class="mb-0">
               Thanks for stopping by!
@@ -289,7 +316,7 @@
         </div>
         <!--Comments-->
         <div class="comment_background">
-          <div id="comments_sec">
+          <div id="comments_sec" class="section-width">
             <h2>Leave a Comment!</h2>
             <form id="cmt_form" action="/comments" method="POST">
               <label>
