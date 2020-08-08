@@ -12,69 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function addCommentsColumn() {
-
-  document.getElementById("main_body").classList.remove("col-12");
-  document.getElementById("main_body").classList.add("col-10");
-
-  document.getElementById("comments_body").classList.remove("col-0");
-  document.getElementById("comments_body").classList.add("col-2");
-}
-
-function removeCommentsColumn() {
-  document.getElementById("main_body").classList.remove("col-10");
-  document.getElementById("main_body").classList.add("col-12");
-
-  document.getElementById("comments_body").classList.remove("col-2");
-  document.getElementById("comments_body").classList.add("col-0");
-}
-
-function createCommentsDOM(commentsArray) {
-
-  const commentsOutput = document.getElementById("comments_body")
-    .appendChild(document.createElement("h2")
-      .appendChild(document.createTextNode("Comments")).parentElement);
-
-  const cmtDOM = document.createElement("div");
-
-  commentsArray.forEach(cmt => {
-
-    const quoteDOM = document.createElement("blockquote");
-
-    const pDOM = document.createElement("p").appendChild(document.createTextNode(cmt.cmtMsg));
-
-    const footerDOM = document.createElement("footer").appendChild(document.createTextNode(cmt.name + ', ' + cmt.date));
-    footerDOM.parentElement.classList.add("blockquote-footer");
-
-    quoteDOM.appendChild(pDOM.parentElement);
-    quoteDOM.appendChild(footerDOM.parentElement);
-    quoteDOM.classList.add("blockquote");
-
-    cmtDOM.appendChild(quoteDOM);
-  });
-
-  commentsOutput.parentElement.appendChild(cmtDOM);
-
-}
-
-// Fetch comments from DataServlet.java
-function getComments() {
-
-  fetch('/comments').then(response => response.json()).then((cmtContainer) => {
-
-    const commentsArray = Array.from(cmtContainer);
-
-    if (!(commentsArray && commentsArray.length)) {
-      removeCommentsColumn();
-      return;
-    }
-
-    addCommentsColumn();
-
-    createCommentsDOM(commentsArray);
-  });
-}
-
 class Countries {
 
   statsType = Object.freeze({ "correct": 0, "incorrect": 1, "skip": 2 });
@@ -377,37 +314,37 @@ function noCountriesLeftDOM() {
 
 function continentsCheckBoxListener(countriesObj) {
 
-  document.getElementById("na_checkbox").addEventListener("change", function() {
+  document.getElementById("na_checkbox").addEventListener("change", function () {
     countriesObj.remakeJsonByContinent(this.checked);
     countriesObj.checkBoxSkipToggle = true;
     document.getElementById("skip_btn").click();
   });
 
-  document.getElementById("sa_checkbox").addEventListener("change", function() {
+  document.getElementById("sa_checkbox").addEventListener("change", function () {
     countriesObj.remakeJsonByContinent(undefined, this.checked);
     countriesObj.checkBoxSkipToggle = true;
     document.getElementById("skip_btn").click();
   });
 
-  document.getElementById("eu_checkbox").addEventListener("change", function() {
+  document.getElementById("eu_checkbox").addEventListener("change", function () {
     countriesObj.remakeJsonByContinent(undefined, undefined, this.checked);
     countriesObj.checkBoxSkipToggle = true;
     document.getElementById("skip_btn").click();
   });
 
-  document.getElementById("af_checkbox").addEventListener("change", function() {
+  document.getElementById("af_checkbox").addEventListener("change", function () {
     countriesObj.remakeJsonByContinent(undefined, undefined, undefined, this.checked);
     countriesObj.checkBoxSkipToggle = true;
     document.getElementById("skip_btn").click();
   });
 
-  document.getElementById("as_checkbox").addEventListener("change", function() {
+  document.getElementById("as_checkbox").addEventListener("change", function () {
     countriesObj.remakeJsonByContinent(undefined, undefined, undefined, undefined, this.checked);
     countriesObj.checkBoxSkipToggle = true;
     document.getElementById("skip_btn").click();
   });
 
-  document.getElementById("oc_checkbox").addEventListener("change", function() {
+  document.getElementById("oc_checkbox").addEventListener("change", function () {
     countriesObj.remakeJsonByContinent(undefined, undefined, undefined, undefined, undefined, this.checked);
     countriesObj.checkBoxSkipToggle = true;
     document.getElementById("skip_btn").click();
@@ -454,7 +391,7 @@ function initMap() {
 
     continentsCheckBoxListener(countries);
 
-    document.getElementById("skip_btn").addEventListener("click", function() {
+    document.getElementById("skip_btn").addEventListener("click", function () {
 
       if (countries.empty()) {
         deleteElementContentsById("rand_country");
@@ -472,7 +409,7 @@ function initMap() {
       randCountryCodeStr = createRandCountryDOM(countries);
     });
 
-    map.addListener('click', function(mapMouseEvent) {
+    map.addListener('click', function (mapMouseEvent) {
 
       if (countries.empty()) {
         deleteElementContentsById("rand_country");
@@ -485,7 +422,7 @@ function initMap() {
 
       const geocoder = new google.maps.Geocoder;
 
-      geocoder.geocode({ 'location': mapMouseEvent.latLng }, function(address, status) {
+      geocoder.geocode({ 'location': mapMouseEvent.latLng }, function (address, status) {
 
         if (status === "OK") {
 
@@ -542,7 +479,7 @@ function initMap() {
               content: "<h5>" + countryNameStr + "</h5>"
             });
 
-            checkmark_marker.addListener('click', function() {
+            checkmark_marker.addListener('click', function () {
               infowindow.open(map, checkmark_marker);
             });
 
@@ -569,7 +506,7 @@ function initMap() {
               content: "<h5>" + countryNameStr + "</h5>"
             });
 
-            cross_mark_marker.addListener('click', function() {
+            cross_mark_marker.addListener('click', function () {
               infowindow.open(map, cross_mark_marker);
             });
 
@@ -628,34 +565,10 @@ function createPieCharts(countriesObj) {
 
 function renderPage() {
   initGoogleCharts();
-  getComments();
   initMap();
 }
 
 
-window.addEventListener("DOMContentLoaded", function() {
-
-  let submitCmtOnce = false;
-  let submitDeleteOnce = false;
-
+window.addEventListener("DOMContentLoaded", function () {
   renderPage();
-
-  const cmt_form = document.getElementById("cmt_form");
-  const cmt_del_form = document.getElementById("cmt_del_form")
-
-  document.getElementById("cmt_button").addEventListener("click", function() {
-
-    if (!submitCmtOnce) {
-      cmt_form.submit();
-      submitCmtOnce = true;
-    }
-  });
-
-  document.getElementById("cmt_del_button").addEventListener("click", function() {
-
-    if (!submitDeleteOnce) {
-      cmt_del_form.submit();
-      submitDeleteOnce = true;
-    }
-  });
 });

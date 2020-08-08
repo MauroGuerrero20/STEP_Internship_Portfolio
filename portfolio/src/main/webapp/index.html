@@ -1,351 +1,319 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Mauro Guerrero's Portfolio</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
-    <link rel="manifest" href="images/favicons/site.webmanifest">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzm99SkYsoktgamhG8OQPINM6Y-YnJIC8"
-      type="text/javascript"></script>
-    <script defer type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script defer src="script.js"></script>
-  </head>
-  <body>
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand navbar-home-text" href="#welcome_sec">Mauro Guerrero</a>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto pl-1">
-          <li class="nav-item active px-2">
-            <a class="nav-link navbar-sections-text" href="#welcome_sec">About</a>
-          </li>
-          <li class="nav-item active px-2">
-            <a class="nav-link navbar-sections-text" href="#work_exp">Work</a>
-          </li>
-          <li class="nav-item active px-2">
-            <a class="nav-link navbar-sections-text" href="#edu">Education</a>
-          </li>
-          <li class="nav-item active px-2">
-            <a class="nav-link navbar-sections-text" href="#proj">Projects</a>
-          </li>
-          <li class="nav-item active px-2">
-            <a class="nav-link navbar-sections-text" href="#map_game">Map Game</a>
-          </li>
-          <li class="nav-item active px-2">
-            <a class="nav-link navbar-sections-text" href="#misc">Misc</a>
-          </li>
-          <li class="nav-item active px-2">
-            <a class="nav-link navbar-sections-text" href="#comments_sec">Comment</a>
-          </li>
-        </ul>
-      </div>
-      <div class="display-inline my-2 my-lg-0">
-        <a class="px-3" href="https://www.linkedin.com/in/mauro-guerrero-286b69172"><i class="fa fa-linkedin-square navbar-icon"></i></a>
-        <a class="px-3" href="https://github.com/MauroGuerrero20"><i class="fa fa-github navbar-icon"></i></a>
-        <a class="px-3" href="documents/resume.pdf"><i class="fa fa-file-text-o navbar-icon"></i></a>
-      </div>
-    </nav>
-    <div class="row">
-      <div id="main_body" class="col-12">
-        <!--Welcome!-->
-        <div class="welcome_background" >
-          <div id="welcome_sec" class="section-width">
-            <h1>Welcome!</h1>
-          </div>
-        </div>
-        <!--About me-->
-        <div>
-          <div id="about_me" class="section-width">
-            <div class="row">
-              <div class="col-8">
-                <h2>About me:</h2>
-                <p class="about_me_text">
-                  Hi, I am a Texas A&M Engineering Student that is currently pursuing a B.S. in Computer
-                  Engineering. I am very passionate about programming and Computer Science, and I also
-                  enjoy creating and designing circuits. My current occupational goal is to pursue a
-                  career that applies principles of Computer Science and Electrical Engineering (e.g.,
-                  Firmware Engineer, Computer Engineer, Software Engineer, etc.).
-                </p>
-              </div>
-              <div class="col-4">
-                <img id="profile_image" class="img-fluid" src="images/profile_pic.jpg" alt="Avatar"></h2>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--Work Exp-->
-        <div class="work_background">
-          <div id="work_exp" class="section-width">
-            <h2>Work Experience</h2>
-            <img class="google_logo" src="images/google_logo.jpg">
-            <div>
-              <p>
-              <h3>STEP Intern, Pittsburgh, PA (Remote)<br>Summer 2020</h3>
-              <ul>
-                <li>
-                  <h4>Starter Project - Portfolio</h4>
-                </li>
-                <ul class="list-font-size">
-                  <li class="my-2">
-                    Developed personal portfolio website, illustrating my education, work
-                    experience, and personal projects in a clear and concise webpage. Created
-                    website’s frontend using JavaScript, HTML, and CSS.
-                  </li>
-                  <li class="my-2">
-                    Implemented a comments feature on my portfolio, allowing users to leave
-                    comments on my webpage. Developed using Java Servlets for the backend and
-                    Google Datastore as the project’s database.
-                  </li>
-                  <li class="my-2">
-                    Added a Geography Map Game on my portfolio website, which allows users to
-                    try to guess a country’s location on Google Maps. This feature utilizes the
-                    Google Maps API and Geocoding API for its implementation.
-                  </li>
-                </ul>
-                <li>
-                  <h4>Capstone Project - BookBook</h4>
-                </li>
-                <ul class="list-font-size">
-                  <li class="my-2">
-                    Collaborated with coworkers to create and design a web application called
-                    BookBook, which allows users to create and manage book clubs, search for
-                    books, and store books they wish to read in a booklist.
-                  </li>
-                  <li class="my-2">
-                    Led the DevOps of the project, I set up the React frontend and Java
-                    Servlets backend integration, and deployment procedures for our project
-                    using App Engine Microservices. Enabled the connection of our frontend and
-                    backend and their separate deployments.
-                  </li>
-                  <li class="my-2">
-                    Developed the Login for BookBook, which allowed us to keep track of a
-                    user’s info (Clubs, Booklists). This feature was implemented using Google
-                    OAuth 2.0 from an npm package.
-                  </li>
-                  <li class="my-2">
-                    Implemented the BookList feature of the web app, which allows users to
-                    create booklist and add books to them, in order to keep track of what books
-                    they wish to read. This feature was developed using Google Firestore as the
-                    project database and React Bootstrap (npm package).
-                  </li>
-                </ul>
-              </ul>
-              </p>
-              <p>
-              <h3>Engineering Practicum Intern, Sunnyvale, CA<br>Summer 2019</h3>
-              <ul>
-                <li>
-                  <h4>Internal Project – Developing the Test Identity Provider (Idp)</h4>
-                </li>
-                <ul class="list-font-size">
-                  <li class="my-2">
-                    Developed the Test Identity Provider’s metadata using OpenSAML 2.0, an
-                    open-source library used for exchanging authentication and authorization
-                    data between parties.
-                  </li>
-                  <li class="my-2">
-                    Implemented the ability to update the current Idp’s credentials, allowing
-                    admins to upload new public and private keys. The feature was developed
-                    using OpenSAML and Google’s framework and injector tools.
-                  </li>
-                  <li class="my-2">
-                    Worked on encrypting the SAML response of the Idp using the Service
-                    Provider’s public key through OpenSAML encryption tools.
-                  </li>
-                </ul>
-              </ul>
-              </p>
-            </div>
-          </div>
-        </div>
-        <!--Edu-->
-        <div class="background_edu">
-          <div id="edu" class="section-width">
-            <h2>Education</h2>
-            <br>
-            <div>
-              <div class="row">
-                <div class="col-4">
-                  <img class="tamu_logo" src="images/tamu_logo.png">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Mauro Guerrero's Portfolio</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
+	<link rel="manifest" href="images/favicons/site.webmanifest">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="style.css">
+	<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzm99SkYsoktgamhG8OQPINM6Y-YnJIC8"
+		type="text/javascript"></script>
+	<script defer type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script defer src="script.js"></script>
+</head>
+
+<body>
+	<!--Navbar-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand navbar-home-text" href="#welcome_sec">Mauro Guerrero</a>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto pl-1">
+				<li class="nav-item active px-2">
+					<a class="nav-link navbar-sections-text" href="#welcome_sec">About</a>
+				</li>
+				<li class="nav-item active px-2">
+					<a class="nav-link navbar-sections-text" href="#work_exp">Work</a>
+				</li>
+				<li class="nav-item active px-2">
+					<a class="nav-link navbar-sections-text" href="#edu">Education</a>
+				</li>
+				<li class="nav-item active px-2">
+					<a class="nav-link navbar-sections-text" href="#proj">Projects</a>
+				</li>
+				<li class="nav-item active px-2">
+					<a class="nav-link navbar-sections-text" href="#map_game">Map Game</a>
+				</li>
+				<li class="nav-item active px-2">
+					<a class="nav-link navbar-sections-text" href="#misc">Misc</a>
+				</li>
+			</ul>
+		</div>
+		<div class="display-inline my-2 my-lg-0">
+			<a class="px-3"
+				href="https://www.linkedin.com/in/mauro-guerrero-286b69172"><i class="fa fa-linkedin-square navbar-icon"></i></a>
+			<a class="px-3" href="https://github.com/MauroGuerrero20"><i class="fa fa-github navbar-icon"></i></a>
+			<a class="px-3" href="documents/resume.pdf"><i class="fa fa-file-text-o navbar-icon"></i></a>
+		</div>
+	</nav>
+	<div id="main_body">
+		<!--Welcome!-->
+		<div class="welcome_background">
+			<div id="welcome_sec" class="section-width">
+				<h1>Welcome!</h1>
+			</div>
+		</div>
+		<!--About me-->
+		<div>
+			<div id="about_me" class="section-width">
+				<div class="row">
+					<div class="col-8">
+						<h2>About me:</h2>
+						<p class="about_me_text">
+							Hi, I am a Texas A&M Engineering Student that is currently pursuing a B.S. in Computer
+							Engineering. I am very passionate about programming and Computer Science, and I also
+							enjoy creating and designing circuits. My current occupational goal is to pursue a
+							career that applies principles of Computer Science and Electrical Engineering (e.g.,
+							Firmware Engineer, Computer Engineer, Software Engineer, etc.).
+						</p>
+					</div>
+					<div class="col-4">
+						<img id="profile_image" class="img-fluid" src="images/profile_pic.jpg" alt="Avatar"></h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Work Exp-->
+		<div class="work_background">
+			<div id="work_exp" class="section-width">
+				<h2>Work Experience</h2>
+				<img class="google_logo" src="images/google_logo.jpg">
+				<div>
+					<p>
+						<h3>STEP Intern, Pittsburgh, PA (Remote)<br>Summer 2020</h3>
+							<ul>
+								<li>
+									<h4>Starter Project - Portfolio</h4>
+								</li>
+								<ul class="list-font-size">
+									<li class="my-2">
+										Developed personal portfolio website, illustrating my education, work
+										experience, and personal projects in a clear and concise webpage. Created
+										website’s frontend using JavaScript, HTML, and CSS.
+									</li>
+									<li class="my-2">
+										Implemented a comments feature on my portfolio, allowing users to leave
+										comments on my webpage. Developed using Java Servlets for the backend and
+										Google Datastore as the project’s database.
+									</li>
+									<li class="my-2">
+										Added a Geography Map Game on my portfolio website, which allows users to
+										try to guess a country’s location on Google Maps. This feature utilizes the
+										Google Maps API and Geocoding API for its implementation.
+									</li>
+								</ul>
+								<li>
+									<h4>Capstone Project - BookBook</h4>
+								</li>
+								<ul class="list-font-size">
+									<li class="my-2">
+										Collaborated with coworkers to create and design a web application called
+										BookBook, which allows users to create and manage book clubs, search for
+										books, and store books they wish to read in a booklist.
+									</li>
+									<li class="my-2">
+										Led the DevOps of the project, I set up the React frontend and Java
+										Servlets backend integration, and deployment procedures for our project
+										using App Engine Microservices. Enabled the connection of our frontend and
+										backend and their separate deployments.
+									</li>
+									<li class="my-2">
+										Developed the Login for BookBook, which allowed us to keep track of a
+										user’s info (Clubs, Booklists). This feature was implemented using Google
+										OAuth 2.0 from an npm package.
+									</li>
+									<li class="my-2">
+										Implemented the BookList feature of the web app, which allows users to
+										create booklist and add books to them, in order to keep track of what books
+										they wish to read. This feature was developed using Google Firestore as the
+										project database and React Bootstrap (npm package).
+									</li>
+								</ul>
+							</ul>
+					</p>
+					<p>
+						<h3>Engineering Practicum Intern, Sunnyvale, CA<br>Summer 2019</h3>
+							<ul>
+								<li>
+									<h4>Internal Project – Developing the Test Identity Provider (Idp)</h4>
+								</li>
+								<ul class="list-font-size">
+									<li class="my-2">
+										Developed the Test Identity Provider’s metadata using OpenSAML 2.0, an
+										open-source library used for exchanging authentication and authorization
+										data between parties.
+									</li>
+									<li class="my-2">
+										Implemented the ability to update the current Idp’s credentials, allowing
+										admins to upload new public and private keys. The feature was developed
+										using OpenSAML and Google’s framework and injector tools.
+									</li>
+									<li class="my-2">
+										Worked on encrypting the SAML response of the Idp using the Service
+										Provider’s public key through OpenSAML encryption tools.
+									</li>
+								</ul>
+							</ul>
+					</p>
+				</div>
+			</div>
+		</div>
+		<!--Edu-->
+		<div class="background_edu">
+			<div id="edu" class="section-width">
+				<h2>Education</h2>
+				<br>
+				<div>
+					<div class="row">
+						<div class="col-4">
+							<img class="tamu_logo" src="images/tamu_logo.png">
                 </div>
-                <div class="col-5">
-                  <div class="tamu_title">
-                    <h3>Texas A&ampM Universtity</h3>
-                    College Station, Texas
-                    <p>
-                      <br>
+							<div class="col-5">
+								<div class="tamu_title">
+									<h3>Texas A&ampM Universtity</h3>
+									College Station, Texas
+									<p>
+										<br>
                       Expected Graduation Date: May 2022
-                      <br>
-                      <br>
+										<br>
+										<br>
                       B.S. in Computer Engineering, GPA: 3.87
                     </p>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="trans_title">
-                    <h3>Unofficial Transcript:</h3>
-                    <a href="documents/transcript.pdf">
-                    <i class="fa fa-file-text-o"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--TODO: Add Awards, Ex Curriculars ??-->
-        </div>
-        <!--Projects-->
-        <div class="proj_background">
-          <div id="proj" class="section-width">
-            <h2>Projects</h2>
-            <h3>Face Detection, Summer 2020
-              <a href="https://github.com/MauroGuerrero20/Face-Detection"><i class="fa fa-github"></i></a>
-            </h3>
-            <img class="face_detection_img mt-4" src="images/face_detection_img.png">
-            <div>
-              <p class="proj_text my-3 text-justify">
-                The purpose of this personal project was to experiment and learn more about Computer
-                Vision and its applications. The Face Detection program is written in C++ and utilizes
-                OpenCV to detect human faces. The program uses OpenCV’s default face data to train a
-                Cascade Classifier to detect human faces accurately. It then captures the webcam and
-                coverts the input frames to grayscale, to more easily detect faces. Finally, the program
-                draws a red rectangle around the detected face.
-              </p>
-            </div>
-            <h3>Particle Effect, Summer 2019
-              <a
-                href="https://github.com/MauroGuerrero20/Particle-Effect"><i class="fa fa-github"></i></a>
-            </h3>
-            <img class="effect_img mt-4" src="images/particle_effect_demo.gif">
-            <div>
-              <p class="proj_text text-justify">
-                <br>
+								</div>
+							</div>
+							<div class="col-3">
+								<div class="trans_title">
+									<h3>Unofficial Transcript:</h3>
+									<a href="documents/transcript.pdf">
+										<i class="fa fa-file-text-o"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--TODO: Add Awards, Ex Curriculars ??-->
+			</div>
+			<!--Projects-->
+			<div class="proj_background">
+				<div id="proj" class="section-width">
+					<h2>Projects</h2>
+					<h3>Face Detection, Summer 2020
+						<a href="https://github.com/MauroGuerrero20/Face-Detection"><i class="fa fa-github"></i></a>
+					</h3>
+					<img class="face_detection_img mt-4" src="images/face_detection_img.png">
+					<div>
+						<p class="proj_text my-3 text-justify">
+							The purpose of this personal project was to experiment and learn more about Computer
+							Vision and its applications. The Face Detection program is written in C++ and utilizes
+							OpenCV to detect human faces. The program uses OpenCV’s default face data to train a
+							Cascade Classifier to detect human faces accurately. It then captures the webcam and
+							coverts the input frames to grayscale, to more easily detect faces. Finally, the program
+							draws a red rectangle around the detected face.
+						</p>
+					</div>
+					<h3>Particle Effect, Summer 2019
+						<a href="https://github.com/MauroGuerrero20/Particle-Effect"><i class="fa fa-github"></i></a>
+					</h3>
+					<img class="effect_img mt-4" src="images/particle_effect_demo.gif">
+					<div>
+						<p class="proj_text text-justify">
+							<br>
                 The Particle Effect program is a personal project I worked on during the summer of 2019. The program was written in C++ and utilized the Simple DirectMedia Layer (SDL 2.0) to create the particle effect. The program first creates a swarm of pixels and moves them in a circular direction. It then adds a box blur to the swarm and changes the color of the pixels to create the unique particle effect. The overall purpose of the project was to learn more about Computer Graphics.
               </p>
-            </div>
-          </div>
-        </div>
-        <!--Google Map Game-->
-        <div class="map_background">
-          <div id="map_game" class="section-width">
-            <h2>Test your Knowlege of Geography!</h2>
-            <br>
-            <div>
-              <div id="rand_country"></div>
-              <div class="row">
-                <div class="col-9">
-                  <button id="skip_btn" type="button" class="btn btn-info">Skip</button>
-                </div>
-                <div class="col-3">
-                  <div id="map_output_answer"></div>
-                </div>
-              </div>
-              <div class="map_checkbox">
-                <div class="form-check form-check-inline">
-                  <input id="na_checkbox" class="form-check-input" type="checkbox" checked>
-                  <label class="form-check-label" for="na_checkbox">NA</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input id="sa_checkbox" class="form-check-input" type="checkbox" checked>
-                  <label class="form-check-label" for="sa_checkbox">SA</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input id="eu_checkbox" class="form-check-input" type="checkbox" checked>
-                  <label class="form-check-label" for="eu_checkbox">EU</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input id="af_checkbox" class="form-check-input" type="checkbox" checked>
-                  <label class="form-check-label" for="af_checkbox">AF</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input id="as_checkbox" class="form-check-input" type="checkbox" checked>
-                  <label class="form-check-label" for="na_checkbox">AS</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input id="oc_checkbox" class="form-check-input" type="checkbox" checked>
-                  <label class="form-check-label" for="na_checkbox">OC</label>
-                </div>
-              </div>
-            </div>
-            <div id="map"></div>
-            <div id="selected_country"></div>
-            <br>
-            <div id="map_charts">
-              <div class="row">
-                <div id="na_map_chart" class="col-4"></div>
-                <div id="sa_map_chart" class="col-4"></div>
-                <div id="eu_map_chart" class="col-4"></div>
-              </div>
-              <div class="row">
-                <div id="af_map_chart" class="col-4"></div>
-                <div id="as_map_chart" class="col-4"></div>
-                <div id="oc_map_chart" class="col-4"></div>
-              </div>
-              <div id="world_map_chart"></div>
-            </div>
-          </div>
-        </div>
-        <!--Misc-->
-        <div class="misc_background">
-          <div id="misc" class="section-width">
-            <h2>Misc</h2>
-            <p class="mb-0">
-              Thanks for stopping by!
-              <br>
-              <br>
+					</div>
+				</div>
+			</div>
+			<!--Google Map Game-->
+			<div class="map_background">
+				<div id="map_game" class="section-width">
+					<h2>Test your Knowlege of Geography!</h2>
+					<br>
+					<div>
+						<div id="rand_country"></div>
+						<div class="row">
+							<div class="col-9">
+								<button id="skip_btn" type="button" class="btn btn-info">Skip</button>
+							</div>
+							<div class="col-3">
+								<div id="map_output_answer"></div>
+							</div>
+						</div>
+						<div class="map_checkbox">
+							<div class="form-check form-check-inline">
+								<input id="na_checkbox" class="form-check-input" type="checkbox" checked>
+								<label class="form-check-label" for="na_checkbox">NA</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input id="sa_checkbox" class="form-check-input" type="checkbox" checked>
+								<label class="form-check-label" for="sa_checkbox">SA</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input id="eu_checkbox" class="form-check-input" type="checkbox" checked>
+								<label class="form-check-label" for="eu_checkbox">EU</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input id="af_checkbox" class="form-check-input" type="checkbox" checked>
+								<label class="form-check-label" for="af_checkbox">AF</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input id="as_checkbox" class="form-check-input" type="checkbox" checked>
+								<label class="form-check-label" for="na_checkbox">AS</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input id="oc_checkbox" class="form-check-input" type="checkbox" checked>
+								<label class="form-check-label" for="na_checkbox">OC</label>
+							</div>
+						</div>
+					</div>
+					<div id="map"></div>
+					<div id="selected_country"></div>
+					<br>
+					<div id="map_charts">
+						<div class="row">
+							<div id="na_map_chart" class="col-4"></div>
+							<div id="sa_map_chart" class="col-4"></div>
+							<div id="eu_map_chart" class="col-4"></div>
+						</div>
+						<div class="row">
+							<div id="af_map_chart" class="col-4"></div>
+							<div id="as_map_chart" class="col-4"></div>
+							<div id="oc_map_chart" class="col-4"></div>
+						</div>
+						<div id="world_map_chart"></div>
+					</div>
+				</div>
+			</div>
+			<!--Misc-->
+			<div class="misc_background">
+				<div id="misc" class="section-width">
+					<h2>Misc</h2>
+					<p class="mb-0">
+						Thanks for stopping by!
+						<br>
+						<br>
               Feel free to check out my Github, Resume, and Linkedin.
             </p>
-            <div class="misc_links">
-              <a href="https://github.com/MauroGuerrero20">
-              <i id="github_misc" class="fa fa-github"></i>
-              </a>
-              <a href="documents/resume.pdf">
-              <i id="resume_misc" class="fa fa-file-text-o"></i>
-              </a>
-              <a href="https://www.linkedin.com/in/mauro-guerrero-286b69172">
-              <i id="linkedin_misc" class="fa fa-linkedin-square"></i>
-              </a>
-            </div>
-            <!--TODO: Add 'Contact' portion-->
-          </div>
-        </div>
-        <!--Comments-->
-        <div class="comment_background">
-          <div id="comments_sec" class="section-width">
-            <h2>Leave a Comment!</h2>
-            <form id="cmt_form" action="/comments" method="POST">
-              <label>
-                <h5>Name:</h5>
-              </label>
-              <textarea id="cmt_name" name="cmt-name-input" class="form-control" row="1"></textarea>
-              <label class="cmt_msg_label">
-                <h5>Message:</h5>
-              </label>
-              <textarea name="comments-input" class="form-control" rows="6"></textarea>
-              <label>
-                <h5 class="limit_cmt">Too many comments. Limit the amount of comments on the screen:</h5>
-              </label>
-              <input class="form-control" type="number" min="0" name="cmt-max-input">
-              <button id="cmt_button" type="button" class="btn btn-primary">Comment!</button>
-            </form>
-            <br>
-            <form id="cmt_del_form" action="/delete-cmt" method="POST">
-              <label>
-                <h5>Delete Comments: </h5>
-              </label>
-              <br>
-              <button id="cmt_del_button" type="button" class="btn btn-danger">Delete</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div id="comments_body" class="col-0"></div>
-    </div>
-  </body>
+						<div class="misc_links">
+							<a href="https://github.com/MauroGuerrero20">
+								<i id="github_misc" class="fa fa-github"></i>
+							</a>
+							<a href="documents/resume.pdf">
+								<i id="resume_misc" class="fa fa-file-text-o"></i>
+							</a>
+							<a href="https://www.linkedin.com/in/mauro-guerrero-286b69172">
+								<i id="linkedin_misc" class="fa fa-linkedin-square"></i>
+							</a>
+						</div>
+						<!--TODO: Add 'Contact' portion-->
+				</div>
+			</div>
+		</div>
+</body>
+
 </html>
