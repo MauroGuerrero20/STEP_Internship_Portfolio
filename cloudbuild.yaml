@@ -1,8 +1,10 @@
 steps:
-- name: 'gcr.io/cloud-builders/mvn'
+- run: cd portfolio
+  name: 'gcr.io/cloud-builders/mvn'
   entrypoint: 'mvn'
   args: ['clean']
 
-- name: 'gcr.io/cloud-builders/mvn'
+- run: cd portfolio
+  name: 'gcr.io/cloud-builders/mvn'
   entrypoint: 'mvn'
   args: ['package', 'appengine:deploy'] 
