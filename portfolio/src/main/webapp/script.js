@@ -635,8 +635,6 @@ function renderPage() {
 
 window.addEventListener("DOMContentLoaded", function() {
 
-  console.log('test')
-
   let submitCmtOnce = false;
   let submitDeleteOnce = false;
 
