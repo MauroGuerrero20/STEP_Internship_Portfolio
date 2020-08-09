@@ -13,4 +13,5 @@ jobs:
           PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
           APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
         with:
-          args: cd portfolio; mvn clean; mvn package appengine:deploy
+          java-version: 1.8
+      - run: cd portfolio; mvn package appengine:deploy
