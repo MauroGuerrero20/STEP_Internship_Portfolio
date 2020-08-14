@@ -159,6 +159,15 @@
   width: 40%;
 }
 
+.chess_proj_img {
+  border-radius: 5%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  mix-blend-mode: multiply;
+  width: 40%;
+}
+
 .map_background {
   padding-top: 10px;
   padding-bottom: 20px;
