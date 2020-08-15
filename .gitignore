@@ -3,3 +3,8 @@ target/
 
 # Google Cloud SDK
 google-cloud-sdk/
+
+# Gitpod Files
+.theia/settings.json
+.gitpod.yml
+.gitpod.Dockerfile
